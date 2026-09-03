@@ -61,4 +61,4 @@ const sciFiAuthors = [
     }
 ];
 
-export default { sciFiAuthors };
+export default sciFiAuthors;
