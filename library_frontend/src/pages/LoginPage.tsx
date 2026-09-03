@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import{ Button } from "@mui/material";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
+import Link from "@mui/material";
 
 type LoginResponse = {
     accesToken: string;
@@ -54,6 +55,7 @@ function LoginPage() {
                         <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} />
                         {error && <p className="text-red-600">{error}</p>}
                         <Button variant="contained" type="submit" disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
+                        <Link to="/recomend">Recomend</Link>
                     
                 </form>
             </div>

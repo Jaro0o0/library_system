@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import heroVideo from '../../assets/videos/hero-video.mp4'
 
-import RecomendedList from '../../pages/RecomendedList'
+
 
 function Hero() {
     return (
@@ -68,7 +68,7 @@ function Hero() {
                 </div>
             </div>
         </div>
-        <RecomendedList/>
+        
         </>
     )
 }

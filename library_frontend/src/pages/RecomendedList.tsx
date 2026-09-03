@@ -22,7 +22,7 @@ import fantasyAuthors from '../lib/Authors/fantasyAuthors';
 
 
 
-function RecomendedList() {
+function RecomendedList({ title, authors }) {
 
     const [choose,setChoose] = useState<string[]>([]);
     const [count,setCount] = useState(0);
@@ -57,11 +57,11 @@ function RecomendedList() {
             <div className="w-full h-screen z-20">
                 
             {/* FANTASY_PAGE */}
-           { pageType ===  'fantasy' && 
+          
                     <Container>
                     {/* TEXT_BOX */}
                     <div className='mb-2 text-3xl text-center'>
-                        <h1 className='text-3xl font-bold'>Select one of your favourite Fantasy Authors</h1>
+                        <h1 className='text-3xl font-bold'>{ title }</h1>
                     </div>
                     {/* COUNTER */}
                     <h2>{count}/3</h2>
@@ -72,7 +72,7 @@ function RecomendedList() {
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true, amount: 0.15 }}>
-                                {fantasyAuthors.map((author, index) => {
+                                {authors.map((author, index) => {
                                     return(
                                         <motion.div
                                             key={index}
@@ -105,7 +105,7 @@ function RecomendedList() {
                             <Button variant="contained" size="large" disabled={count === 0} onClick={() => { submitHandler(); fantasyButtonHandler(); }}>submit</Button>
                         </div>
                     </Container>
-            }
+            
 
 
             {/* SCI-FI_PAGE */}
