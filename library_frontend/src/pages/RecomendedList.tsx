@@ -22,7 +22,7 @@ import fantasyAuthors from '../lib/Authors/fantasyAuthors';
 
 
 
-function RecomendedList({ title, authors }) {
+function RecomendedList({ title, authors, onSubmit }) {
 
     const [choose,setChoose] = useState<string[]>([]);
     const [count,setCount] = useState(0);
@@ -46,7 +46,7 @@ function RecomendedList({ title, authors }) {
    
 
     const fantasyButtonHandler = () => {
-
+        onSubmit?.();
         setPageType("sci-fi")
     }
 
