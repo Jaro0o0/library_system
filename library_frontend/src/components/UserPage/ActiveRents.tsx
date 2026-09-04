@@ -10,7 +10,7 @@ function ActiveRents() {
         <>
        
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 ">
-                <div className='flex flex-col gap-4 p-4 bg-green-300 rounded-2xl shadow-md'>
+                <div className='flex flex-col gap-4 p-4 bg-green-100 rounded-2xl shadow-md'>
                     <h2 className='text-2xl'>Active Rents</h2>
                     <div className="bg-white shadom-md rounded-xl">
                         <span>Title</span>
@@ -21,7 +21,7 @@ function ActiveRents() {
                     </div>
                 </div>
 
-                 <div className='flex flex-col gap-4 p-8 bg-green-300 rounded-2xl shadow-md'>
+                 <div className='flex flex-col gap-4 p-8 bg-green-100 rounded-2xl shadow-md'>
                     <h2 className='text-2xl'>Active Rents</h2>
                     <div className="bg-white shadom-md rounded-xl">
                         <span>Title</span>
@@ -32,7 +32,7 @@ function ActiveRents() {
                     </div>
                 </div>
 
-                 <div className='flex flex-col gap-4 p-8 bg-green-300 rounded-2xl shadow-md'>
+                 <div className='flex flex-col gap-4 p-8 bg-green-100 rounded-2xl shadow-md'>
                     <h2 className='text-2xl'>Active Rents</h2>
                     <div className="bg-white shadom-md rounded-xl">
                         <span>Title</span>
