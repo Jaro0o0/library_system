@@ -28,7 +28,7 @@ const features = [
 function Features() {
     return (
         <section id="features" className="w-full px-4 py-20 bg-slate-50">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-9xl mx-auto">
                 <div className="text-center mb-14">
                     <span className="text-sm font-semibold uppercase tracking-wider text-green-600">
                         Dlaczego Book Tracker

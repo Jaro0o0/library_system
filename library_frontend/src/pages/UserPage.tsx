@@ -1,16 +1,14 @@
 import UserPageHeader from "../components/UserPage/UserPageHeader";
-import Container from "../components/common/Container";
 import Cto from "../components/UserPage/Cto";
 import ActiveRents from "../components/UserPage/ActiveRents";
 import UserPageRecomended from "../components/UserPage/UserPageRecomended";
-import Section from "../components/common/Section";
 import IconBox from "../components/common/IconBox";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Button } from "@mui/material";
+
 
 
 const iconsData = [
@@ -45,14 +43,14 @@ const iconsData = [
 
 function UserPage() {
     return (  
-        <div className="flex flex-col h-screen max-h-screen overflow-hidden">
+        <div className="flex flex-col h-screen max-h-screen overflow-hidden bg-slate-50">
            <UserPageHeader/>
             <div className="flex-1 min-h-0 w-full">
                 {/* Grid */}
-                <div className="grid grid-cols-[1fr_4fr] h-full">
+                <div className="grid grid-cols-[1fr_3fr] h-full">
                     {/* Options */}
-                    <div className=" flex flex-col justify-between p-8">
-                        <div className="flex">
+                    <div className=" flex flex-col justify-between p-8 shadow-md  ">
+                        <div className="flex flex-col gap-3">
                                 {/* Photo */}
                                 <div className="flex">
                                     <img src="" alt="profiole-photo" className="h-md w-md"/>
@@ -61,20 +59,25 @@ function UserPage() {
                                         <span>Uset Name</span>
                                     </div>
                                 </div>
-                            </div>
-                            {/* Icons_BOX */}
-                            <div>
-                               { iconsData.map((item) => {
-                                return(
-                                    <IconBox>
-                                        {item}
-                                    </IconBox>
-                                )
-                                  
-                               } )}
+                                {/* Icons_BOX */}
+                                <div>
+                                { iconsData.map((item) => {
+                                    return(
+                                        <div className="flex gap-2 items-center gap-2 mb-3 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300" key={item.name} >
+                                            <IconBox>
+                                                {item.icon}
+                                            </IconBox>
+                                            <span >{item.name}</span>
+                                            
+                                        </div>
+                                    )
+                                    
+                                } )}
 
+                                </div>
                             </div>
-                            <Button variant="outlined">Outlined</Button>
+                           
+                            <Button className="!border-green-400 !text-green-400" variant="outlined">Outlined</Button>
 
                         
                     </div>

@@ -8,7 +8,7 @@ function UserPageRecomended() {
         <Container>
             <div className="flex justify-between">
                 <h2>Rrcomended Books fo yout</h2>
-                <Button variant="contained">Contained</Button>
+                <Button className="!bg-green-400" variant="contained">Contained</Button>
                 
             </div>
             {/* Dashboard */}

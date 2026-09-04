@@ -32,8 +32,8 @@ function Cto() {
                 <div className="grid grid-cols-[2fr_1fr]  shadow-md rounded-3xl overflow-hidden" >
                     {/* text-col */}
                     <div className="p-8 ">
-                        <h1 className="text-3xl mb-2">Welcome <span className="text-green-700">{userName}</span></h1>
-                        <p>This is the palce where you can mange your books and<br></br> find new inspirations</p>
+                        <h1 className="text-3xl mb-2">Welcome <span className="text-green-300">{userName}</span></h1>
+                        <p className="text-green-600">This is the palce where you can mange your books and<br></br> find new inspirations</p>
                     </div>
                     {/* Date */}
                     <div className="bg-green-100 p-8">

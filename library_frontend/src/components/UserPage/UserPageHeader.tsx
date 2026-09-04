@@ -13,7 +13,7 @@ function UserPageHeader() {
             <div className="flex justify-between w-full max-w-md">
                 {/* Links */}
                 <div className=" flex gap-2  items-center">
-                    <Link to='/home'>Home</Link>
+                    <Link to='/'>Home</Link>
                     <Link to='/home'>Library</Link>
                 </div>
                 {/* Photo */}
