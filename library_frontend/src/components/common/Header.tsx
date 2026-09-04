@@ -2,10 +2,55 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { Container, TextField } from '@mui/material';
+import { Button }from '@mui/material';
+
+import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
+
+
+const recomendedAuthorsData = [
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+    {
+        img: Tolkien_Img,
+        author: 'Tolkien'
+    },
+]
+
+
 
 function Header() {
     const [scrolled, setScrolled] = useState(false)
+     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
+   
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,8 +61,9 @@ function Header() {
     }, [])
 
     return (
+    <>
         <header
-            className={`fixed top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-black/50 backdrop-blur-sm' : 'bg-transparent'} transition-all duration-300`}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-black/50 backdrop-blur-sm' : 'bg-transparent'} transition-all duration-300`}
         >
             <div>
                 <h1 className="text-2xl font-bold text-white">
@@ -48,12 +94,56 @@ function Header() {
                         <Link to="/register">Register</Link>
                     </button>
                 </div>
-                <Link to="/search" className='text-lg font-bold text-white hover:text-green-500 transition-colors'><SearchIcon/></Link>     
+                {/* Search_Button */}
+                <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-white hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
-                <button onClick={setOpen(prev => !prev)} className='text-white'><MenuIcon/></button>
+                <button onClick={() => setOpen(prev => !prev)} className='text-white'><MenuIcon/></button>
             </div>
           
         </header>
+
+
+
+        {/* Search_Menu */}
+        {searchOpen && (
+            <div className='fixed top-[70px] left-0 w-full bg-white z-[200] p-6'>
+                <Container>
+                    <h2>Search</h2>
+                    <TextField id="filled-basic" label="Filled" variant="filled"  fullWidth/>
+
+                    <h3 className='mt-8 mb-2'>Recomended Authors for you </h3>
+                    {/* Grid */}
+                
+                    <div className='grid grid-cols-4  gap-4 mb-4'>
+                        {recomendedAuthorsData.map((item, index) => {
+                            return (
+                                <div className='p-2 border-1 border-b-olive-400 bg-slate-50  rounded-md' key={index}>
+                                    <div className='flex gap-2 items-center '>
+                                        <img src={item.img} alt={item.author} className='w-[50px] h-[50px] object-cover'/>
+                                        <span className='font-medium font-bold'>{item.author}</span>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    
+                    </div>
+                    
+                    <Button variant='contained'>See all books</Button>
+                </Container>
+            </div>
+        )}
+
+        {/* Side_Menu */}
+        {open && (
+                <div>
+
+                </div>
+            )
+        }
+
+    
+
+    </>
     )
 }
 

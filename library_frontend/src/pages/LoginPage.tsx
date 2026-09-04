@@ -32,7 +32,7 @@ function LoginPage() {
                 return;
             }
 
-            const data: LoginResponse = await response.json();
+            const data = await response.json();
             localStorage.setItem("accessToken", data.accesToken);
             navigate("/");
         } catch {
