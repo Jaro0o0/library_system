@@ -23,7 +23,7 @@ public class UserController : ControllerBase
 
       
 
-        return Ok(user.UserName);
+       return Ok(new { userName = user.UserName });
     }
 
 

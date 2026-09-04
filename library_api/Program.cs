@@ -37,6 +37,20 @@ builder.Services.AddSingleton<PasswordService>();
 
 builder.Services.AddAuthorization();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
+
 //Auth
 builder.Services.AddAuthorization();
 
@@ -73,6 +87,9 @@ var app = builder.Build();
     app.MapOpenApi();
     // app.UseHttpRedirection();
     app.MapControllers();
+
+    //cors
+    app.UseCors("AllowReact");
 
 
 app.UseHttpsRedirection();

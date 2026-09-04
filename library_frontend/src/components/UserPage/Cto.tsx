@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from "react";
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 function Cto() {
     const [userName, setUserName] = useState('');
@@ -9,7 +11,7 @@ function Cto() {
             try{
                 const res = await fetch("http://localhost:5110/search/User")
                 const data = await res.json();
-                setUserName(data);
+                setUserName(data.userName);
                 console.log(data)
             }
             catch(err)
@@ -20,12 +22,27 @@ function Cto() {
         fetchData();
     }, [])
 
+
+ //heandlers
+ const date = new Date();
+
     return ( 
         <>
           
-                <div className="grid grid-cols-[2fr_1fr]">
-                    <div>
-                        <h1 className="text-3xl text-amber-300">Welcome {userName}</h1>
+                <div className="grid grid-cols-[2fr_1fr]  shadow-md rounded-3xl overflow-hidden" >
+                    {/* text-col */}
+                    <div className="p-8 ">
+                        <h1 className="text-3xl mb-2">Welcome <span className="text-green-800">{userName}</span></h1>
+                        <p>This is the palce where you can mange your books and<br></br> find new inspirations</p>
+                    </div>
+                    {/* Date */}
+                    <div className="bg-gray-300 p-8">
+                        <div className="flex gap-2 justify-between">
+                            {/* hour */}
+                            <p className="text-lg"><AccessTimeFilledIcon/>{date.getHours()}:{date.getMinutes()}</p>
+                            {/* month */}
+                            <p className="text-lg"><CalendarMonthIcon/>{date.getMonth()}</p>
+                        </div>
                     </div>
                 </div>
         
