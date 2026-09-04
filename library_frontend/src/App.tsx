@@ -8,6 +8,7 @@ import Recomend from "./pages/Recomend";
 import { Provider } from 'react-redux'
 import store from './store'
 import UserPage from "./pages/UserPage";
+import Categories from "./pages/Categories";
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
           <Route path="search" element={<Search/>}/>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="recomend" element={<Recomend/>}/>
-           <Route path="user" element={<UserPage/>}/>
+          <Route path="user" element={<UserPage/>}/>
+          <Route path="categories" element={<Categories/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>
