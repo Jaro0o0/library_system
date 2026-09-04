@@ -5,7 +5,7 @@ import IconBox from "../common/IconBox";
 
 function UserPageHeader() {
     return ( 
-        <header className="flex justify-between items-center p-4 bg-green-50/35">
+        <header className="flex justify-between items-center p-4 bg-green-50">
             <div>
                 <h1 className="text-xl">Books</h1>
             </div>

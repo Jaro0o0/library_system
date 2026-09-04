@@ -14,10 +14,10 @@ function UserPageRecomended() {
             {/* Dashboard */}
             <div className="flex flex-col">
                 {/* ITEM */}
-                <div className="flex bg-amber-50 shadow-md p-4 rounded-2xl mt-2">
+                <div className="flex bg-green-50 shadow-md p-4 rounded-2xl mt-2">
                     {/* IMG_BOX */}
                     <div className="flex gap-3">
-                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[200px] h-[100px]"/>
+                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[100px] h-[100px]"/>
                         {/* TEXT_BOX */}
                         <div>
                             <h3>Authot</h3>
@@ -27,10 +27,10 @@ function UserPageRecomended() {
                     </div>
                 </div>
                 {/* ITEM */}
-                <div className="flex bg-amber-50 shadow-md p-4 rounded-2xl mt-2">
+                <div className="flex bg-green-50 shadow-md p-4 rounded-2xl mt-2">
                     {/* IMG_BOX */}
                     <div className="flex gap-3">
-                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[150px] h-[150px]"/>
+                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[100px] h-[100px]"/>
                         {/* TEXT_BOX */}
                         <div>
                             <h3>Authot</h3>

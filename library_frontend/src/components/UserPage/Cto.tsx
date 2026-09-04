@@ -36,7 +36,7 @@ function Cto() {
                         <p>This is the palce where you can mange your books and<br></br> find new inspirations</p>
                     </div>
                     {/* Date */}
-                    <div className="bg-gray-300 p-8">
+                    <div className="bg-green-300 p-8">
                         <div className="flex gap-2 justify-between">
                             {/* hour */}
                             <p className="text-lg"><AccessTimeFilledIcon/>{date.getHours()}:{date.getMinutes()}</p>
