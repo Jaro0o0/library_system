@@ -5,8 +5,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
 import { Button }from '@mui/material';
+import getUserStatus from '../../hooks/useGetUserStatus';
 
 import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
+import usegetUserStatus from '../../hooks/useGetUserStatus';
 
 
 const recomendedAuthorsData = [
@@ -48,9 +50,10 @@ const recomendedAuthorsData = [
 
 function Header() {
     const [scrolled, setScrolled] = useState(false)
-     const [searchOpen, setSearchOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
-   
+
+    const { isUserLogin } = usegetUserStatus();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -87,12 +90,15 @@ function Header() {
                 </ul>
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
+                    {isUserLogin ? <Button variant="contained" color="secondary"> : (
+                    <div>
                     <button className=" text-white ">
                         <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
                     </button>
                     <button className="bg-green-500 text-white px-4 py-2 rounded-md">
                         <Link to="/register">Register</Link>
                     </button>
+                    </div> )}
                 </div>
                 {/* Search_Button */}
                 <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-white hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
