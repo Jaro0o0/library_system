@@ -6,14 +6,16 @@ function CategoriesHero() {
     return ( 
       <>
         <Header/>
-        <div className="h-[60vh]">
+        <div className="h-[60vh] relative">
               <img src={Hero_Img } className='w-full h-full object-cover  relative'/>
               {/* TEXT_BOX */}
-              <div className='absolute top-1/3 left-1/3 -translate-1/2'>
+              <div className='absolute top-1/3 left-1/3 -translate-1/2 z-10'>
                   <h1 className='text-3xl font-bold text-white mb-4'>Discover everything you need in one place.<br></br> Browse our categories and find the products that are right for you</h1>
                   <p className='mb-8'>Find best plan for you</p>
                   <Button className='!bg-green-400' variant='contained' size='large'>Try now</Button>
               </div>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 pointer-events-none" />
         </div>
        </>
      );

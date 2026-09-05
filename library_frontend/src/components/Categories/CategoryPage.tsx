@@ -1,7 +1,9 @@
 import { useParams } from "react-router";
 import { Button } from "@mui/material";
 import Container from '../../components/common/Container'
+import Section from "../common/Section";
 import CategoryPageSwiper from "./CategoryPageSwiper";
+import CategoryPageHero from "./CategoryPageHero";
 import Footer from "../common/Footer";
 
 function CategoryPage() {
@@ -9,19 +11,20 @@ function CategoryPage() {
 
     return ( 
         <>
-                <Container>
-                    <h2>{name}</h2>
-                    <p>DESC DESC DESC DESC</p>
-                    <Button variant="contained">Try now </Button>
-                </Container>
+                <CategoryPageHero header={ name }/>
                 {/* Grid */}
-                <h2>Explore {name}</h2>
-                <div>
+                
+                    <h2>Explore {name}</h2>
+                        <Container>
+                            <CategoryPageSwiper/>
+                        </Container>
+                
+                {/* Second_Grid */}
+                <Section>
                     <Container>
-                      <CategoryPageSwiper/>
+                        <CategoryPageSwiper/>
                     </Container>
-                </div>
-            
+                </Section>
             <Footer/>
         </>
      );

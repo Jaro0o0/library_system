@@ -5,14 +5,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Pagination, Navigation } from 'swiper/modules';
 
 
 //APi_BOOKS
 const genre = "fantasy";
-const amount = 20;
+const amount = 10;
 
 const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
 
@@ -23,6 +24,8 @@ const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxR
 // }
 
 function CategoryPageSwiper() {
+    const [books, setBooks] = useState([]);
+
     useEffect(() => {
         (async () => {
             try {
@@ -31,7 +34,7 @@ function CategoryPageSwiper() {
                     throw new Error(`Błąd API: ${res.status}`);
                 }
                 const data = await res.json();
-                console.log(data);
+                setBooks(data.items || []);
             } catch (err) {
                 console.error('Nie udało się pobrać danych:', err);
             }
@@ -40,6 +43,10 @@ function CategoryPageSwiper() {
 
     return (
         <>
+            {/* TEXT_BOX */}
+            <div>
+                <h2>Explore {genre}</h2>
+            </div>
             <Swiper
                 slidesPerView={'auto'}
                 centeredSlides={true}
@@ -47,18 +54,34 @@ function CategoryPageSwiper() {
                 pagination={{
                 clickable: true,
                 }}
-                modules={[Pagination]}
+                navigation={true}
+                modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide>Slide 1</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide>
+                {books.map((book) => {
+                    const volume = book.volumeInfo;
+                    const cover = volume.imageLinks?.thumbnail;
+                    return (
+                        <SwiperSlide key={book.id} style={{ width: 250 }}>
+                            <div style={{ textAlign: 'center' }}>
+                                {cover ? (
+                                    <img
+                                        src={cover}
+                                        alt={volume.title}
+                                        style={{ width: 128, height: 192, objectFit: 'cover' }}
+                                    />
+                                ) : (
+                                    <div style={{ width: 128, height: 192, margin: '0 auto', background: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        Brak okładki
+                                    </div>
+                                )}
+                                <h3>{volume.title}</h3>
+                                <p>{volume.authors?.join(', ')}</p>
+                                {/* <p style={{ fontSize: 14 }}>{volume.description}</p> */}
+                            </div>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </>
       );
