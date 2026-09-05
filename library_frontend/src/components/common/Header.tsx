@@ -56,6 +56,7 @@ function Header() {
     const [scrolled, setScrolled] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
+    const [profileOpen, setProfileOpen] = useState(false);
     const { isUserLogin } = usegetUserStatus();
 
     const { userName } = useGetUser();
@@ -80,6 +81,10 @@ function Header() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+
+    //Handlers
+    
 
     return (
     <>
@@ -108,8 +113,9 @@ function Header() {
                     </li>
                 </ul>
                 {/* Buttons */}
+                {/* <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${userName}`}>Profile</Button> */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ? <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${userName}`}>Profile</Button> : (
+                    {isUserLogin ?  <Button variant='contained' onClick={() => setProfileOpen(prev => !prev)}>Profile</Button>  : (
                     <div>
                     <button className=" text-white ">
                         <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
@@ -158,16 +164,11 @@ function Header() {
             </div>
         )}
 
-        {/* Side_Menu */}
-        {open && (
-                <div>
-
-                </div>
-            )
-        }
+        {/* Profile_Menu */}
+        {profileOpen && <ProfileMenu/>}
 
     
-
+        
     </>
     )
 }

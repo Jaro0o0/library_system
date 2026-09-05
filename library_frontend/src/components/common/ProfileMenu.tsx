@@ -17,6 +17,7 @@ function ProfileMenu() {
     const { userName } = useGetUser();
 
     return ( 
+        <>
         {open && (
 
         <div className='fixed top-[70px]'>
@@ -44,7 +45,7 @@ function ProfileMenu() {
         </div>
 
         )}
-     
+        </>
      );
 }
 
