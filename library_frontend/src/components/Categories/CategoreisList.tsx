@@ -97,7 +97,7 @@ function CategoriesList() {
                         <div key={index} className='p-4 shadow-md'>
                             <img src={item.img} className='w-full object-cover rounded-xl'/>
                             <h3 className='text-xl font-bold'>{item.name}</h3>
-                            <Button variant="contained" endIcon={<SendIcon />}  component={Link}  to={`/ctegories/${item.name}`} className='!bg-green-400'> Send </Button>
+                            <Button variant="contained" endIcon={<SendIcon />}  component={Link}  to={`/categories/${item.name}`} className='!bg-green-400'> Send </Button>
                                                                             
                                                                             
                         </div>

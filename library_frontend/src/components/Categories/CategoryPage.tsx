@@ -1,13 +1,27 @@
 import { useParams } from "react-router";
+import { Button } from "@mui/material";
+import Container from '../../components/common/Container'
+import CategoryPageSwiper from "./CategoryPageSwiper";
+import Footer from "../common/Footer";
 
 function CategoryPage() {
-    const { categoryName } = useParams();
+    const { name } = useParams();
 
     return ( 
-
-        <div>
-                <h2>{categoryName}</h2>
-        </div>
+        <>
+                <Container>
+                    <h2>{name}</h2>
+                    <p>DESC DESC DESC DESC</p>
+                    <Button variant="contained">Try now </Button>
+                </Container>
+                {/* Grid */}
+                <h2>Explore {name}</h2>
+                <div>
+                    <CategoryPageSwiper/>
+                </div>
+            
+            <Footer/>
+        </>
      );
 }
 
