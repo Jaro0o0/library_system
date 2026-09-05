@@ -22,6 +22,12 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod());
 });
 
+
+//Custom SERVICES
+ builder.Services.AddScoped<IRegisterService, UserService>();
+
+
+//DATABASE
 var connectionString =
     $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
     $"Port={Environment.GetEnvironmentVariable("DB_PORT")};" +

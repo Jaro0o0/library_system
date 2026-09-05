@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import UserPage from "./pages/UserPage";
 import Categories from "./pages/Categories";
+import Register from "./pages/Register";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="recomend" element={<Recomend/>}/>
           <Route path="user" element={<UserPage/>}/>
           <Route path="categories" element={<Categories/>}/>
+          <Route path="register" element={<Register/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>

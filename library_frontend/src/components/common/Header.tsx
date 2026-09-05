@@ -90,7 +90,7 @@ function Header() {
                 </ul>
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ? <Button variant="contained" color="secondary"> : (
+                    {isUserLogin ? <Button variant="contained" color="secondary"></Button> : (
                     <div>
                     <button className=" text-white ">
                         <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
