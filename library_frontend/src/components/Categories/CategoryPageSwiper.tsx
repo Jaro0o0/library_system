@@ -6,10 +6,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import './styles.css';
-
 // import required modules
 import { Pagination } from 'swiper/modules';
+
+
+//APi_BOOKS
+const genre = "fantasy";
+const amount = 20;
+
+const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}`;
+
+const getBooksData = async () => {
+    const res =  await fetch(url);
+    const data =  await res.json();
+    console.log(data)
+}
 
 
 function CategoryPageSwiper() {

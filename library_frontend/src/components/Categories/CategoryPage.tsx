@@ -17,7 +17,9 @@ function CategoryPage() {
                 {/* Grid */}
                 <h2>Explore {name}</h2>
                 <div>
-                    <CategoryPageSwiper/>
+                    <Container>
+                      <CategoryPageSwiper/>
+                    </Container>
                 </div>
             
             <Footer/>
