@@ -9,6 +9,11 @@ import { Button } from '@mui/material';
 import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
 import usegetUserStatus from '../../hooks/useGetUserStatus';
 
+//Components
+import ProfileMenu from './ProfileMenu';
+
+//hooks
+import useGetUser from "../../hooks/useGetUser";
 
 const recomendedAuthorsData = [
     {
@@ -51,8 +56,9 @@ function Header() {
     const [scrolled, setScrolled] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
-
     const { isUserLogin } = usegetUserStatus();
+
+    const { userName } = useGetUser();
 
     let user = { id: "" };
     if (isUserLogin) {
@@ -77,6 +83,7 @@ function Header() {
 
     return (
     <>
+        <ProfileMenu/>
         <header
             className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-black/50 backdrop-blur-sm' : 'bg-transparent'} transition-all duration-300`}
         >
@@ -102,7 +109,7 @@ function Header() {
                 </ul>
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ? <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${user.id}`}>Profile</Button> : (
+                    {isUserLogin ? <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${userName}`}>Profile</Button> : (
                     <div>
                     <button className=" text-white ">
                         <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>

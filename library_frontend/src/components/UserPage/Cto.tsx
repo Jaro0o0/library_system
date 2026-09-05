@@ -1,27 +1,10 @@
 
-import { useState, useEffect } from "react";
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import useGetUser from "../../hooks/useGetUser";
 
 function Cto() {
-    const [userName, setUserName] = useState('');
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const res = await fetch("http://localhost:5110/search/User")
-                const data = await res.json();
-                setUserName(data.userName);
-                console.log(data)
-            }
-            catch(err)
-            {
-                console.log(err)
-            }
-        };
-        fetchData();
-    }, [])
-
+    const { userName } = useGetUser();
 
  //heandlers
  const date = new Date();
