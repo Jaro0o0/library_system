@@ -1,6 +1,6 @@
 import { BrowserRouter,Routes,Route } from "react-router";
 import Home from "./pages/Home";
-import Search from "./pages/Search";
+import Search from "./pages/Faq";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
 import Recomend from "./pages/Recomend";
@@ -10,6 +10,7 @@ import store from './store'
 import UserPage from "./pages/UserPage";
 import Categories from "./pages/Categories";
 import Register from "./pages/Register";
+import CategoryPage from "./components/Categories/CategoryPage";
 
 function App() {
  
@@ -21,13 +22,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="search" element={<Search/>}/>
+          <Route path="faq" element={<Search/>}/>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="recomend" element={<Recomend/>}/>
           {/* <Route path="user" element={<UserPage/>}/> */}
           <Route path="categories" element={<Categories/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="/users/:name"  element={<UserPage/>}/>
+          <Route path="/categories/:name"  element={<CategoryPage/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>

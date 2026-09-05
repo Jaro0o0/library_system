@@ -2,6 +2,8 @@ import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Container from '../common/Container';
+import { Link } from 'react-router';
+
 
 const categoriesList = [
        {
@@ -88,13 +90,14 @@ const categoriesList = [
 function CategoriesList() {
     return ( 
         <Container>
+            {/* Gird */}
             <div className='grid grid-cols-4 gap-6'>
                 {categoriesList.map((item,index)=> {
                     return (
                         <div key={index} className='p-4 shadow-md'>
                             <img src={item.img} className='w-full object-cover rounded-xl'/>
                             <h3 className='text-xl font-bold'>{item.name}</h3>
-                            <Button variant="contained" endIcon={<SendIcon />} className='!bg-green-400'> Send </Button>
+                            <Button variant="contained" endIcon={<SendIcon />}  component={Link}  to={`/ctegories/${item.name}`} className='!bg-green-400'> Send </Button>
                                                                             
                                                                             
                         </div>

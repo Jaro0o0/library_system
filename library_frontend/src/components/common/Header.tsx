@@ -88,7 +88,6 @@ function Header() {
 
     return (
     <>
-        <ProfileMenu/>
         <header
             className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-black/50 backdrop-blur-sm' : 'bg-transparent'} transition-all duration-300`}
         >
@@ -109,7 +108,7 @@ function Header() {
                         <Link to="/search">Search</Link>
                     </li> */}
                     <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
-                        <Link to="/contact">Faq</Link>
+                        <Link to="/faq">Faq</Link>
                     </li>
                 </ul>
                 {/* Buttons */}
@@ -165,7 +164,7 @@ function Header() {
         )}
 
         {/* Profile_Menu */}
-        {profileOpen && <ProfileMenu/>}
+        <ProfileMenu open={profileOpen}/>
 
     
         
