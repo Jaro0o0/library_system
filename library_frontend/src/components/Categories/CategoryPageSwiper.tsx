@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -14,16 +14,30 @@ import { Pagination } from 'swiper/modules';
 const genre = "fantasy";
 const amount = 20;
 
-const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}`;
+const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
 
-const getBooksData = async () => {
-    const res =  await fetch(url);
-    const data =  await res.json();
-    console.log(data)
-}
-
+// const getBooksData = async () => {
+//     const res =  await fetch(url);
+//     const data =  await res.json();
+//     console.log(data)
+// }
 
 function CategoryPageSwiper() {
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await fetch(url);
+                if (!res.ok) {
+                    throw new Error(`Błąd API: ${res.status}`);
+                }
+                const data = await res.json();
+                console.log(data);
+            } catch (err) {
+                console.error('Nie udało się pobrać danych:', err);
+            }
+        })();
+    }, []);
+
     return (
         <>
             <Swiper
