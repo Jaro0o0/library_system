@@ -4,8 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
-import { Button }from '@mui/material';
-import getUserStatus from '../../hooks/useGetUserStatus';
+import { Button } from '@mui/material';
 
 import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
 import usegetUserStatus from '../../hooks/useGetUserStatus';
@@ -55,6 +54,19 @@ function Header() {
 
     const { isUserLogin } = usegetUserStatus();
 
+    let user = { id: "" };
+    if (isUserLogin) {
+        try {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+                const payload = JSON.parse(atob(token.split(".")[1])) as { nameid?: string };
+                user = { id: payload.nameid ?? "" };
+            }
+        } catch {
+            user = { id: "" };
+        }
+    }
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 0)
@@ -90,7 +102,7 @@ function Header() {
                 </ul>
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ? <Button variant="contained" color="secondary"></Button> : (
+                    {isUserLogin ? <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${user.id}`}>Profile</Button> : (
                     <div>
                     <button className=" text-white ">
                         <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>

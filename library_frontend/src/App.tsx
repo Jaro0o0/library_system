@@ -11,7 +11,6 @@ import UserPage from "./pages/UserPage";
 import Categories from "./pages/Categories";
 import Register from "./pages/Register";
 
-
 function App() {
  
     
@@ -25,9 +24,10 @@ function App() {
           <Route path="search" element={<Search/>}/>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="recomend" element={<Recomend/>}/>
-          <Route path="user" element={<UserPage/>}/>
+          {/* <Route path="user" element={<UserPage/>}/> */}
           <Route path="categories" element={<Categories/>}/>
           <Route path="register" element={<Register/>}/>
+          <Route path="/users/:name"  element={<UserPage/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>
@@ -35,4 +35,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
