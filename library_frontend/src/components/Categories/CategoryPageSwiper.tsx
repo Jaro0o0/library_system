@@ -164,7 +164,7 @@ function CategoryPageSwiper() {
                                         {volume.description?.slice(0, 150)}{volume.description?.length > 150 ? '...' : ''}
                                     </p>
                                 </div>
-                                <Button onClick={handleAddItem(volume.title)} variant='contained' className='!bg-green-400'>Add to card</Button>
+                                <Button onClick={() => handleAddItem(volume.title)} variant='contained' className='!bg-green-400'>Add to card</Button>
                             </div>
                         </SwiperSlide>
                     );

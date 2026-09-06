@@ -13,7 +13,7 @@ function ShoppingCard() {
     }
 
     return ( 
-        <div className="w-[300px] h-screen flex items-center justify-center fixed top-[70px] z-20  right-0'">
+        <div className="w-[500px] rounded-md h-screen flex  justify-center fixed  top-0 top-[60px]  right-0 p-8 bg-white z-60">
             <div className="mb-2">
                 <h2>Your Shopping Card</h2>
             </div>
