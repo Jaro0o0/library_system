@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 
 const categoriesList = [
-       {
+    {
         name: 'fantasy',
         img: Tolkien_Img
     },
@@ -19,14 +19,6 @@ const categoriesList = [
         img: Tolkien_Img
     },
     {
-        name: 'mystery',
-        img: Tolkien_Img
-    },
-    {
-        name: 'thriller',
-        img: Tolkien_Img
-    },
-    {
         name: 'romance',
         img: Tolkien_Img
     },
@@ -35,53 +27,11 @@ const categoriesList = [
         img: Tolkien_Img
     },
     {
-        name: 'historical fiction',
-        img: Tolkien_Img
-    },
-    {
-        name: 'crime fiction',
-        img: Tolkien_Img
-    },
-    {
-        name: 'dystopian fiction',
-        img: Tolkien_Img
-    },
-    {
         name: 'biography',
         img: Tolkien_Img
     },
-    {
-        name: 'autobiography',
-        img: Tolkien_Img
-    },
-    {
-        name: 'poetry',
-        img: Tolkien_Img
-    },
-    {
-        name: 'drama',
-        img: Tolkien_Img
-    },
-    {
-        name: 'comedy',
-        img: Tolkien_Img
-    },
-    {
-        name: 'tragedy',
-        img: Tolkien_Img
-    },
-    {
-        name: 'satire',
-        img: Tolkien_Img
-    },
-    {
-        name: 'psychological fiction',
-        img: Tolkien_Img
-    },
-    {
-        name: 'historical',
-        img: Tolkien_Img
-    },
+  
+    
 ]
 
 
@@ -91,7 +41,7 @@ function CategoriesList() {
     return ( 
         <Container>
             {/* Gird */}
-            <div className='grid grid-cols-4 gap-6'>
+            <div className='grid grid-cols-3 gap-6'>
                 {categoriesList.map((item,index)=> {
                     return (
                         <div key={index} className='p-4 shadow-md'>

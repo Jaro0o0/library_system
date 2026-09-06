@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Library_Api.Models;
 
 namespace MyProject.Data{
 
@@ -7,6 +8,12 @@ public class Book
     public int id { get; set; }
     public string tytul { get; set; } = "";
     public string autor { get; set; } = "";
+}
+
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
 }
 
 public class LibraryUser
@@ -28,6 +35,8 @@ public class AppDbContext : DbContext
     public DbSet<Book> books { get; set; }
     public DbSet<LibraryUser> Users { get; set; }
 
+    public DbSet<Category> Categories { get; set;} 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<LibraryUser>(entity =>
@@ -37,6 +46,9 @@ public class AppDbContext : DbContext
             entity.Property(user => user.PasswordHash).HasMaxLength(500);
         });
     }
+
+
+   
 }
 
 }

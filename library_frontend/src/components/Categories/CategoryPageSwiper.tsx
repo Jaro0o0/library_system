@@ -11,6 +11,8 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 
 
+
+
 //APi_BOOKS
 const genre = "fantasy";
 const amount = 10;
@@ -48,14 +50,14 @@ function CategoryPageSwiper() {
                 <h2>Explore {genre}</h2>
             </div>
             <Swiper
-                slidesPerView={'auto'}
-                centeredSlides={true}
-                spaceBetween={30}
-                pagination={{
-                clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
+                 slidesPerView={3}
+        spaceBetween={30}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+
                 className="mySwiper"
             >
                 {books.map((book) => {
@@ -63,6 +65,7 @@ function CategoryPageSwiper() {
                     const cover = volume.imageLinks?.thumbnail;
                     return (
                         <SwiperSlide key={book.id} style={{ width: 250 }}>
+                            
                             <div style={{ textAlign: 'center' }}>
                                 {cover ? (
                                     <img
@@ -79,6 +82,7 @@ function CategoryPageSwiper() {
                                 <p>{volume.authors?.join(', ')}</p>
                                 {/* <p style={{ fontSize: 14 }}>{volume.description}</p> */}
                             </div>
+
                         </SwiperSlide>
                     );
                 })}
