@@ -31,39 +31,50 @@ const amount = 10;
 
 function CategoryPageSwiper() {
 
-    //library_API
-    const [booksData, setBooksData] = useState<any[]>([]);
-    //Google Books
     const [books, setBooks] = useState<any[]>([]);
-
-
-    useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
-            const data = await res.json();
-            setBooksData(data);
-        })();
-    },[])
 
     useEffect(() => {
         (async () => {
             try {
-                const titles = (Array.isArray(booksData) ? booksData : []).map(b => b.tytul).filter(Boolean);
-                const results = [];
-                for (const t of titles.slice(0, amount)) {
-                    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(t)}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
-                    const res = await fetch(url);
-                    if (!res.ok) continue;
-                    const data = await res.json();
-                    if (data.items?.length) results.push(data.items[0]);
-                    console.log('Fetched book data:', data.items?.[0]);
+                const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
+                const data = await res.json();
+                const localBooks: any[] = Array.isArray(data) ? data : [];
+
+                const merged: any[] = [];
+                for (const book of localBooks.slice(0, amount)) {
+                    const googleBook: any = { volumeInfo: {} };
+                    if (book.tytul) {
+                        try {
+                            const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(book.tytul)}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
+                            const gRes = await fetch(url);
+                            if (gRes.ok) {
+                                const gData = await gRes.json();
+                                if (gData.items?.length) {
+                                    Object.assign(googleBook.volumeInfo, gData.items[0].volumeInfo);
+                                }
+                            }
+                        } catch (e) {
+                            console.warn('Google Books fetch failed for:', book.tytul, e);
+                        }
+                    }
+
+                    merged.push({
+                        id: book.id ?? book.tytul ?? Math.random().toString(),
+                        local: book,
+                        volumeInfo: {
+                            title: googleBook.volumeInfo.title ?? book.tytul ?? 'Brak tytułu',
+                            authors: googleBook.volumeInfo.authors ?? (book.autor ? [book.autor] : []),
+                            description: googleBook.volumeInfo.description ?? book.opis ?? '',
+                            imageLinks: googleBook.volumeInfo.imageLinks ?? null,
+                        },
+                    });
                 }
-                setBooks(results);
+                setBooks(merged);
             } catch (err) {
                 console.error('Nie udało się pobrać danych:', err);
             }
         })();
-    }, [booksData]);
+    }, []);
 
     return (
         <>
@@ -102,7 +113,7 @@ function CategoryPageSwiper() {
                                 )}
                                 <h3>{volume.title}</h3>
                                 <p>{volume.authors?.join(', ')}</p>
-                                {/* <p style={{ fontSize: 14 }}>{volume.description}</p> */}
+                                <p style={{ fontSize: 14 }}>{volume.description?.slice(0, 150)}{volume.description?.length > 150 ? '...' : ''}</p>
                             </div>
 
                         </SwiperSlide>

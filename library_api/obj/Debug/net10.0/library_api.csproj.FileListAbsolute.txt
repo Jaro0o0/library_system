@@ -132,3 +132,4 @@
 /home/jaro/Desktop/library_website/library_api/bin/Debug/net10.0/Microsoft.IdentityModel.Tokens.dll
 /home/jaro/Desktop/library_website/library_api/bin/Debug/net10.0/System.IdentityModel.Tokens.Jwt.dll
 /home/jaro/Desktop/library_website/library_api/obj/Debug/net10.0/library_api.sourcelink.json
+/home/jaro/Desktop/library_website/library_api/bin/Debug/net10.0/dotnet-tools.json
