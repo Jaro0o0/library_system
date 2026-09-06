@@ -11,6 +11,7 @@ import usegetUserStatus from '../../hooks/useGetUserStatus';
 
 //Components
 import ProfileMenu from './ProfileMenu';
+import ShoppingCard from './ShoppingCard';
 
 //hooks
 import useGetUser from "../../hooks/useGetUser";
@@ -57,6 +58,9 @@ function Header() {
     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
+    const [shoppingCardOpen, setShoppingCardOpen] = useState(false);
+
+
     const { isUserLogin } = usegetUserStatus();
 
     const { userName } = useGetUser();
@@ -165,6 +169,9 @@ function Header() {
 
         {/* Profile_Menu */}
         <ProfileMenu open={profileOpen}/>
+
+        {/* Shopping_Card */}
+        <ShoppingCard open={shoppingCardOpen}/>
 
     
         
