@@ -5,7 +5,7 @@ import { addItem, removeItem } from '../../store/ShoppingCardSlice/ShoppingCardS
 function ShoppingCard(open) {
 
     const cardItems = useSelector((state) => state.shoppingCard.card);
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
 
 
     const handleRemoveItem = (name) => {
@@ -14,7 +14,7 @@ function ShoppingCard(open) {
 
     return ( 
         <>
-        {open && (
+        {open && (<>
 
 
             {/* SHoppongCardOveraly */}
@@ -37,8 +37,8 @@ function ShoppingCard(open) {
 
 
 
-        )}
-            
+        </>)}
+       
         </>
      );
 }

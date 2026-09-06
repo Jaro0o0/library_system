@@ -133,6 +133,7 @@ function Header() {
 
                 <button onClick={() => setOpen(prev => !prev)} className='text-white'><MenuIcon/></button>
             </div>
+            <Button onClick={() => setShoppingCardOpen(prev => !prev) }>ShoppingCard</Button>
           
         </header>
 
