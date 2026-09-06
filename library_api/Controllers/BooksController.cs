@@ -28,5 +28,20 @@ public class BooksController : ControllerBase
         
         
         return Ok(books);
+
+
+
+
+
+    }
+    
+    [HttpGet("category/{category}")]
+    public IActionResult GetBooksByCategory(string category)
+    {
+        var books = _context.books
+            .Where(b => b.gatunek == category)
+            .ToList();
+
+        return Ok(books);
     }
 }

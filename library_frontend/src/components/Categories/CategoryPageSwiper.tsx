@@ -13,11 +13,18 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 
 
+//library_APi
+
+
+
+//Google APi
+
 //APi_BOOKS
 const genre = "fantasy";
 const amount = 10;
 
 const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
+const url2 = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
 
 // const getBooksData = async () => {
 //     const res =  await fetch(url);
@@ -26,7 +33,19 @@ const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxR
 // }
 
 function CategoryPageSwiper() {
+
+    //library_API
+    const [booksData, setBooksData] = useState([]);
+    //Google Books
     const [books, setBooks] = useState([]);
+
+
+    useEffect( async () => {
+        
+        const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
+        const data = await res.json();
+
+    },[])
 
     useEffect(() => {
         (async () => {
