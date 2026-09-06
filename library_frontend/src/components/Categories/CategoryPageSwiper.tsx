@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -23,9 +23,6 @@ import { Pagination, Navigation } from 'swiper/modules';
 const genre = "fantasy";
 const amount = 10;
 
-const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=${amount}&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
-const url2 = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
-
 // const getBooksData = async () => {
 //     const res =  await fetch(url);
 //     const data =  await res.json();
@@ -35,32 +32,38 @@ const url2 = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&max
 function CategoryPageSwiper() {
 
     //library_API
-    const [booksData, setBooksData] = useState([]);
+    const [booksData, setBooksData] = useState<any[]>([]);
     //Google Books
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState<any[]>([]);
 
 
-    useEffect( async () => {
-        
-        const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
-        const data = await res.json();
-
+    useEffect(() => {
+        (async () => {
+            const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
+            const data = await res.json();
+            setBooksData(data);
+        })();
     },[])
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch(url);
-                if (!res.ok) {
-                    throw new Error(`Błąd API: ${res.status}`);
+                const titles = (Array.isArray(booksData) ? booksData : []).map(b => b.tytul).filter(Boolean);
+                const results = [];
+                for (const t of titles.slice(0, amount)) {
+                    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(t)}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
+                    const res = await fetch(url);
+                    if (!res.ok) continue;
+                    const data = await res.json();
+                    if (data.items?.length) results.push(data.items[0]);
+                    console.log('Fetched book data:', data.items?.[0]);
                 }
-                const data = await res.json();
-                setBooks(data.items || []);
+                setBooks(results);
             } catch (err) {
                 console.error('Nie udało się pobrać danych:', err);
             }
         })();
-    }, []);
+    }, [booksData]);
 
     return (
         <>
