@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import heroVideo from '../../assets/videos/hero-video.mp4'
+import ShoppingCard from '../common/ShoppingCard'
 
 
 
@@ -7,6 +8,7 @@ function Hero() {
     return (
         <>
         <div className="w-full min-h-screen relative flex items-center">
+            <ShoppingCard/>
             <video
                 src={heroVideo}
                 autoPlay
