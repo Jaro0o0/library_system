@@ -1,6 +1,6 @@
 import Container from '../components/common/Container';
 import { useState } from 'react';
-import { motion } from "framer-motion";
+import { motion, removeItem } from "framer-motion";
 import recomendedListAnimation from '../animations/recomendedListAnimation';
 import toast from "react-hot-toast";
 import { Button } from '@mui/material';
@@ -8,12 +8,22 @@ import Section from '../components/common/Section';
 
 //lib
 import fantasyAuthors from '../lib/Authors/fantasyAuthors';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../store/RecomendedSlice/RecomendedSlice';
 
 // import sciFiAuthors from '../lib/Authors/sciFiAuthors';
+    const cardItems = useSelector((state) => state.recomended.authors);
+    const dispatch = useDispatch();
 
 
 
+const handleAddItem = (author) => {
+    dispatch(addItem(author));
+}
 
+const handleRemoveItem = (index) => {
+    dispatch(removeItem(index));
+}
 
 
 

@@ -45,8 +45,12 @@ public class AppDbContext : DbContext
         entity.HasIndex(user => user.UserName).IsUnique();
         entity.Property(user => user.UserName).HasMaxLength(100);
         entity.Property(user => user.PasswordHash).HasMaxLength(500);
-        entity.UsingEntity(j => j.ToTable("UserFavoriteAuthors"));
     });
+
+    modelBuilder.Entity<LibraryUser>()
+        .HasMany(user => user.FavoriteAuthors)
+        .WithMany(author => author.Users)
+        .UsingEntity(join => join.ToTable("UserFavoriteAuthors"));
 
     // Categories
     modelBuilder.Entity<Category>().HasData(

@@ -1,3 +1,5 @@
+using MyProject.Data;
+
 public class Author
 {
     public int Id { get; set; }
@@ -6,5 +8,5 @@ public class Author
 
     public ICollection<Book> Books { get; set; } = new List<Book>();
 
-    public ICollection<User> Users { get; set; } = new List<User>();
+    public ICollection<LibraryUser> Users { get; set; } = new List<LibraryUser>();
 }

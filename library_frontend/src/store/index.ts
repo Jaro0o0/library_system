@@ -19,6 +19,7 @@ const storage = {
 import SliceSearchedBooks from './SearchedBooks/SliceSearchedBooks'
 import userReducer from './UserSlice/userSlice'
 import shoppingCardReducer from './ShoppingCardSlice/ShoppingCardSlice';
+import RecomendedSlice from './RecomendedSlice/RecomendedSlice'
 
 
 //Presist
@@ -38,7 +39,7 @@ const store = configureStore({
     searchedBooks: SliceSearchedBooks,
     user: userReducer,
     shoppingCard : persistedShoppingCardReducer,
-
+    recomended: RecomendedSlice
   },
 })
 

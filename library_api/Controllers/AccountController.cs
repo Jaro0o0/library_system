@@ -58,7 +58,34 @@ public class AccountController  : ControllerBase
     [HttpPost("recomend")]
     public async Task<IActionResult> GetPreferences(UserPreferencesModel request)
     {
-        var  Recomendation = request.AuthorType;
+        var authorName = request.AuthorType.Trim();
+
+        if (string.IsNullOrWhiteSpace(authorName))
+            return BadRequest("Podaj nazwę autora.");
+
+        var user = await _dbContext.Users
+            .Include(user => user.FavoriteAuthors)
+            .FirstOrDefaultAsync(user => user.Id == request.UserId);
+
+        if (user == null)
+            return NotFound("Nie znaleziono użytkownika.");
+
+        var author = await _dbContext.Authors
+            .FirstOrDefaultAsync(author => author.Name == authorName);
+
+        if (author == null)
+        {
+            author = new Author { Name = authorName };
+            _dbContext.Authors.Add(author);
+        }
+
+        if (!user.FavoriteAuthors.Any(author => author.Name == authorName))
+        {
+            user.FavoriteAuthors.Add(author);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        return Ok(user.FavoriteAuthors);
     }
 
     // public async Task<IActionResult> Logout()
