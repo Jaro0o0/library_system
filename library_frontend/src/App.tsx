@@ -12,6 +12,7 @@ import Categories from "./pages/Categories";
 import Register from "./pages/Register";
 import CategoryPage from "./components/Categories/CategoryPage";
 import CheckOut from "./pages/CheckOut";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 
 import { PersistGate } from "redux-persist/integration/react";
@@ -33,6 +34,9 @@ function App() {
             {/* <Route path="user" element={<UserPage/>}/> */}
             <Route path="categories" element={<Categories/>}/>
             <Route path="register" element={<Register/>}/>
+
+            <Route path="/users/:name" element={<ProtectedRoute><UserPage/></ProtectedRoute>}/>
+            
             <Route path="/users/:name"  element={<UserPage/>}/>
             <Route path="/categories/:name"  element={<CategoryPage/>}/>
             <Route path="checkout" element={<CheckOut/>} />

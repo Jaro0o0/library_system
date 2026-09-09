@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Library_Api.Models;
 
+
 namespace MyProject.Data{
 
 public class Book
@@ -17,13 +18,7 @@ public class Category
     public string Name { get; set; } = "";
 }
 
-public class LibraryUser
-{
-    public int Id { get; set; }
-    public string UserName { get; set; } = "";
-    public string PasswordHash { get; set; } = "";
-    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
-}
+
 
 public class AppDbContext : DbContext
 {

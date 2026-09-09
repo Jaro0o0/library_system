@@ -2,8 +2,22 @@ import { Link } from "react-router";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import SearchIcon from '@mui/icons-material/Search';
 import IconBox from "../common/IconBox";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
 function UserPageHeader() {
+    const navigate = useNavigate();
+
+    const logoutHandler =  () => {
+
+        localStorage.removeItem("accessToken");
+
+        navigate("/login");
+
+    }
+
+
+
     return ( 
         <header className="flex justify-between items-center p-4 bg-green-50">
             <div>
@@ -15,6 +29,9 @@ function UserPageHeader() {
                 <div className=" flex gap-2  items-center">
                     <Link to='/'>Home</Link>
                     <Link to='/home'>Library</Link>
+                    <Button variant="contained" onClick={logoutHandler}>
+                        Logout
+                    </Button>
                 </div>
                 {/* Photo */}
                 <div className="flex gap-4">
