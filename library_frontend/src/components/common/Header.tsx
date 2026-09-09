@@ -6,8 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
 import { Button } from '@mui/material';
 
-import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
-import usegetUserStatus from '../../hooks/useGetUserStatus';
+
+
+//icons
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
 
 //Components
 import ProfileMenu from './ProfileMenu';
@@ -15,41 +18,9 @@ import ShoppingCard from './ShoppingCard';
 
 //hooks
 import useGetUser from "../../hooks/useGetUser";
+import usegetUserStatus from '../../hooks/useGetUserStatus';
 
-// const recomendedAuthorsData = [
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-//     {
-//         img: Tolkien_Img,
-//         author: 'Tolkien'
-//     },
-// ]
+
 
 
 
@@ -171,24 +142,32 @@ function Header() {
                     </li>
                 </ul>
                 {/* Buttons */}
-                {/* <Button variant="contained" className="!bg-green-400" component={Link} to={`/users/${userName}`}>Profile</Button> */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
                     {isUserLogin ?  <Button variant='contained' onClick={() => setProfileOpen(prev => !prev)}>Profile</Button>  : (
                     <div>
-                    <button className=" text-white ">
-                        <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-md">
-                        <Link to="/register">Register</Link>
-                    </button>
+                        {/* User is not logged in */}
+                        <div className="flex gap-4">
+                            <button className=" text-white ">
+                                <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
+                            </button>
+                            <button className="bg-green-500 text-white px-4 py-2 rounded-md">
+                                <Link to="/register">Register</Link>
+                            </button>
+                        </div>
                     </div> )}
                 </div>
                 {/* Search_Button */}
                 <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-white hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
-                <button onClick={() => setOpen(prev => !prev)} className='text-white'><MenuIcon/></button>
+                {/* mobile menu button */}
+                <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button>
+
+                {/* Shopping_Card_Button */}
+                <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold text-white hover:text-green-500 transition-colors'>
+                    <ShoppingBagIcon  className='!text-white'/>
+                </button>
             </div>
-            <Button onClick={() => setShoppingCardOpen(prev => !prev) }>ShoppingCard</Button>
+            
           
         </header>
 
@@ -204,23 +183,7 @@ function Header() {
                     <h3 className='mt-8 mb-2'>Recomended Authors for you </h3>
                     {/* Grid */}
                 
-                    <div className='grid grid-cols-4  gap-4 mb-4'>
-                        {/* Display recomended authors from API */}
-
-                        {recomendedAuthorsData.length === 0 ? (
-                            <p>You don't have recomedation yet</p>
-                        ) : recomendedAuthorsData.map((item, index) => {
-                            return (
-                                <div className='p-2 border-1 border-b-olive-400 bg-slate-50  rounded-md' key={index}>
-                                    <div className='flex gap-2 items-center '>
-                                        <img src={item.img} alt={item.author} className='w-[50px] h-[50px] object-cover'/>
-                                        <span className='font-medium font-bold'>{item.author}</span>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    
-                    </div>
+                     {/* Display search results */}
                      {searchBooks.length > 0 && (
                         <div className='mt-6'>
                             <h3 className='mb-2'>Search results ({searchBooks.length})</h3>
