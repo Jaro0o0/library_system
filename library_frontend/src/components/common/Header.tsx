@@ -16,45 +16,48 @@ import ShoppingCard from './ShoppingCard';
 //hooks
 import useGetUser from "../../hooks/useGetUser";
 
-const recomendedAuthorsData = [
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-    {
-        img: Tolkien_Img,
-        author: 'Tolkien'
-    },
-]
+// const recomendedAuthorsData = [
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+//     {
+//         img: Tolkien_Img,
+//         author: 'Tolkien'
+//     },
+// ]
 
 
 
 function Header() {
     const [scrolled, setScrolled] = useState(false)
+    const [recomendedAuthorsData ,setrecomendedAuthorsData] = useState([]);
+    const [searchBooks,setSearchBooks] = useState('');
+
     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
@@ -90,7 +93,7 @@ function Header() {
     //Handlers
     const recomendedBooksHandler = async () => {
 
-        const data = await fetch("http://localhost:5110/search/Books/recomended",{
+        const data = await fetch(`http://localhost:5110/search/Books/recomended?userId=${user.id}&count=10`,{
 
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -104,8 +107,8 @@ function Header() {
     useEffect(()=>{
         
         const recomendedBooksHandler = async () => {
-
-        const res  = await fetch("http://localhost:5110/search/Books/recomended",{
+        const userId = user.id || "1";
+        const res  = await fetch(`http://localhost:5110/search/Books/recomended?userId=${userId}&count=10`,{
 
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -113,6 +116,7 @@ function Header() {
 
 
         });
+        if (!res.ok) return;
         const data =  await res.json() 
         console.log(data)
 
@@ -122,6 +126,16 @@ function Header() {
 
     },[])
     
+    //Search Books
+    const searchBooksHandler = async ( e ) => {
+
+        const input = e.target.value
+        const res =  await fetch(`http://localhost:5110/search/Books/search-books?${input}`);
+        const data = await res.json();
+        setSearchBooks(data)
+
+    }
+
 
     return (
     <>
@@ -177,13 +191,17 @@ function Header() {
             <div className='fixed top-[70px] left-0 w-full bg-white z-[200] p-6'>
                 <Container>
                     <h2>Search</h2>
-                    <TextField id="filled-basic" label="Filled" variant="filled"  fullWidth/>
+                    <TextField id="filled-basic" label="Filled" variant="filled"  fullWidth onChange={( e ) =>  searchBooksHandler ( e ) } />
 
                     <h3 className='mt-8 mb-2'>Recomended Authors for you </h3>
                     {/* Grid */}
                 
                     <div className='grid grid-cols-4  gap-4 mb-4'>
-                        {recomendedAuthorsData.map((item, index) => {
+                        {/* Display recomended authors from API */}
+
+                        {recomendedAuthorsData.length === 0 ? (
+                            <p>You don't have recomedation yet</p>
+                        ) : recomendedAuthorsData.map((item, index) => {
                             return (
                                 <div className='p-2 border-1 border-b-olive-400 bg-slate-50  rounded-md' key={index}>
                                     <div className='flex gap-2 items-center '>
@@ -195,6 +213,7 @@ function Header() {
                         })}
                     
                     </div>
+                     <h1 className='text-red-800'>{searchBooks}</h1>
                     
                     <Button variant='contained'>See all books</Button>
                 </Container>

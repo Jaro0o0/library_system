@@ -12,10 +12,13 @@ public class BooksController : ControllerBase
     private readonly AppDbContext _context;
     private readonly RecommendService _recomended;
 
-     public BooksController(AppDbContext context, RecommendService recomended)
+    private readonly SearchBookService _search;
+
+     public BooksController(AppDbContext context, RecommendService recomended, SearchBookService search)
     {
         _context = context;
         _recomended = recomended;
+        _search =   search;
     }
 
     [HttpGet]
@@ -54,6 +57,16 @@ public class BooksController : ControllerBase
     public async Task<IActionResult> GetRecomendedBooks(int userId, int count)
     {
         var books = await _recomended.GetRecommendedUsers(userId, count);
+        return Ok(books);
+    }
+
+
+
+    [HttpGet("search-books")]
+    public async Task<IActionResult> GetBooksBytitle(string title)
+    {
+        var books = await _search.SearchBooks(title);
+
         return Ok(books);
     }
 
