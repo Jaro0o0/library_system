@@ -38,6 +38,8 @@ var connectionString =
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+
+//Auth
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddSingleton<PasswordService>();
 
@@ -85,6 +87,10 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
+
+//Custom Setvies
+builder.Services.AddScoped<RecommendService>();
+
 
 
 var app = builder.Build();

@@ -1,6 +1,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using MyProject.Data;
+using Microsoft.EntityFrameworkCore;
+using Library_Api.Services;
 
 [ApiController]
 [Route("search/[controller]")]
@@ -8,10 +10,12 @@ public class BooksController : ControllerBase
 {
 
     private readonly AppDbContext _context;
+    private readonly RecommendService _recomended;
 
-     public BooksController(AppDbContext context)
+     public BooksController(AppDbContext context, RecommendService recomended)
     {
         _context = context;
+        _recomended = recomended;
     }
 
     [HttpGet]
@@ -44,4 +48,14 @@ public class BooksController : ControllerBase
 
         return Ok(books);
     }
+
+
+    [HttpGet("recomended")]
+    public async Task<IActionResult> GetRecomendedBooks(int userId, int count)
+    {
+        var books = await _recomended.GetRecommendedUsers(userId, count);
+        return Ok(books);
+    }
+
+
 }

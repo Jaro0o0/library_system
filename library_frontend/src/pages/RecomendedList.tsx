@@ -38,52 +38,51 @@ function RecomendedList({ title, authors, onSubmit }: RecomendedListProps) {
     return ( 
         <>
 
-        <Section>
-            <div className="w-full h-screen z-20">
-                
-            {/* FANTASY_PAGE */}
-          
-                    <Container>
-                    {/* TEXT_BOX */}
-                    <div className='mb-2 text-3xl text-center mb-4'>
-                        <h1 className='text-3xl font-bold mb-2'>{ title }</h1>
-                        {/* COUNTER */}
-                        <h2 className=' text-4xl'>{choose.length}/3</h2>
-                    </div>
-                    
-                    
-                            {/* Grid */}
-                            <motion.div className="grid grid-cols-3 gap-6 "
-                                variants={recomendedListAnimation.container}
-                                initial="hidden"
-                                whileInView="show"
-                                
-                                viewport={{ once: true, amount: 0.15 }}>
-                                {authors.map((author, index) => {
-                                    return(
-                                        <motion.div
-                                            key={index}
-                                            
-                                            className={`p-9 ${choose.includes(author.name) ? "bg-black" : "bg-amber-50" } flex items-center   flex flex-col rounded-2xl shadow-xl cursor-pointer`}
-                                            variants={recomendedListAnimation.item}
-                                            whileHover={recomendedListAnimation.hover}
-                                            onClick={() => toggleAuthor(author.name)}
-                                        
-                                        >
-                                            <span>{author.name}</span>
-                                            <img src={author.img} alt='author' className='rounded-full object-cover w-50 h-50'/>
-
-                                        </motion.div>
-                                    )
-                                })}
-                        </motion.div>
-                        <div className='flex justify-center mt-4'>
-                            <Button variant="contained" size="large" className='!bg-green-400 !text-white' disabled={choose.length !== 3} onClick={() => onSubmit?.(choose)}>submit</Button>
-                        </div>
-                    </Container>
+        
+            <div className="w-full h-screen overflow-hidden z-20">
+                {/* FANTASY_PAGE */}
             
-            </div>
-        </Section>
+              
+                    <Container>
+                        {/* TEXT_BOX */}
+                        <div className='mb-3  mt-6 text-center'>
+                            <h1 className='text-2xl font-bold mb-1 md:text-3xl'>{ title }</h1>
+                            {/* COUNTER */}
+                            <h2 className='text-2xl md:text-3xl'>{choose.length}/3</h2>
+                        </div>
+                        
+                        
+                                {/* Grid */}
+                                <motion.div className="grid grid-cols-3 gap-2 md:gap-6"
+                                    variants={recomendedListAnimation.container}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    
+                                    viewport={{ once: true, amount: 0.15 }}>
+                                    {authors.map((author, index) => {
+                                        return(
+                                            <motion.div
+                                                key={index}
+                                                
+                                                className={`p-2 md:p-4 ${choose.includes(author.name) ? "bg-green-300/50" : "bg-white" } flex flex-col items-center rounded-xl shadow-xl cursor-pointer`}
+                                                variants={recomendedListAnimation.item}
+                                                whileHover={recomendedListAnimation.hover}
+                                                onClick={() => toggleAuthor(author.name)}
+                                            
+                                            >
+                                                <span className='text-center text-xs md:text-base'>{author.name}</span>
+                                                <img src={author.img} alt='author' className='mt-1 size-16 rounded-full object-cover md:size-28'/>
+
+                                            </motion.div>
+                                        )
+                                    })}
+                            </motion.div>
+                            <div className='mt-3 flex justify-center'>
+                                <Button variant="contained" size="large"  className="!bg-green-400 !text-white disabled:!bg-gray-400 disabled:!text-white"  disabled={choose.length !== 3} onClick={() => onSubmit?.(choose)}>submit</Button>
+                            </div>
+                        </Container>
+                </div>
+        
         </>
      );
 }

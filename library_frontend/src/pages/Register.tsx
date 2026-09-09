@@ -30,11 +30,14 @@ function Register( {  }) {
                 return;
             }
 
-            const data = await res.json();
-            localStorage.setItem("accessToken", data.accesToken);
-            navigate("/");
+            if (res.ok) {
+                const data = await res.json();
+                localStorage.setItem("accessToken", data.accesToken);
+                navigate("/recomend"); // Navigate to the recomend page after successful registration
 
-            
+            }
+        
+
         } catch {
             setError("Nie można połączyć się z API.");
         } finally {

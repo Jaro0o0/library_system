@@ -6,9 +6,13 @@ import fantasyAuthors from '../lib/Authors/fantasyAuthors';
 import sciFiAuthors from '../lib/Authors/sciFiAuthors';
 import scienceAuthors from '../lib/Authors/scienceAuthors';
 
+import { useNavigate } from "react-router";
+
 function Recomend() {
     const [pageType,setPageType] = useState("fantasy");
     const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
+
+    const navigate = useNavigate();
 
     const submitAuthors = async (authors: string[]) => {
         const allAuthors = [...selectedAuthors, ...authors];
@@ -29,6 +33,13 @@ function Recomend() {
             if (!response.ok) {
                 throw new Error(await response.text());
             }
+
+            if (response.ok) {
+                const data = await response.json();
+                navigate("/users/:name"); // Navigate to the home page after successful submission
+            }
+
+
         } catch (error) {
             console.error("Nie udało się zapisać rekomendowanych autorów.", error);
         }

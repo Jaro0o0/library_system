@@ -88,6 +88,39 @@ function Header() {
 
 
     //Handlers
+    const recomendedBooksHandler = async () => {
+
+        const data = await fetch("http://localhost:5110/search/Books/recomended",{
+
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+           
+
+
+        });
+    
+    }
+
+    useEffect(()=>{
+        
+        const recomendedBooksHandler = async () => {
+
+        const res  = await fetch("http://localhost:5110/search/Books/recomended",{
+
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+           
+
+
+        });
+        const data =  await res.json() 
+        console.log(data)
+
+    
+    }
+    recomendedBooksHandler();
+
+    },[])
     
 
     return (
