@@ -90,6 +90,7 @@ builder.Services.AddAuthorization();
 
 //Custom Setvies
 builder.Services.AddScoped<RecommendService>();
+builder.Services.AddScoped<SearchBookService>();
 
 
 

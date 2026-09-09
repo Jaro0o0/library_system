@@ -56,7 +56,7 @@ import useGetUser from "../../hooks/useGetUser";
 function Header() {
     const [scrolled, setScrolled] = useState(false)
     const [recomendedAuthorsData ,setrecomendedAuthorsData] = useState([]);
-    const [searchBooks,setSearchBooks] = useState('');
+    const [searchBooks,setSearchBooks] = useState<any[]>([]);
 
     const [searchOpen, setSearchOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -130,7 +130,15 @@ function Header() {
     const searchBooksHandler = async ( e ) => {
 
         const input = e.target.value
-        const res =  await fetch(`http://localhost:5110/search/Books/search-books?${input}`);
+        if (!input.trim()) {
+            setSearchBooks([])
+            return
+        }
+        const res =  await fetch(`http://localhost:5110/search/Books/search-books?title=${encodeURIComponent(input)}`,{
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        }  );
+        if (!res.ok) return;
         const data = await res.json();
         setSearchBooks(data)
 
@@ -213,7 +221,22 @@ function Header() {
                         })}
                     
                     </div>
-                     <h1 className='text-red-800'>{searchBooks}</h1>
+                     {searchBooks.length > 0 && (
+                        <div className='mt-6'>
+                            <h3 className='mb-2'>Search results ({searchBooks.length})</h3>
+                            <div className='flex flex-col max-h-64 overflow-y-auto gap-2'>
+                                {searchBooks.map((book) => (
+                                    <div key={book.id} className='p-3 border-1 border-slate-200 rounded-md bg-slate-50'>
+                                        <h1 className='text-red-800'>{book.tytul}</h1>
+                                        <p className='text-sm text-gray-600'>{book.autor} · {book.gatunek}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    {searchBooks.length === 0 && (
+                        <p className='mt-6 text-gray-500'>No books found</p>
+                    )}
                     
                     <Button variant='contained'>See all books</Button>
                 </Container>

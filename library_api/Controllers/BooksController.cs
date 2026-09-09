@@ -63,9 +63,9 @@ public class BooksController : ControllerBase
 
 
     [HttpGet("search-books")]
-    public async Task<IActionResult> GetBooksBytitle(string title)
+    public async Task<IActionResult> GetBooksBytitle(string? title)
     {
-        var books = await _search.SearchBooks(title);
+        var books = await _search.SearchBooks(title ?? "");
 
         return Ok(books);
     }
