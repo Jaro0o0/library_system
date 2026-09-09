@@ -8,12 +8,37 @@ import scienceAuthors from '../lib/Authors/scienceAuthors';
 
 function Recomend() {
     const [pageType,setPageType] = useState("fantasy");
+    const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
+
+    const submitAuthors = async (authors: string[]) => {
+        const allAuthors = [...selectedAuthors, ...authors];
+
+        if (pageType !== "science") {
+            setSelectedAuthors(allAuthors);
+            setPageType(pageType === "fantasy" ? "sci-fi" : "science");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:5110/api/auth/recommendations", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ authors: allAuthors }),
+            });
+
+            if (!response.ok) {
+                throw new Error(await response.text());
+            }
+        } catch (error) {
+            console.error("Nie udało się zapisać rekomendowanych autorów.", error);
+        }
+    };
     
     return ( 
         <>
-            {pageType === "fantasy" &&  <RecomendedList title={"fantasy authors"}  authors={fantasyAuthors} onSubmit={() => setPageType("sci-fi")}/>}
-            {pageType === "sci-fi" &&  <RecomendedList title={"sci-fi authors"}  authors={sciFiAuthors} onSubmit={() => setPageType("science")}/>}
-            {pageType === "science" &&  <RecomendedList title={"science authors"}  authors={scienceAuthors} onSubmit={() => setPageType("fantasy")}/>}
+            {pageType === "fantasy" &&  <RecomendedList title={"fantasy authors"} authors={fantasyAuthors} onSubmit={submitAuthors}/>}
+            {pageType === "sci-fi" &&  <RecomendedList title={"sci-fi authors"} authors={sciFiAuthors} onSubmit={submitAuthors}/>}
+            {pageType === "science" &&  <RecomendedList title={"science authors"} authors={scienceAuthors} onSubmit={submitAuthors}/>}
         </>
      );
 }

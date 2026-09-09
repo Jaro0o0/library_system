@@ -47,10 +47,16 @@ public class AppDbContext : DbContext
         entity.Property(user => user.PasswordHash).HasMaxLength(500);
     });
 
+    //LibraryUser - FavoriteAuthors relationship
     modelBuilder.Entity<LibraryUser>()
         .HasMany(user => user.FavoriteAuthors)
         .WithMany(author => author.Users)
         .UsingEntity(join => join.ToTable("UserFavoriteAuthors"));
+
+    modelBuilder.Entity<Author>()
+        .HasIndex(author => author.Name)
+        .IsUnique();
+
 
     // Categories
     modelBuilder.Entity<Category>().HasData(

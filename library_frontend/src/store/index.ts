@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
+import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 
 const storage = {
   getItem: (key: string) => {
@@ -41,6 +42,12 @@ const store = configureStore({
     shoppingCard : persistedShoppingCardReducer,
     recomended: RecomendedSlice
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
 

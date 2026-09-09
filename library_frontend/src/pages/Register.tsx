@@ -33,6 +33,8 @@ function Register( {  }) {
             const data = await res.json();
             localStorage.setItem("accessToken", data.accesToken);
             navigate("/");
+
+            
         } catch {
             setError("Nie można połączyć się z API.");
         } finally {

@@ -85,7 +85,7 @@ public class AccountController  : ControllerBase
             await _dbContext.SaveChangesAsync();
         }
 
-        return Ok(user.FavoriteAuthors);
+        return Created(string.Empty, user.FavoriteAuthors);
     }
 
     // public async Task<IActionResult> Logout()

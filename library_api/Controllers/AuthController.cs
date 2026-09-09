@@ -19,6 +19,33 @@ public class AuthController : ControllerBase
         _passwordService = passwordService;
     }
 
+    [HttpPost("recommendations")]
+    public async Task<IActionResult> SaveRecommendedAuthors(RecommendedAuthorsRequest request)
+    {
+        var authorNames = request.Authors
+            .Where(name => !string.IsNullOrWhiteSpace(name))
+            .Select(name => name.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (authorNames.Count != 9)
+            return BadRequest("Wybierz dokładnie 3 autorów z każdej z 3 kategorii.");
+
+        var existingNames = await _context.Authors
+            .Where(author => authorNames.Contains(author.Name))
+            .Select(author => author.Name)
+            .ToListAsync();
+
+        var newAuthors = authorNames
+            .Where(name => !existingNames.Contains(name, StringComparer.OrdinalIgnoreCase))
+            .Select(name => new Author { Name = name });
+
+        _context.Authors.AddRange(newAuthors);
+        await _context.SaveChangesAsync();
+
+        return Created("", authorNames);
+    }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequestModel request)
     {

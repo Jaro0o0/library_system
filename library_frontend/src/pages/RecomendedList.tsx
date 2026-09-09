@@ -1,86 +1,39 @@
 import Container from '../components/common/Container';
 import { useState } from 'react';
-import { motion, removeItem } from "framer-motion";
+import { motion } from "framer-motion";
 import recomendedListAnimation from '../animations/recomendedListAnimation';
 import toast from "react-hot-toast";
 import { Button } from '@mui/material';
 import Section from '../components/common/Section';
 
-//lib
-import fantasyAuthors from '../lib/Authors/fantasyAuthors';
+type Author = {
+    name: string;
+    img: string;
+};
 
+type RecomendedListProps = {
+    title: string;
+    authors: Author[];
+    onSubmit: (authors: string[]) => void;
+};
 
-//Redux
-import {addItem} from '../store/RecomendedSlice/RecomendedSlice';
-import { useDispatch, useSelector} from 'react-redux';
-
-
-// import sciFiAuthors from '../lib/Authors/sciFiAuthors';
-    const dispatch = useDispatch();
-    const authors = useSelector((state) => state.recomended.authors);
-
-
-
-// const handleAddItem = (author) => {
-//     dispatch(addItem(author));
-// }
-
-// const handleRemoveItem = (index) => {
-//     dispatch(removeItem(index));
-// }
-
-
-
-
-
-
-
-
-function RecomendedList({ title, authors, onSubmit }) {
+function RecomendedList({ title, authors, onSubmit }: RecomendedListProps) {
 
     const [choose,setChoose] = useState<string[]>([]);
-    const [count,setCount] = useState(0);
-    const [pageType,setPageType] = useState("fantasy");
-  
 
-    //Heanbdles
-    const submitHandler = async () => {
-    if(count === 0){
-        toast.error("You must choose minimal one author");
-    }
-
-        fetch('http://localhost:3000/aut/recomended',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ authors: choose })
-        })
-    }
-
-
-    const countHandler = () => {
-        if(count >= 3 ) {
-            toast.error("You can choose only 3 authors");
+    const toggleAuthor = (authorName: string) => {
+        if (choose.includes(authorName)) {
+            setChoose(choose.filter(name => name !== authorName));
+            return;
         }
-    }
 
-   
+        if (choose.length >= 3) {
+            toast.error("You can choose only 3 authors");
+            return;
+        }
 
-    const fantasyButtonHandler = () => {
-        onSubmit?.();
-        setPageType("sci-fi")
-    }
-
-
-    const handleAddItem = (author) => {
-        dispatch(addItem(author));
-    }
-
-    const handleRemoveItem = (index) => {
-        dispatch(removeItem(index));
-    }
-
+        setChoose([...choose, authorName]);
+    };
 
     return ( 
         <>
@@ -95,7 +48,7 @@ function RecomendedList({ title, authors, onSubmit }) {
                     <div className='mb-2 text-3xl text-center mb-4'>
                         <h1 className='text-3xl font-bold mb-2'>{ title }</h1>
                         {/* COUNTER */}
-                        <h2 className=' text-4xl'>{count}/3</h2>
+                        <h2 className=' text-4xl'>{choose.length}/3</h2>
                     </div>
                     
                     
@@ -114,22 +67,7 @@ function RecomendedList({ title, authors, onSubmit }) {
                                             className={`p-9 ${choose.includes(author.name) ? "bg-black" : "bg-amber-50" } flex items-center   flex flex-col rounded-2xl shadow-xl cursor-pointer`}
                                             variants={recomendedListAnimation.item}
                                             whileHover={recomendedListAnimation.hover}
-                                            onClick={() => {
-                                                setChoose(prev => {
-                                                    if(prev.includes(author.name)){
-                                                        setCount(c => Math.max(c - 1, 0))
-                                                        handleAddItem(author.cat);
-                                                        return prev.filter(name => name !== author.name)
-                                                    }
-                                                    if(prev.length >= 3){
-                                                        countHandler();
-                                                        return prev;
-                                                    }
-                                                    setCount(c => Math.min(c + 1, 3))
-                                                    return [...prev, author.name]
-                                                })
-                                            }}
-                                            variants={recomendedListAnimation.item}
+                                            onClick={() => toggleAuthor(author.name)}
                                         
                                         >
                                             <span>{author.name}</span>
@@ -140,19 +78,10 @@ function RecomendedList({ title, authors, onSubmit }) {
                                 })}
                         </motion.div>
                         <div className='flex justify-center mt-4'>
-                            <Button variant="contained" size="large" className='!bg-green-400 !text-white' disabled={count === 0} onClick={() => { submitHandler(); fantasyButtonHandler();  }}>submit</Button>
+                            <Button variant="contained" size="large" className='!bg-green-400 !text-white' disabled={choose.length !== 3} onClick={() => onSubmit?.(choose)}>submit</Button>
                         </div>
                     </Container>
             
-
-
-            {/* SCI-FI_PAGE */}
-            { pageType === "sci-fi" &&
-                <Container>
-                    <div></div>
-                </Container>
-            }
-
             </div>
         </Section>
         </>
