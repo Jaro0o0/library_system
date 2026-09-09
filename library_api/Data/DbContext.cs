@@ -33,6 +33,8 @@ public class AppDbContext : DbContext
 
     public DbSet<Category> Categories { get; set;} 
 
+    public DbSet<Author> Authors { get; set; }
+
     //SEEDING DATA
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -43,6 +45,7 @@ public class AppDbContext : DbContext
         entity.HasIndex(user => user.UserName).IsUnique();
         entity.Property(user => user.UserName).HasMaxLength(100);
         entity.Property(user => user.PasswordHash).HasMaxLength(500);
+        entity.UsingEntity(j => j.ToTable("UserFavoriteAuthors"));
     });
 
     // Categories
@@ -54,6 +57,9 @@ public class AppDbContext : DbContext
         new Category { Id = 5, Name = "adventure" },
         new Category { Id = 6, Name = "biography" }
     );
+
+   
+
 
     // Books
     modelBuilder.Entity<Book>().HasData(

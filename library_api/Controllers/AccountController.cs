@@ -30,7 +30,7 @@ public class AccountController  : ControllerBase
     {
         
         //Valdiaation same users
-         var userName = request.UserName.Trim();
+        var userName = request.UserName.Trim();
         if (await _dbContext.Users.AnyAsync(user => user.UserName == userName))
         {
             return Conflict("A user with this name already exists.");
@@ -55,6 +55,11 @@ public class AccountController  : ControllerBase
 
     }
 
+    [HttpPost("recomend")]
+    public async Task<IActionResult> GetPreferences(UserPreferencesModel request)
+    {
+        var  Recomendation = request.AuthorType;
+    }
 
     // public async Task<IActionResult> Logout()
     // {

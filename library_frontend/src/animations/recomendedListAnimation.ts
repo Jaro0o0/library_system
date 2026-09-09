@@ -16,6 +16,14 @@ const recomendedListAnimation = {
       transition: { duration: 0.55, ease: "easeOut" as const },
     },
   },
+
+  hover: {
+    scale: 1.05,
+    y: -5,
+    transition: { duration: 0.3, ease: "easeOut" as const },
+  }
+
+
 };
 
 export default recomendedListAnimation;
