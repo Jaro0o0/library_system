@@ -13,6 +13,7 @@ const RecomendedSlice = createSlice({
         addItem: (state,action) => {
 
             state.authors.push(action.payload)
+            
         },
         removeItem :  (state,action) => {
 

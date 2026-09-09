@@ -8,22 +8,26 @@ import Section from '../components/common/Section';
 
 //lib
 import fantasyAuthors from '../lib/Authors/fantasyAuthors';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../store/RecomendedSlice/RecomendedSlice';
+
+
+//Redux
+import {addItem} from '../store/RecomendedSlice/RecomendedSlice';
+import { useDispatch, useSelector} from 'react-redux';
+
 
 // import sciFiAuthors from '../lib/Authors/sciFiAuthors';
-    const cardItems = useSelector((state) => state.recomended.authors);
     const dispatch = useDispatch();
+    const authors = useSelector((state) => state.recomended.authors);
 
 
 
-const handleAddItem = (author) => {
-    dispatch(addItem(author));
-}
+// const handleAddItem = (author) => {
+//     dispatch(addItem(author));
+// }
 
-const handleRemoveItem = (index) => {
-    dispatch(removeItem(index));
-}
+// const handleRemoveItem = (index) => {
+//     dispatch(removeItem(index));
+// }
 
 
 
@@ -40,10 +44,18 @@ function RecomendedList({ title, authors, onSubmit }) {
   
 
     //Heanbdles
-    const submitHandler = () => {
+    const submitHandler = async () => {
     if(count === 0){
         toast.error("You must choose minimal one author");
     }
+
+        fetch('http://localhost:3000/aut/recomended',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ authors: choose })
+        })
     }
 
 
@@ -59,6 +71,16 @@ function RecomendedList({ title, authors, onSubmit }) {
         onSubmit?.();
         setPageType("sci-fi")
     }
+
+
+    const handleAddItem = (author) => {
+        dispatch(addItem(author));
+    }
+
+    const handleRemoveItem = (index) => {
+        dispatch(removeItem(index));
+    }
+
 
     return ( 
         <>
@@ -96,6 +118,7 @@ function RecomendedList({ title, authors, onSubmit }) {
                                                 setChoose(prev => {
                                                     if(prev.includes(author.name)){
                                                         setCount(c => Math.max(c - 1, 0))
+                                                        handleAddItem(author.cat);
                                                         return prev.filter(name => name !== author.name)
                                                     }
                                                     if(prev.length >= 3){
@@ -117,7 +140,7 @@ function RecomendedList({ title, authors, onSubmit }) {
                                 })}
                         </motion.div>
                         <div className='flex justify-center mt-4'>
-                            <Button variant="contained" size="large" className='!bg-green-400 !text-white' disabled={count === 0} onClick={() => { submitHandler(); fantasyButtonHandler(); }}>submit</Button>
+                            <Button variant="contained" size="large" className='!bg-green-400 !text-white' disabled={count === 0} onClick={() => { submitHandler(); fantasyButtonHandler();  }}>submit</Button>
                         </div>
                     </Container>
             
