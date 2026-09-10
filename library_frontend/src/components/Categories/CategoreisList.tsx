@@ -45,8 +45,8 @@ function CategoriesList() {
                 {categoriesList.map((item,index)=> {
                     return (
                         <div key={index} className='p-4 shadow-md'>
-                            <img src={item.img} className='w-full object-cover rounded-xl'/>
-                            <h3 className='text-xl font-bold'>{item.name}</h3>
+                            <img src={item.img} className='w-full object-cover rounded-xl mb-4'/>
+                            <h3 className='text-xl font-bold mb-2'>{item.name}</h3>
                             <Button variant="contained" endIcon={<SendIcon />}  component={Link}  to={`/categories/${item.name}`} className='!bg-green-400'> Send </Button>
                                                                             
                                                                             

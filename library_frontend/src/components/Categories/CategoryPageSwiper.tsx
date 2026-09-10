@@ -83,9 +83,17 @@ function CategoryPageSwiper() {
         })();
     }, []);
 
+
+    //handlers
+
+
     const handleAddItem = (book: VolumeInfo) => {
         dispatch(addItem(book));
     };
+
+
+ 
+
 
     return (
         <>

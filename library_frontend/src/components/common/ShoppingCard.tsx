@@ -30,7 +30,10 @@ function ShoppingCard({ open, onClose }) {
                         return (
                             // Item
                             <div key={index} className='flex p-4 shadow-md'>
-                                {item}
+                                <div>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.authors?.join(', ')}</p>
+                                </div>
                             </div>
                         )
                     } )}
