@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import CircularProgress from '@mui/material/CircularProgress';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -44,8 +44,14 @@ function CategoryPageSwiper() {
     
     const dispatch = useDispatch();
 
+    //Laoding
+     const [loading,setLoading] = useState(true);
+
     //APIs
     const [books, setBooks] = useState<any[]>([]);
+
+
+
 
     useEffect(() => {
         (async () => {
@@ -69,6 +75,10 @@ function CategoryPageSwiper() {
                             }
                         } catch (e) {
                             console.warn('Google Books fetch failed for:', book.tytul, e);
+                        }
+                        finally{
+
+                            setLoading(false);
                         }
                     }
 
@@ -141,19 +151,32 @@ function CategoryPageSwiper() {
                         <SwiperSlide key={book.id} className='!h-[420px]'>
                             <div className='flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100 hover:border-green-400 hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-300 cursor-pointer group'>
 
-                                {/* Okladka */}
+                               
                                 <div className="relative overflow-hidden">
-                                    {cover ? (
-                                        <img
-                                            src={cover}
-                                            alt={volume.title}
-                                            className='w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500'
-                                        />
-                                    ) : (
-                                        <div className='w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 font-medium' >
-                                            Brak okładki
-                                        </div>
-                                    )}
+
+
+                                     <div className="relative overflow-hidden">
+                                                {loading ? (
+                                                    <CircularProgress aria-label="Loading…" />
+                                                ) : (
+                                                    <>
+                                                        {/* Okładka */}
+                                                        {cover ? (
+                                                            <img
+                                                                src={cover}
+                                                                alt={volume.title}
+                                                                className="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
+                                                            />
+                                                        ) : (
+                                                            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 font-medium">
+                                                                Brak okładki
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                    </div>
+
+
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 </div>
 

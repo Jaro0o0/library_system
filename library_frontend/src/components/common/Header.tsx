@@ -164,7 +164,7 @@ function Header() {
 
                 {/* Shopping_Card_Button */}
                 <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold text-white hover:text-green-500 transition-colors'>
-                    <ShoppingBagIcon  className='!text-white'/>
+                    <ShoppingBagIcon  className="hover:!text-green-500"/>
                 </button>
             </div>
             
@@ -210,7 +210,7 @@ function Header() {
         <ProfileMenu open={profileOpen}/>
 
         {/* Shopping_Card */}
-        <ShoppingCard open={shoppingCardOpen}/>
+        <ShoppingCard open={shoppingCardOpen} onClose={() => setShoppingCardOpen(false)}/>
 
     
         

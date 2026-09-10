@@ -4,16 +4,23 @@ import Footer from "../components/common/Footer";
 import Container from "../components/common/Container";
 import { Button } from "@mui/material";
 import { Link } from "react-router";
+import { useState } from "react";
+
+
+import CheckoutAllert from "../components/Checkout/CheckoutAllert";
 
 function CheckOut() {
 
     const dispatch = useDispatch();
     const cardItems = useSelector((state) => state.shoppingCard.card);
 
+    const [openAllert,setOpenAllert] = useState(false);
+
     return ( 
         <>  
         <Header/>
             <div className="w-full h-screen relative">
+                <CheckoutAllert open={openAllert} onClose={() => setOpenAllert(false)}/>
 
             <div className="absolute top-1/3 left-1/2 -translate-1/2">
                
@@ -40,8 +47,11 @@ function CheckOut() {
                                 <div>
                                     <span>for all</span>
                                     <h1>Price</h1>
-                                    <Button variant="contained" className="!bg-green-400">Rent</Button>
-                                    <Button variant="outlined" className="!bg-green-400" component={Link} to='/'>Back to home</Button>
+                                    {/* Buttons */}
+                                    <div className="flex gap-4 mt-4">
+                                        <Button variant="contained" className="!bg-green-400" onClick={() => setOpenAllert(prev => !prev)}>Rent</Button>
+                                        <Button variant="outlined" className="!bg-green-400" component={Link} to='/'>Back to home</Button>
+                                    </div>
                                 </div>
                             </div>
                     </div>
