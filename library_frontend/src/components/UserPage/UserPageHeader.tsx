@@ -5,6 +5,38 @@ import IconBox from "../common/IconBox";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 
+
+const categoriesList = [
+    {
+        name: 'fantasy',
+        
+    },
+    {
+        name: 'science fiction',
+       
+    },
+    {
+        name: 'horror',
+      
+    },
+    {
+        name: 'romance',
+      
+    },
+    {
+        name: 'adventure',
+       
+    },
+    {
+        name: 'biography',
+       
+    },
+  
+    
+]
+
+
+
 function UserPageHeader() {
     const navigate = useNavigate();
 
@@ -19,37 +51,32 @@ function UserPageHeader() {
 
 
     return ( 
-        <header className="flex justify-between items-center p-4 bg-green-50">
+        <header className="flex justify-between  py-2 px-6 bg-white shadow-md items-center ">
             <div>
-                <h1 className="text-xl">Books</h1>
+                <h1 className="text-xl font-semibold">Books <span className="text-green-400">Tracker</span></h1>
             </div>
-            {/* Nav */}
-            <div className="flex justify-between w-full max-w-md">
-                {/* Links */}
-                <div className=" flex gap-2  items-center">
-                    <Link to='/'>Home</Link>
-                    <Link to='/home'>Library</Link>
-                    <Button variant="contained" onClick={logoutHandler}>
-                        Logout
-                    </Button>
-                </div>
-                {/* Photo */}
-                <div className="flex gap-4">
-                    {/* Notifiacanitons */}
-                    <IconBox>
-                        <NotificationsActiveIcon />
-                    </IconBox>
-                    <IconBox>
-                         <SearchIcon/>
-                    </IconBox>
-                    
-                    {/* ProfilePhoto */}
-                    <div>
-                        <img src="" alt="user-photo" className="w-15 h-15 rounded-2xl"/>
-                    </div>
 
-                </div>
+            {/* Nav */}
+            <div>
+                <ul className="flex gap-4 items-center">
+                    {categoriesList.map((item,indx)=>(
+                        <li key={indx} className="hover:text-green-600 transition-colors duration-300"><Link to={`/categories/${item.name}`}>{item.name}</Link></li>
+                    ))}
+                </ul>
+
             </div>
+
+
+      
+          
+                {/* Links */}
+                <div className=" flex gap-4  items-center">
+                    <Link to='/' className="hover:text-green-600 transition-colors duration-300">Home</Link>
+                    <Link to='/home' className="hover:text-green-600 transition-colors duration-300">Library</Link>
+                    <span onClick={logoutHandler} className="hover:text-green-600 transition-colors duration-300 cursor-pointer">Logout</span>
+                </div>
+            
+
         </header>
      );
 }

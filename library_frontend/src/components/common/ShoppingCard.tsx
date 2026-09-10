@@ -37,7 +37,7 @@ function ShoppingCard({ open, onClose }) {
                 </div>
                 {/* Buttons */}
                 <div className='mb-12'>
-                    <Button variant='contained' component={Link} to='checkout'>Go to summary</Button>
+                    <Button variant='contained' component={Link} to='checkout' className='!bg-green-400'>Go to summary</Button>
                 </div>
             </div>
         </>

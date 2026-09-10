@@ -12,7 +12,7 @@ function Cto() {
     return ( 
         <>
           
-                <div className="grid grid-cols-[2fr_1fr]  shadow-md rounded-3xl overflow-hidden" >
+                <div className="grid grid-cols-[2fr_1fr] bg-white shadow-md rounded-3xl overflow-hidden" >
                     {/* text-col */}
                     <div className="p-8 ">
                         <h1 className="text-3xl mb-2">Welcome <span className="text-green-300">{userName}</span></h1>

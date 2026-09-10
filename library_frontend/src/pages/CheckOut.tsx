@@ -16,6 +16,10 @@ function CheckOut() {
 
     const [openAllert,setOpenAllert] = useState(false);
 
+
+    //handlers
+    const rentDate = new Date();
+
     return ( 
         <>  
         <Header/>
@@ -28,6 +32,7 @@ function CheckOut() {
                     <div className="grid grid-cols-[2fr_1fr] gap-6">
                             {/* ShoppingCardCOL */}
                             <div className="p-4 overflow-y-auto">
+                                {cardItems.length === 0 ? <h2>Empty card</h2> : 
                                     { cardItems.map((item,index) => {
                                         return (
                                             <div key={index}>
@@ -35,12 +40,18 @@ function CheckOut() {
                                             </div>
                                         )
                                     })}
+
+                                }
                             </div>
                             {/* Data_COL */}
-                            <div>
+                            <div className="shadow-xl p-4">
                                 {/* data_box */}
                                 <div className="border-b-1">
-                                    <h2>date</h2>
+                                    <div>
+                                        <h2>Date</h2>
+                                        <h2>{rentDate.getDate()}</h2>
+                                    </div>
+                                   
                                     <h2>end date</h2>
                                 </div>
                                 {/* price_box */}

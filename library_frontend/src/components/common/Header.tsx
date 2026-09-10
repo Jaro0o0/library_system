@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import { Link } from 'react-router'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
 import { Button } from '@mui/material';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 //icons
@@ -25,6 +25,8 @@ import usegetUserStatus from '../../hooks/useGetUserStatus';
 
 
 function Header() {
+
+
     const [scrolled, setScrolled] = useState(false)
     const [recomendedAuthorsData ,setrecomendedAuthorsData] = useState([]);
     const [searchBooks,setSearchBooks] = useState<any[]>([]);
@@ -34,6 +36,8 @@ function Header() {
     const [profileOpen, setProfileOpen] = useState(false);
     const [shoppingCardOpen, setShoppingCardOpen] = useState(false);
 
+    const heightRef = useRef<HTMLElement | null>(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
 
     const { isUserLogin } = usegetUserStatus();
 
@@ -60,6 +64,12 @@ function Header() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    //Height
+    useEffect(() => {
+        if (heightRef.current) {
+            setHeaderHeight(heightRef.current.offsetHeight);
+        }
+    }, []);
 
     //Handlers
     const recomendedBooksHandler = async () => {
@@ -120,31 +130,34 @@ function Header() {
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-2  bg-white  `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  `}
+            ref={heightRef}
         >
             <div>
                 <h1 className={`text-xl   text-black font-bold`} >
-                    <Link to="/"> Book Tracker</Link>
+                    <Link to="/"> Book <span className="text-green-400">Tracker</span></Link>
                 </h1>
             </div>
             <div className='flex gap-6 items-center mr-6'>
                 <ul className="flex gap-4">
-                    <li className="text-lg  text-black hover:text-green-500 transition-colors">
+                    <li className="  text-black  hover:text-green-500 transition-colors">
                         <Link to="/">Home</Link>
                     </li>
-                    <li className="text-lg  text-black hover:text-green-500 transition-colors">
+                    <li className=" text-black  hover:text-green-500 transition-colors">
                         <Link to="/categories">Categories</Link>
                     </li>
                     {/* <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
                         <Link to="/search">Search</Link>
                     </li> */}
-                    <li className="text-lg text-black  hover:text-green-500 transition-colors">
+                    <li className=" text-black  hover:text-green-500 transition-colors">
                         <Link to="/faq">Faq</Link>
                     </li>
                 </ul>
+
+
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ?  <Button variant='contained' onClick={() => setProfileOpen(prev => !prev)}>Profile</Button>  : (
+                    {isUserLogin ?  <button  onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
                     <div>
                         {/* User is not logged in */}
                         <div className="flex gap-4">
@@ -157,6 +170,8 @@ function Header() {
                         </div>
                     </div> )}
                 </div>
+
+
                 {/* Search_Button */}
                 <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-black hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
@@ -175,8 +190,11 @@ function Header() {
 
 
         {/* Search_Menu */}
-        {searchOpen && (
-            <div className='fixed top-[70px] left-0 w-full bg-white z-[200] p-6'>
+       
+            <div
+                style={{ top: headerHeight }}
+                className={`fixed left-0 w-full bg-white z-[99] p-6 transition-transform duration-500 ${searchOpen ? "translate-y-0" : "-translate-y-[500px]"}`}
+            >
                 <Container>
                     <h2>Search</h2>
                     <TextField id="filled-basic" label="Filled" variant="filled"  fullWidth onChange={( e ) =>  searchBooksHandler ( e ) } />
@@ -205,7 +223,7 @@ function Header() {
                     <Button variant='contained'>See all books</Button>
                 </Container>
             </div>
-        )}
+        
 
         {/* Profile_Menu */}
         <ProfileMenu open={profileOpen}/>
