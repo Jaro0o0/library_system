@@ -10,7 +10,7 @@
         "projectUniqueName": "/home/jaro/Desktop/library_website/library_api/library_api.csproj",
         "projectName": "library_api",
         "projectPath": "/home/jaro/Desktop/library_website/library_api/library_api.csproj",
-        "packagesPath": "/tmp/cursor-sandbox-cache/15422aa532b7ffcb30e44d3cfbd2250d/nuget",
+        "packagesPath": "/home/jaro/.nuget/packages/",
         "outputPath": "/home/jaro/Desktop/library_website/library_api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [

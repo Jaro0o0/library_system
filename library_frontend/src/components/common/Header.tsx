@@ -114,16 +114,16 @@ function Header() {
         setSearchBooks(data)
 
     }
-
-
+// 'bg-black/50 backdrop-blur-sm'
+// 'bg-transparent'
     return (
     <>
         <header
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-black/50 backdrop-blur-sm' : 'bg-transparent'} transition-all duration-300`}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'} transition-all duration-300`}
         >
             <div>
-                <h1 className="text-2xl font-bold text-white">
-                    <Link to="/">Book Tracker</Link>
+                <h1 className={`text-2xl font-bold  ${scrolled ?  'text-black' : 'text-white'}`} >
+                    <Link to="/"> Book Tracker</Link>
                 </h1>
             </div>
             <div className='flex gap-6 items-center mr-6'>
