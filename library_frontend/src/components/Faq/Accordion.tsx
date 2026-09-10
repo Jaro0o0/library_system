@@ -8,12 +8,12 @@ import Button from '@mui/material/Button';
 
 import Container from '../common/Container';
 
-function AccordionComponent() {
+function AccordionComponent({ accordionTitle, accordionQuestion }) {
     return ( 
             <div className='p-8 mb-8'>
                   {/* TEXT_BOX */}
-                        <div>
-                            <h1 className='text-3xl'>Questions</h1>
+                        <div className='mb-4'>
+                            <h1 className='text-3xl'>{accordionQuestion}</h1>
                         </div>
 
 
@@ -22,40 +22,11 @@ function AccordionComponent() {
                             <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}  
                             >
-                            <Typography component="span">Accordion 1</Typography>
+                            <Typography component="span">{accordionQuestion}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
+                            {accordionTitle}
                             </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                       
-                            >
-                            <Typography component="span">Accordion 2</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion defaultExpanded>
-                            <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                         
-                            >
-                            <Typography component="span">Accordion Actions</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                            </AccordionDetails>
-                            <AccordionActions>
-                            <Button>Cancel</Button>
-                            <Button>Agree</Button>
-                            </AccordionActions>
                         </Accordion>
                 </div>
      );

@@ -119,25 +119,26 @@ function Header() {
     return (
     <>
         <header
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-4 ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'} transition-all duration-300`}
+            // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center p-2  bg-white  `}
         >
             <div>
-                <h1 className={`text-2xl font-bold  ${scrolled ?  'text-black' : 'text-white'}`} >
+                <h1 className={`text-xl   text-black font-bold`} >
                     <Link to="/"> Book Tracker</Link>
                 </h1>
             </div>
             <div className='flex gap-6 items-center mr-6'>
                 <ul className="flex gap-4">
-                    <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
+                    <li className="text-lg  text-black hover:text-green-500 transition-colors">
                         <Link to="/">Home</Link>
                     </li>
-                    <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
+                    <li className="text-lg  text-black hover:text-green-500 transition-colors">
                         <Link to="/categories">Categories</Link>
                     </li>
                     {/* <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
                         <Link to="/search">Search</Link>
                     </li> */}
-                    <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
+                    <li className="text-lg text-black  hover:text-green-500 transition-colors">
                         <Link to="/faq">Faq</Link>
                     </li>
                 </ul>
@@ -148,7 +149,7 @@ function Header() {
                         {/* User is not logged in */}
                         <div className="flex gap-4">
                             <button className=" text-white ">
-                                <Link to="/login" className='text-lg font-bold text-white hover:text-green-500 transition-colors'>Login</Link>
+                                <Link to="/login" className='text-lg  text-black hover:text-green-500 transition-colors'>Login</Link>
                             </button>
                             <button className="bg-green-500 text-white px-4 py-2 rounded-md">
                                 <Link to="/register">Register</Link>
@@ -157,13 +158,13 @@ function Header() {
                     </div> )}
                 </div>
                 {/* Search_Button */}
-                <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-white hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
+                <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-black hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
                 {/* mobile menu button */}
                 <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button>
 
                 {/* Shopping_Card_Button */}
-                <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold text-white hover:text-green-500 transition-colors'>
+                <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold text-black hover:text-green-500 transition-colors'>
                     <ShoppingBagIcon  className="hover:!text-green-500"/>
                 </button>
             </div>

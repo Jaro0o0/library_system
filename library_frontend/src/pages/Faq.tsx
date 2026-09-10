@@ -3,6 +3,7 @@ import SeaarchedBooks from "../components/Search/SearchedBooks";
 import Section from "../components/common/Section";
 // import Hero from "../components/Search/Hero";
 import FaqHero from "../components/Faq/FaqHero";
+import Header from "../components/common/Header";
 
 
 
@@ -11,6 +12,7 @@ import FaqHero from "../components/Faq/FaqHero";
 function Search() {
   return ( 
     <>
+      <Header/>  
       <FaqHero/>
       {/* <Section>
         <Recomend/>
