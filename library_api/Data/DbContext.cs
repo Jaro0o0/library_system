@@ -10,6 +10,8 @@ public class Book
     public string tytul { get; set; } = "";
     public string autor { get; set; } = "";
     public string? gatunek { get; set; }
+
+    public bool IsRented {get; set;} = false;
 }
 
 public class Category
@@ -80,21 +82,24 @@ public class AppDbContext : DbContext
             id = 1,
             tytul = "The Hobbit",
             autor = "J.R.R. Tolkien",
-            gatunek = "fantasy"
+            gatunek = "fantasy",
+            IsRented = false
         },
         new Book
         {
             id = 2,
             tytul = "The Fellowship of the Ring",
             autor = "J.R.R. Tolkien",
-            gatunek = "fantasy"
+            gatunek = "fantasy",
+            IsRented = false
         },
         new Book
         {
             id = 3,
             tytul = "Harry Potter and the Philosopher's Stone",
             autor = "J.K. Rowling",
-            gatunek = "fantasy"
+            gatunek = "fantasy",
+            IsRented = false
         },
 
         // SCIENCE FICTION
@@ -103,21 +108,24 @@ public class AppDbContext : DbContext
             id = 4,
             tytul = "Dune",
             autor = "Frank Herbert",
-            gatunek = "science fiction"
+            gatunek = "science fiction",
+            IsRented = false
         },
         new Book
         {
             id = 5,
             tytul = "Foundation",
             autor = "Isaac Asimov",
-            gatunek = "science fiction"
+            gatunek = "science fiction",
+            IsRented = false
         },
         new Book
         {
             id = 6,
             tytul = "Neuromancer",
             autor = "William Gibson",
-            gatunek = "science fiction"
+            gatunek = "science fiction",
+            IsRented = false
         },
 
         // HORROR
@@ -126,21 +134,24 @@ public class AppDbContext : DbContext
             id = 7,
             tytul = "It",
             autor = "Stephen King",
-            gatunek = "horror"
+            gatunek = "horror",
+            IsRented = false
         },
         new Book
         {
             id = 8,
             tytul = "The Shining",
             autor = "Stephen King",
-            gatunek = "horror"
+            gatunek = "horror",
+            IsRented = false
         },
         new Book
         {
             id = 9,
             tytul = "Dracula",
             autor = "Bram Stoker",
-            gatunek = "horror"
+            gatunek = "horror",
+            IsRented = false
         },
 
         // ROMANCE
@@ -149,21 +160,24 @@ public class AppDbContext : DbContext
             id = 10,
             tytul = "Pride and Prejudice",
             autor = "Jane Austen",
-            gatunek = "romance"
+            gatunek = "romance",
+            IsRented = false
         },
         new Book
         {
             id = 11,
             tytul = "The Notebook",
             autor = "Nicholas Sparks",
-            gatunek = "romance"
+            gatunek = "romance",
+            IsRented = false
         },
         new Book
         {
             id = 12,
             tytul = "Me Before You",
             autor = "Jojo Moyes",
-            gatunek = "romance"
+            gatunek = "romance",
+            IsRented = false
         },
 
         // ADVENTURE
@@ -172,21 +186,24 @@ public class AppDbContext : DbContext
             id = 13,
             tytul = "Treasure Island",
             autor = "Robert Louis Stevenson",
-            gatunek = "adventure"
+            gatunek = "adventure",
+            IsRented = false
         },
         new Book
         {
             id = 14,
             tytul = "The Three Musketeers",
             autor = "Alexandre Dumas",
-            gatunek = "adventure"
+            gatunek = "adventure",
+            IsRented = false
         },
         new Book
         {
             id = 15,
             tytul = "Around the World in Eighty Days",
             autor = "Jules Verne",
-            gatunek = "adventure"
+            gatunek = "adventure",
+            IsRented = false
         },
 
         // BIOGRAPHY
@@ -195,14 +212,16 @@ public class AppDbContext : DbContext
             id = 16,
             tytul = "Steve Jobs",
             autor = "Walter Isaacson",
-            gatunek = "biography"
+            gatunek = "biography",
+            IsRented = false
         },
         new Book
         {
             id = 17,
             tytul = "Einstein: His Life and Universe",
             autor = "Walter Isaacson",
-            gatunek = "biography"
+            gatunek = "biography",
+            IsRented = false
         },
         new Book
         {

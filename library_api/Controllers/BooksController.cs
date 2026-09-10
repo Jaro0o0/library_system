@@ -14,11 +14,14 @@ public class BooksController : ControllerBase
 
     private readonly SearchBookService _search;
 
-     public BooksController(AppDbContext context, RecommendService recomended, SearchBookService search)
+    private readonly RentBookService _rent;
+
+     public BooksController(AppDbContext context, RecommendService recomended, SearchBookService search, RentBookService rent)
     {
         _context = context;
         _recomended = recomended;
         _search =   search;
+        _rent = rent;
     }
 
     [HttpGet]
@@ -68,6 +71,21 @@ public class BooksController : ControllerBase
         var books = await _search.SearchBooks(title ?? "");
 
         return Ok(books);
+    }
+
+
+
+    //Rent endpoint
+    [HttpPut("rent")]
+    public async Task<IActionResult> RentBook( [FromBody] List<string> booksIds )
+    {
+
+       
+
+
+        var rentBooks = await _rent.MarkBook();
+
+        return Ok('book rented')
     }
 
 
