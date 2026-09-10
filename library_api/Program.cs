@@ -28,12 +28,22 @@ builder.Services.AddCors(options =>
 
 
 //DATABASE
-var connectionString =
-    $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
-    $"Port={Environment.GetEnvironmentVariable("DB_PORT")};" +
-    $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
-    $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
-    $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
+// Build connection string from environment variables if present, otherwise fall back to configuration
+var envHost = Environment.GetEnvironmentVariable("DB_HOST");
+string connectionString;
+if (!string.IsNullOrEmpty(envHost))
+{
+    connectionString =
+        $"Host={envHost};" +
+        $"Port={Environment.GetEnvironmentVariable("DB_PORT")};" +
+        $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
+        $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
+        $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
+}
+else
+{
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+}
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
@@ -91,41 +101,30 @@ builder.Services.AddAuthorization();
 //Custom Setvies
 builder.Services.AddScoped<RecommendService>();
 builder.Services.AddScoped<SearchBookService>();
-
-
+builder.Services.AddScoped<RentBookService>();
 
 var app = builder.Build();
 
-
-    app.MapOpenApi();
-    // app.UseHttpRedirection();
-    app.MapControllers();
-
-    //cors
-    app.UseCors("AllowReact");
-
-
-app.UseHttpsRedirection();
-app.UseCors("Frontend");
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapGet("/",() => "Library system");
-
-app.Use(async (context,next) =>
+app.Use(async (context, next) =>
 {
     try
     {
         await next();
     }
-    catch(Exception)
+    catch (Exception)
     {
         context.Response.StatusCode = 500;
-        await context.Response.WriteAsync("An unexpected error occurred. Please try again later.");
-    };
+        await context.Response.WriteAsJsonAsync(new { error = "An unexpected error occurred. Please try again later." });
+    }
 });
 
+app.UseCors("AllowReact");
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapOpenApi();
+app.MapControllers();
+app.MapGet("/", () => "Library system");
 
 app.Run();
 

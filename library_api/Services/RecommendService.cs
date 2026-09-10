@@ -18,7 +18,12 @@ public class RecommendService
     {
         var user = await _context.Users
             .Include(u => u.FavoriteAuthors)
-            .FirstAsync(u => u.Id == userId);
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user is null)
+        {
+            return [];
+        }
 
         var books = await _context.books.ToListAsync();
 

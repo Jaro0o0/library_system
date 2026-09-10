@@ -2639,7 +2639,7 @@
     ]
   },
   "packageFolders": {
-    "/home/jaro/.nuget/packages/": {}
+    "/tmp/cursor-sandbox-cache/15422aa532b7ffcb30e44d3cfbd2250d/nuget": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2647,7 +2647,7 @@
       "projectUniqueName": "/home/jaro/Desktop/library_website/library_api/library_api.csproj",
       "projectName": "library_api",
       "projectPath": "/home/jaro/Desktop/library_website/library_api/library_api.csproj",
-      "packagesPath": "/home/jaro/.nuget/packages/",
+      "packagesPath": "/tmp/cursor-sandbox-cache/15422aa532b7ffcb30e44d3cfbd2250d/nuget",
       "outputPath": "/home/jaro/Desktop/library_website/library_api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [

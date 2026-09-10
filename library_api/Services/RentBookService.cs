@@ -32,14 +32,9 @@ namespace Library_Api.Services {
                 {
                     book.IsRented = true;
                 }
+            }
 
-
-
-             }
-
-
-          
-         }
-
+            await _context.SaveChangesAsync();
+        }
     }
 }
