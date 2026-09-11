@@ -35,6 +35,9 @@ public class RentalHistory
     public int BookId { get; set; }
     public Book Book { get; set; } = null!;
 
+    public int UserId { get; set; }
+    public LibraryUser User { get; set; } = null!;
+
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
 }
@@ -97,6 +100,11 @@ public class AppDbContext : DbContext
         .HasOne(rent => rent.Book)
         .WithMany(book => book.RentalHistories)
         .HasForeignKey(rent => rent.BookId);
+
+    modelBuilder.Entity<RentalHistory>()
+        .HasOne(rent => rent.User)
+        .WithMany()
+        .HasForeignKey(rent => rent.UserId);
 
 
     // Books

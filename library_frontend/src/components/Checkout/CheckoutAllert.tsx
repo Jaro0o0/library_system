@@ -68,8 +68,8 @@ function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
                     <h2 className="text-lg font-bold mb-4">Checkout Alert</h2>
                     <p className="mb-4">Please review your order before proceeding to checkout.</p>
                     <div className='flex gap-4'>
-                        <Button className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</Button>
-                        <Button className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</Button>
+                        <Button variant='contained' className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</Button>
+                        <Button  variant='contained' className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</Button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CircularProgress from '@mui/material/CircularProgress';
 import 'swiper/css';
@@ -9,6 +9,8 @@ import { Link } from 'react-router';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../store/ShoppingCardSlice/ShoppingCardSlice';
+
+import toast from 'react-hot-toast';
 
 const genre = 'fantasy';
 const amount = 10;
@@ -22,12 +24,14 @@ interface VolumeInfo {
 
 interface MergedBook {
     id: string | number;
+    isRented: boolean;
     local: Record<string, unknown>;
     volumeInfo: VolumeInfo;
 }
 
 function CategoryPageSwiper() {
     const dispatch = useDispatch();
+    const [localBooksData, setLocalBooksData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState<MergedBook[]>([]);
 
@@ -38,10 +42,14 @@ function CategoryPageSwiper() {
                 const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
                 if (!res.ok) {
                     console.error('Nie udało się pobrać danych:', res.status, await res.text());
+                 
                     return;
                 }
+                //Locale Books
                 const data = await res.json();
                 const localBooks: Record<string, unknown>[] = Array.isArray(data) ? data : [];
+                console.log(localBooks);
+                setLocalBooksData(localBooks);
 
                 const merged: MergedBook[] = [];
                 for (const book of localBooks.slice(0, amount)) {
@@ -65,6 +73,7 @@ function CategoryPageSwiper() {
 
                     merged.push({
                         id: (book.id as string | number) ?? tytul ?? Math.random().toString(),
+                        isRented: book.isRented === true,
                         local: book,
                         volumeInfo: {
                             title: googleBook.volumeInfo.title ?? tytul ?? 'Brak tytułu',
@@ -84,13 +93,27 @@ function CategoryPageSwiper() {
     }, []);
 
 
-    //handlers
+    const handleAddItem = (item: VolumeInfo) => {
+
+        for ( i = 0;   i < localBooksData.length; i++ ){
 
 
-    const handleAddItem = (book: VolumeInfo) => {
-        dispatch(addItem(book));
-    };
+            if(localBooksData[i].isRented = true) {
 
+                toast.error("this book is rente you can't rent ")
+                
+            }else{
+                dispatch(addItem(item));
+            }
+
+            
+        }
+        
+        
+        
+
+      
+    }
 
  
 
@@ -176,6 +199,7 @@ function CategoryPageSwiper() {
                                     >
                                         Add to card
                                     </Button>
+                                   {book.isRented && <p>This book is rented</p>}
                                 </div>
                             </SwiperSlide>
                         );

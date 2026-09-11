@@ -15,49 +15,41 @@ namespace Library_Api.Services {
             _context = context;            
         }
 
-        public async Task<List<Book>> MarkBook( List<string> booksIds)
+        public async Task RentBooks(List<string> bookTitles, int userId)
         {
-          
-            var allRentedBooks = new List<Book>();
+            var titles = bookTitles
+                .Where(title => !string.IsNullOrWhiteSpace(title))
+                .Select(title => title.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
 
-            // Request_Books
-            foreach(var requestBook in booksIds)
+            if (titles.Count == 0)
+                throw new ArgumentException("Select at least one book.");
+
+            var books = await _context.books
+                .Where(book => titles.Contains(book.tytul))
+                .ToListAsync();
+
+            if (books.Count != titles.Count)
+                throw new ArgumentException("One or more selected books do not exist.");
+
+            if (books.Any(book => book.IsRented))
+                throw new InvalidOperationException("One or more selected books are already rented.");
+
+            var now = DateTime.UtcNow;
+            foreach (var book in books)
             {
-
-                  var books = await _context.books
-                    .Where(b => b.tytul.Contains(requestBook))
-                    .ToListAsync();
-
-              
-
-                // Mark_AS_RENTED
-                foreach(var book in books)
+                book.IsRented = true;
+                _context.RentalHistories.Add(new RentalHistory
                 {
-                   
-                    book.IsRented = true;
-
-                    allRentedBooks.Add(book);
-
-                    //History
-                    var rentalHistory = new RentalHistory
-                    {
-                        BookId = book.id,
-                        StartDate = DateTime.UtcNow,
-                        EndDate = DateTime.UtcNow.AddMonths(1)
-                    };
-
-                     _context.RentalHistories.Add(rentalHistory);
-
-
-                    //Table Response
-                    allRentedBooks.Add(book);
-
-                }
+                    BookId = book.id,
+                    UserId = userId,
+                    StartDate = now,
+                    EndDate = now.AddMonths(1)
+                });
             }
 
             await _context.SaveChangesAsync();
-
-            return allRentedBooks;
         }
     }
 }

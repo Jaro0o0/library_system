@@ -118,6 +118,8 @@ app.Use(async (context, next) =>
     }
 });
 
+
+
 app.UseCors("AllowReact");
 app.UseAuthentication();
 app.UseAuthorization();

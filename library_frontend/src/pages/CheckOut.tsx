@@ -4,10 +4,9 @@ import Footer from "../components/common/Footer";
 import Container from "../components/common/Container";
 import { Button } from "@mui/material";
 import { Link } from "react-router";
-import { useNavigate } from "react-router";
 import { useState } from "react";
 
-import  { removeItem} from '../store/ShoppingCardSlice'
+import  { removeItem} from '../store/ShoppingCardSlice/ShoppingCardSlice'
 //Icons
 import DeleteIcon from '@mui/icons-material/Delete';
 
