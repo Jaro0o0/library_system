@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CircularProgress from '@mui/material/CircularProgress';
 import 'swiper/css';
@@ -31,7 +31,6 @@ interface MergedBook {
 
 function CategoryPageSwiper() {
     const dispatch = useDispatch();
-    const [localBooksData, setLocalBooksData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState<MergedBook[]>([]);
 
@@ -49,7 +48,6 @@ function CategoryPageSwiper() {
                 const data = await res.json();
                 const localBooks: Record<string, unknown>[] = Array.isArray(data) ? data : [];
                 console.log(localBooks);
-                setLocalBooksData(localBooks);
 
                 const merged: MergedBook[] = [];
                 for (const book of localBooks.slice(0, amount)) {
@@ -93,26 +91,20 @@ function CategoryPageSwiper() {
     }, []);
 
 
-    const handleAddItem = (item: VolumeInfo) => {
+    const handleAddItem = (book: MergedBook) => {
+        if (book.isRented) {
+            toast.error("This book is rented, you can't rent it.");
+            return;
+        }
+        else{
 
-        for ( i = 0;   i < localBooksData.length; i++ ){
-
-
-            if(localBooksData[i].isRented = true) {
-
-                toast.error("this book is rente you can't rent ")
-                
-            }else{
-                dispatch(addItem(item));
-            }
-
-            
+            toast.success("This book was added to your card.");
+        dispatch(addItem({
+            ...book.volumeInfo,
+            title: book.local.tytul as string,
+        }));
         }
         
-        
-        
-
-      
     }
 
  
@@ -193,7 +185,7 @@ function CategoryPageSwiper() {
                                         </p>
                                     </div>
                                     <Button
-                                        onClick={() => handleAddItem(volume)}
+                                        onClick={() => handleAddItem(book)}
                                         variant="contained"
                                         className="!bg-green-400"
                                     >
