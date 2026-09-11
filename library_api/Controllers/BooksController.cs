@@ -83,9 +83,14 @@ public class BooksController : ControllerBase
        
 
 
-        await _rent.MarkBook( booksIds );
+        var updatetBooks = await _rent.MarkBook( booksIds );
 
-        return Ok("book rented");
+        
+        return Ok( new
+        {
+            message: "book rented",
+
+        });
     }
 
 

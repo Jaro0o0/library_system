@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector,  } from 'react-redux';
+
+import { useNavigate } from 'react-router';
+
 
 
 function CheckoutAllert({ open , onClose} ) {
 
+    const navigate = useNavigate();
     
-
 
       
 
@@ -26,19 +29,22 @@ function CheckoutAllert({ open , onClose} ) {
      const cardItems = useSelector((state) => state.shoppingCard.card);
 
     //handleRentBook
-    const handleRentBook =  async () => {
+    const handleRentBook = async () => {
+        const booksIds = cardItems.map((item) => item.title);
 
-        const res = await fetch('http://localhost:5110/search/Books/rent',{
-
+        const res = await fetch('http://localhost:5110/search/Books/rent', {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(cardItems),
-
+            body: JSON.stringify(booksIds),
         });
 
-        const data = await res.json();
+        if(res.ok){
+            
+
+            navigate('thanks')
+        }
+        const data = await res.text();
         console.log(data);
-        
     }
 
   
@@ -50,8 +56,10 @@ function CheckoutAllert({ open , onClose} ) {
                 <div className="bg-white p-8 rounded-md shadow-md">
                     <h2 className="text-lg font-bold mb-4">Checkout Alert</h2>
                     <p className="mb-4">Please review your order before proceeding to checkout.</p>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={onClose}>Close</button>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleRentBook} >Rent</button>
+                    <div className='flex gap-4'>
+                        <button className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</button>
+                        <button className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</button>
+                    </div>
                 </div>
             </div>
         }       

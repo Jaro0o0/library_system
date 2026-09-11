@@ -17,9 +17,14 @@ const shoppingCardSlice = createSlice({
         removeItem :  (state,action) => {
 
             state.card.splice(action.payload, 1)
-        }
+        },
+        clearTable :  (state) => {
+
+            state.card = []
+        },
+        
     }
 })
 
-export const { addItem, removeItem } = shoppingCardSlice.actions;
+export const { addItem, removeItem, clearTable } = shoppingCardSlice.actions;
 export default shoppingCardSlice.reducer;

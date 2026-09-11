@@ -12,6 +12,13 @@ public class Book
     public string? gatunek { get; set; }
 
     public bool IsRented {get; set;} = false;
+
+    public DateTime StartDate {get; set;}
+
+    public DateTime  EndDate {get; set;}
+
+    public ICollection<RentalHistory> RentalHistories { get; set; }
+        = new List<RentalHistory>();
 }
 
 public class Category
@@ -19,6 +26,19 @@ public class Category
     public int Id { get; set; }
     public string Name { get; set; } = "";
 }
+
+
+public class RentalHistory
+{
+    public int Id { get; set; }
+
+    public int BookId { get; set; }
+    public Book Book { get; set; } = null!;
+
+    public DateTime StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+}
+
 
 
 
@@ -31,6 +51,8 @@ public class AppDbContext : DbContext
 
     //context Tabli BOkks
     public DbSet<Book> books { get; set; }
+
+    public DbSet<RentalHistory> RentalHistories { get; set; }
     public DbSet<LibraryUser> Users { get; set; }
 
     public DbSet<Category> Categories { get; set;} 
@@ -70,7 +92,11 @@ public class AppDbContext : DbContext
         new Category { Id = 6, Name = "biography" }
     );
 
-   
+   //Rental Hisotry
+    modelBuilder.Entity<RentalHistory>()
+        .HasOne(rent => rent.Book)
+        .WithMany(book => book.RentalHistories)
+        .HasForeignKey(rent => rent.BookId);
 
 
     // Books

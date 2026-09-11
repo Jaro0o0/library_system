@@ -4,6 +4,7 @@ import Search from "./pages/Faq";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
 import Recomend from "./pages/Recomend";
+import ThanksPage from "./components/Checkout/ThanksPage";
 
 import { Provider } from 'react-redux'
 import store, { persistor } from './store'
@@ -13,6 +14,7 @@ import Register from "./pages/Register";
 import CategoryPage from "./components/Categories/CategoryPage";
 import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+
 
 
 import { PersistGate } from "redux-persist/integration/react";
@@ -40,6 +42,7 @@ function App() {
             <Route path="/users/:name"  element={<UserPage/>}/>
             <Route path="/categories/:name"  element={<CategoryPage/>}/>
             <Route path="checkout" element={<CheckOut/>} />
+            <Route path="/checkout/thanks" element={<ThanksPage/>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

@@ -4,6 +4,7 @@ import Footer from "../components/common/Footer";
 import Container from "../components/common/Container";
 import { Button } from "@mui/material";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 //Icons
@@ -22,6 +23,8 @@ function CheckOut() {
     const [openAllert,setOpenAllert] = useState(false);
 
 
+    
+
     //handlers
     const rentDate = new Date();
 
@@ -31,7 +34,7 @@ function CheckOut() {
             <div className="w-full h-screen relative">
                 <CheckoutAllert open={openAllert} onClose={() => setOpenAllert(false)}/>
 
-            <div className="absolute top-1/3 left-1/2 -translate-1/2">
+            <div className="absolute top-1/2 left-1/2 -translate-1/2">
                
                     {/* Grid */}
                     <div className="grid grid-cols-[2fr_1fr] gap-6">
@@ -64,7 +67,8 @@ function CheckOut() {
                             <div className="shadow-xl p-4 h-fit p-8">
                                 {/* data_box */}
                                 <div className="border-b-1 mb-4">
-                                    <div>
+                                    {/* Start_Date */}
+                                    <div className="flex gap-4">
                                         <h2>Date</h2>
                                         <h2>{rentDate.getDate()}</h2>
                                     </div>
