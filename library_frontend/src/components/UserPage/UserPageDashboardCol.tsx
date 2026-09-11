@@ -11,7 +11,6 @@ function UserPageDashboardCol() {
                         <h1 className="text-3xl font-semibold text-slate-800">Daschboard</h1>
                         <ActiveRents/>
                         <UserPageRecomended/>
-                         <UserPageRecomended/>
 
                     </div>
      );

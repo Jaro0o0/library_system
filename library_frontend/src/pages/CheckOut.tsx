@@ -27,6 +27,11 @@ function CheckOut() {
 
     //handlers
     const rentDate = new Date();
+    const rentDateFormatted = rentDate.toLocaleDateString('pl-PL');
+
+    // End date
+    const  getEndDate = rentDate.setMonth(rentDate.getMonth() + 1)
+    const endDate = new Date(getEndDate).toLocaleDateString('pl-PL'); 
 
     return ( 
         <>  
@@ -67,14 +72,16 @@ function CheckOut() {
                             {/* Data_COL */}
                             <div className="shadow-xl p-4 h-fit p-8">
                                 {/* data_box */}
-                                <div className="border-b-1 mb-4">
+                                <div className="border-b-1 mb-4 text-slate-800 font-semibold">
                                     {/* Start_Date */}
                                     <div className="flex gap-4">
-                                        <h2>Date</h2>
-                                        <h2>{rentDate.getDate()}</h2>
+                                        <h2>Start date</h2>
+                                        <h2>{rentDateFormatted}</h2>
                                     </div>
-                                   
-                                    <h2>end date</h2>
+                                    <div  className="flex gap-4">
+                                        <h2>End date</h2>
+                                        <h2>{endDate}</h2>
+                                    </div>
                                 </div>
                                 {/* price_box */}
                                 <div>
@@ -83,7 +90,7 @@ function CheckOut() {
                                     {/* Buttons */}
                                     <div className="flex gap-4 mt-4">
                                         <Button variant="contained" className="!bg-green-400" onClick={() => setOpenAllert(prev => !prev)}>Rent</Button>
-                                        <Button variant="outlined"  component={Link} to='/'>Back to home</Button>
+                                        <Button variant="outlined"  className="!border-green-400 !text-green-400" component={Link} to='/'>Back to home</Button>
                                     </div>
                                 </div>
                             </div>
