@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { Button } from '@mui/material';
+
+
 import { useSelector,  } from 'react-redux';
+import type { RootState } from '../../store';
 
 import { useNavigate } from 'react-router';
 
 
 
-function CheckoutAllert({ open , onClose} ) {
+type CheckoutAllertProps = {
+    open: boolean;
+    onClose: () => void;
+};
+
+function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
 
     const navigate = useNavigate();
     
@@ -26,15 +34,18 @@ function CheckoutAllert({ open , onClose} ) {
     // }
 
 
-     const cardItems = useSelector((state) => state.shoppingCard.card);
+     const cardItems = useSelector((state: RootState) => state.shoppingCard.card);
 
     //handleRentBook
     const handleRentBook = async () => {
-        const booksIds = cardItems.map((item) => item.title);
+        const booksIds = cardItems.map((item: { title: string }) => item.title);
 
         const res = await fetch('http://localhost:5110/search/Books/rent', {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
             body: JSON.stringify(booksIds),
         });
 
@@ -57,8 +68,8 @@ function CheckoutAllert({ open , onClose} ) {
                     <h2 className="text-lg font-bold mb-4">Checkout Alert</h2>
                     <p className="mb-4">Please review your order before proceeding to checkout.</p>
                     <div className='flex gap-4'>
-                        <button className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</button>
-                        <button className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</button>
+                        <Button className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</Button>
+                        <Button className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</Button>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
+import  { removeItem} from '../store/ShoppingCardSlice'
 //Icons
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -54,7 +55,8 @@ function CheckOut() {
                                                             <p>{item.title}</p>
                                                             <p>{item.authors?.join(', ')}</p>
                                                         </div>
-                                                        <DeleteIcon/>
+                                                        <button onClick={() => dispatch(removeItem())}><DeleteIcon/></button>
+                                                       
                                                     </div>
                                                 
                                             </div>
