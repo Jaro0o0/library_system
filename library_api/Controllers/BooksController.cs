@@ -59,9 +59,9 @@ public class BooksController : ControllerBase
 
 
     [HttpGet("recomended")]
-    public async Task<IActionResult> GetRecomendedBooks(int userId, int count)
+    public async Task<IActionResult> GetRecomendedBooks(string userName )
     {
-        var books = await _recomended.GetRecommendedUsers(userId, count);
+        var books = await _recomended.GetRecommendedUsers(userName);
         return Ok(books);
     }
 

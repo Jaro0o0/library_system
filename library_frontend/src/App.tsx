@@ -44,7 +44,8 @@ function App() {
             <Route path="/categories/:name"  element={<CategoryPage/>}/>
             <Route path="checkout" element={<CheckOut/>} />
             <Route path="/checkout/thanks" element={<ThanksPage/>}/>
-            <Route path="/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
+            {/* History */}
+            <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

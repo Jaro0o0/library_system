@@ -1,47 +1,58 @@
+
+
+
 import Tolkien_Img from "../../assets/images/recommendList/tolkien.jpg"
 import { Button } from "@mui/material";
 import Container from "../common/Container"
+import { useState,useEffect } from "react";
+import useGetUser from "../../hooks/useGetUser";
 
 function UserPageRecomended() {
-    return ( 
 
+    const { userName } = useGetUser();
+    const [reccomedationList, setReccomedationList] = useState([]);
+
+    useEffect(  () => {
+        const getReccomendation =   async  () => {
+
+
+                const res = await fetch(`http://localhost:5110/search/Books/recomended?userName=${ userName }`,{
+                method: 'GET',
+                    
+                });
+                const data = await res.json();
+
+                console.log(data);
+                setReccomedationList(data);
+
+        }
+
+        getReccomendation();
+    },
+    
+    
+    [])
+
+
+
+
+return (
         <Container>
-            <div className="flex justify-between">
-                <h2>Rrcomended Books fo yout</h2>
-                <Button className="!bg-green-400" variant="contained">Contained</Button>
-                
-            </div>
-            {/* Dashboard */}
-            <div className="flex flex-col">
-                {/* ITEM */}
-                <div className="flex bg-green-50 shadow-md p-4 rounded-2xl mt-2">
-                    {/* IMG_BOX */}
-                    <div className="flex gap-3">
-                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[100px] h-[100px]"/>
-                        {/* TEXT_BOX */}
-                        <div>
-                            <h3>Authot</h3>
-                            <p>book</p>
-                            <p>Book desc</p>
-                        </div>
+            {reccomedationList.length === 0 ? (
+                <p>You don't have recommendations yet</p>
+            ) : (
+                reccomedationList.map((book) => (
+                    <div key={book.id}>
+                        <h3>{book.title}</h3>
+                        <p>{book.autor}</p>
                     </div>
-                </div>
-                {/* ITEM */}
-                <div className="flex bg-green-50 shadow-md p-4 rounded-2xl mt-2">
-                    {/* IMG_BOX */}
-                    <div className="flex gap-3">
-                        <img src={Tolkien_Img} alt="tolkien" className="rounded-2xl object-cover w-[100px] h-[100px]"/>
-                        {/* TEXT_BOX */}
-                        <div>
-                            <h3>Authot</h3>
-                            <p>book</p>
-                            <p>Book desc</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                ))
+            )}
         </Container>
-     );
+    );
+
+
+    
 }
 
 export default UserPageRecomended;

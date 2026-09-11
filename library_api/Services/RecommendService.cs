@@ -14,11 +14,11 @@ public class RecommendService
 
     }
 
-    public async Task<List<Book>> GetRecommendedUsers(int userId, int count)
+    public async Task<List<Book>> GetRecommendedUsers(string userName)
     {
         var user = await _context.Users
             .Include(u => u.FavoriteAuthors)
-            .FirstOrDefaultAsync(u => u.Id == userId);
+            .FirstOrDefaultAsync(u => u.UserName == userName);
 
         if (user is null)
         {
@@ -27,7 +27,8 @@ public class RecommendService
 
         var books = await _context.books.ToListAsync();
 
-        var recomendations = books.Select(book => {
+        var recomendations = books.Select(book =>
+        {
             int score = 0;
 
             if (user.FavoriteAuthors
@@ -35,8 +36,6 @@ public class RecommendService
             {
                 score += 5;
             }
-
-          
 
             return new
             {
@@ -46,13 +45,11 @@ public class RecommendService
         })
         .Where(x => x.Score > 0)
         .OrderByDescending(x => x.Score)
-        .Take(count)
         .Select(x => x.Book)
         .ToList();
 
         return recomendations;
     }
-
    
 
 

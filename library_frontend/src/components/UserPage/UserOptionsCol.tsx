@@ -4,6 +4,8 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
+import {Link} from 'react-router';
+import useGetUser from "../../hooks/useGetUser";
 
 const iconsData = [
 
@@ -36,9 +38,10 @@ const iconsData = [
 
 
 function UserOptionsCol() {
+
+    const {userName} = useGetUser();
   
     return ( 
-                <>
                     <div className="flex flex-col justify-between p-8 bg-white border-r border-slate-100 shadow-sm">
                         <div className="flex flex-col gap-5">
                                 {/* Photo */}
@@ -46,7 +49,7 @@ function UserOptionsCol() {
                                    
                                     {/* Text_BOX */}
                                     <div className="flex flex-col">
-                                        <span className="font-semibold text-slate-800">User Name</span>
+                                        <span className="font-semibold text-slate-800">{userName}</span>
                                         <span className="text-sm text-slate-400">Member</span>
                                     </div>
                                 </div>
@@ -58,7 +61,8 @@ function UserOptionsCol() {
                                             <IconBox>
                                                 {item.icon}
                                             </IconBox>
-                                            <span className="text-slate-600 group-hover:text-green-600 transition-colors">{item.name}</span>
+                                            <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={`/users/${userName}/${item.name}`}>{item.name}</Link>
+                                        
                                             
                                         </div>
                                     )
@@ -67,11 +71,8 @@ function UserOptionsCol() {
 
                                 </div>
                             </div>
-                        </div>
-                           
-                            <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined">Logout</Button>
-            
-                </>
+                        <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined">Logout</Button>
+                    </div>
                         
      );
 }
