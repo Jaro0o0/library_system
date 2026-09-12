@@ -1,12 +1,12 @@
 import { Button } from "@mui/material"
 import IconBox from "../../components/common/IconBox";
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import useGetUser from "../../hooks/useGetUser";
 import HomeIcon from '@mui/icons-material/Home';
+import { useNavigate } from "react-router";
 
 
 
@@ -49,6 +49,16 @@ const iconsData = [
 function UserOptionsCol() {
 
     const {userName} = useGetUser();
+
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        localStorage.removeItem("accessToken");
+        navigate('login');
+
+
+    }
+
   
     return ( 
                     <div className="flex flex-col justify-between p-8 bg-white border-r border-slate-100 shadow-sm">
@@ -80,7 +90,7 @@ function UserOptionsCol() {
 
                                 </div>
                             </div>
-                        <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined">Logout</Button>
+                        <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined" onClick={logoutHandler}>Logout</Button>
                     </div>
                         
      );

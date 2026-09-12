@@ -16,6 +16,7 @@ import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import HistoryPage from "./pages/HistoryPage";
 import ProductPage from "./pages/ProductPage";
+import CommingSoonPage from "./pages/CommingSoonPage";
 
 
 
@@ -49,6 +50,9 @@ function App() {
             <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
             {/* ProductPaage */}
             <Route path="/products/:productName" element={<ProductPage/>}/>
+
+            {/* CommingSoon */}
+            <Route path="comming-soon" element={<CommingSoonPage/>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

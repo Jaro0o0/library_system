@@ -21,7 +21,7 @@ function LoginPage() {
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://localhost:5110/api/auth/login", {
+            const response = await fetch("http://localhost:5110/auth/Account/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userName, password }),
