@@ -101,6 +101,8 @@ public class BooksController : ControllerBase
         }
     }
 
+    
+
     // [Authorize]
     // [HttpGet("rent")]
     // public async Task<IActionResult> GetRentalHistory()

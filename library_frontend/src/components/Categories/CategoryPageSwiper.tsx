@@ -136,7 +136,7 @@ function CategoryPageSwiper() {
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
-                    className="mySwiper mt-6 !pb-12"
+                    className="mySwiper mt-6 !pt-2 !pb-12"
                     breakpoints={{
                         0: { slidesPerView: 1, spaceBetween: 16 },
                         640: { slidesPerView: 2, spaceBetween: 20 },
@@ -154,7 +154,7 @@ function CategoryPageSwiper() {
                                             <img
                                                 src={cover}
                                                 alt={volume.title}
-                                                className="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
+                                                className="w-full h-[700px] object-cover object-center group-hover:scale-105 transition-transform duration-500"
                                             />
                                         ) : (
                                             <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 font-medium">

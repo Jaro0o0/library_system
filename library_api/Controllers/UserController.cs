@@ -20,12 +20,17 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<IActionResult>  GetUserName()
     {
-        var user = await _context.Users.FirstOrDefaultAsync();
+        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
+        if (!int.TryParse(userId, out var parsedUserId))
+            return Unauthorized();
 
-      
+        var user = await _context.Users.FindAsync(parsedUserId);
 
-       return Ok(new { userName = user.UserName });
+        if (user is null)
+            return NotFound();
+
+        return Ok(new { userName = user.UserName });
     }
 
 

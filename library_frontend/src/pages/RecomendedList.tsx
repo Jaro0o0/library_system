@@ -78,7 +78,7 @@ function RecomendedList({ title, authors, onSubmit }: RecomendedListProps) {
                                     })}
                             </motion.div>
                             <div className='mt-3 flex justify-center'>
-                                <Button variant="contained" size="large"  className="!bg-green-400 !text-white disabled:!bg-gray-400 disabled:!text-white"  disabled={choose.length !== 3} onClick={() => onSubmit?.(choose)}>submit</Button>
+                                <Button variant="contained" size="large"  className="!bg-green-400 !text-white disabled:!bg-gray-400 disabled:!text-white"  disabled={choose.length <= 0 } onClick={() => onSubmit?.(choose)}>submit</Button>
                             </div>
                         </Container>
                 </div>

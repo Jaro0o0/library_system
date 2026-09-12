@@ -24,7 +24,7 @@ function Recomend() {
         }
 
         try {
-            const response = await fetch("http://localhost:5110/api/auth/recommendations", {
+            const response = await fetch("http://localhost:5110/search/Books/recomended", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ authors: allAuthors }),

@@ -2,6 +2,8 @@ import { TextField } from "@mui/material";
 import{ Button } from "@mui/material";
 import { useState, type FormEvent } from "react";
 import { useNavigate, Link } from "react-router";
+import AccountHeader from "../components/common/AccountHeader";
+
 
 type LoginResponse = {
     accesToken: string;
@@ -44,17 +46,57 @@ function LoginPage() {
 
     return (
         <>
+             <AccountHeader/>
             <div className="w-full h-screen">
                 {/* Login_BOX */}
-                <form onSubmit={loginHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col bg-white border border-green-900 bords gap-6 rounded-2xl shadow-sm">
+                <form onSubmit={loginHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col bg-white  gap-6 rounded-2xl shadow-lg">
                     <h1 className="text-3xl">Login</h1>
-                        <span>E-mail</span>
-                        <TextField id="userName" label="E-mail" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} />
-                         <span>Pasword</span>
-                        <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} />
+
+                    <div className="flex flex-col gap-3">
+                        <span>Username</span>
+                        <TextField id="userName" label="Username" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} 
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                
+                                        '&:hover fieldset': {
+                                            borderColor: '#4ade80', // hover
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#4ade80', // focus
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                    color: '#4ade80', // label color
+                                    },
+                                }}
+                            
+                            />
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <span>Pasword</span>
+                            <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} 
+                                sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                        
+                                        '&:hover fieldset': {
+                                            borderColor: '#4ade80', // hover
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#4ade80', // focus
+                                        },
+                                        },
+                                        '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#4ade80', // label color
+                                        },
+                                    }}
+                                
+                            />
+                        </div>
                         {error && <p className="text-red-600">{error}</p>}
-                        <Button variant="contained" type="submit" disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
-                        <Link to="/recomend">Recomend</Link>
+                        <Button variant="contained" className="!bg-green-400" type="submit" disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
+                        {/* <Link to="/recomend">Recomend</Link> */}
+                        <p className="text-center font-medium">You don't have account?</p>
+                        <Button variant="text" className="!text-green-500 !font-md" component={Link} to='/register'>Register</Button>
                     
                 </form>
             </div>

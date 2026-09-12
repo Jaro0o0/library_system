@@ -43,7 +43,7 @@ function ProfileMenu({ open, positionProperty }) {
                             className="!bg-green-400 !rounded-xl !px-5"
                             component={Link}
                             to={userName ? `/users/${encodeURIComponent(userName)}` : '/users/profile'}
-                            disabled={!userName}
+                            
                         >
                             Go to Profile
                         </Button>

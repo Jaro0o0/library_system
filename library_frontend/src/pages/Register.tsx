@@ -6,6 +6,8 @@ import { useState, type FormEvent } from "react";
 
 
 function Register( {  }) {
+    const [disabled, setDisabled] = useState(false);
+    const [email , setEmail] = useState('');
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -13,6 +15,7 @@ function Register( {  }) {
     const navigate = useNavigate();
 
 
+    //handdlers
     const rewhisterHandler =  async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError("");
@@ -22,7 +25,7 @@ function Register( {  }) {
             const res = await fetch("http://localhost:5110/auth/Account/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userName, password }),
+                body: JSON.stringify({ userName, password, email }),
             });
 
             if (!res.ok) {
@@ -45,22 +48,80 @@ function Register( {  }) {
         }
     }
 
+    //disabledHandler
+    const disabledHandler = () => {
+        return email.trim() === '' || userName.trim() === '' || password.trim() === '';
+    }
+
+
     return (
         <>
            <div className="w-full h-screen">
                 {/* Login_BOX */}
                 <form onSubmit={rewhisterHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col  gap-6 rounded-2xl shadow-md">
                     <h1 className="text-3xl">Register</h1>
-                        <span>Username</span>
-                        <TextField id="userName" label="Username" variant="outlined" fullWidth  />
-                        <span>E-mail</span>
-                        <TextField id="email" label="E-mail" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} />
-                         <span>Password</span>
-                        <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <div className="flex flex-col gap-3">
+                            <span>E-mail</span>
+                            <TextField id="userName" label="Email" variant="outlined" fullWidth value={email} onChange={(event) => setEmail(event.target.value)} 
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                
+                                        '&:hover fieldset': {
+                                            borderColor: '#4ade80', // hover
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#4ade80', // focus
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                    color: '#4ade80', // label color
+                                    },
+                                }}
+                                />
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <span>Username</span>
+                            <TextField id="userName" label="Username" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} 
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                
+                                        '&:hover fieldset': {
+                                            borderColor: '#4ade80', // hover
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#4ade80', // focus
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                    color: '#4ade80', // label color
+                                    },
+                                }}
+                                />
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <span>Password</span>
+                            <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} 
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                
+                                        '&:hover fieldset': {
+                                            borderColor: '#4ade80', // hover
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#4ade80', // focus
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                    color: '#4ade80', // label color
+                                    },
+                                }}
+                                
+                                />
+                        </div>
                         {error && <p className="text-red-600">{error}</p>}
-                        <Button variant="contained" type="submit" disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
-                        <Link to="/recomend">Recomend</Link>
-                    
+                        <Button  className="!bg-green-400"  variant="contained" type="submit" disabled={disabledHandler() || isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
+                        {/* <Link to="/recomend">Recomend</Link>
+                     */}
                 </form>
             </div>
         </>

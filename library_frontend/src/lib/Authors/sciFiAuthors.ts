@@ -44,21 +44,7 @@ const sciFiAuthors = [
         img: "Tolkien_IMG",
         cat: "sci-fi"
     },
-    {
-        name: "Andy Weir",
-        img: "Tolkien_IMG",
-        cat: "sci-fi"
-    },
-    {
-        name: "Neal Stephenson",
-        img: "Tolkien_IMG",
-        cat: "sci-fi"
-    },
-    {
-        name: "Dan Simmons",
-        img: "Tolkien_IMG"  ,
-        cat: "sci-fi"
-    }
+   
 ];
 
 export default sciFiAuthors;

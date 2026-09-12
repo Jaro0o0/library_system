@@ -3,6 +3,7 @@ import IconBox from "../../components/common/IconBox";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router';
 import useGetUser from "../../hooks/useGetUser";
 import HomeIcon from '@mui/icons-material/Home';
@@ -33,6 +34,12 @@ const iconsData = [
     {
         name:'History',
         icon: <HistoryToggleOffIcon/>
+
+
+    },
+    {
+        name:'favourites',
+        icon: <FavoriteIcon/>
 
 
     },

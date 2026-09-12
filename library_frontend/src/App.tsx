@@ -17,10 +17,12 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import HistoryPage from "./pages/HistoryPage";
 import ProductPage from "./pages/ProductPage";
 import CommingSoonPage from "./pages/CommingSoonPage";
-import ScrolltoTop from "./components/common/ScrollToTop";
+import ScrolltoTop from "./components/common/ScrollToTop"
+
 
 
 import { PersistGate } from "redux-persist/integration/react";
+import FavouritesPage from "./pages/FavouritesPage";
 
 function App() {
  
@@ -54,6 +56,9 @@ function App() {
 
               {/* CommingSoon */}
               <Route path="comming-soon" element={<CommingSoonPage/>}/>
+              <Route path="/users/:name/favaourites" element={<ProtectedRoute><FavouritesPage/></ProtectedRoute>}/>
+
+
           </Routes>
         </BrowserRouter>
       </PersistGate>

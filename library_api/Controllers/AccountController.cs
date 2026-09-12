@@ -40,7 +40,7 @@ public class AccountController  : ControllerBase
 
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequestModel request)
+    public async Task<IActionResult> Register( [FromBody] RegisterRequestModel request)
     {
         
         //Valdiaation same users
@@ -50,11 +50,13 @@ public class AccountController  : ControllerBase
             return Conflict("A user with this name already exists.");
         }
 
+        var email = request.Email;
 
 
          //Create user
         var user = new LibraryUser
         {
+            Email  =  email,
             UserName = userName,
             PasswordHash = _passwordService.Hash(request.Password)
         };

@@ -54,23 +54,7 @@ const scienceAuthors = [
         cat: "science"
     },
 
-    {
-        name: "Yuval Noah Harari",
-        img: "Tolkien_IMG",
-        cat: "science"
-    },
 
-    {
-        name: "Jared Diamond",
-        img: "Tolkien_IMG",
-        cat: "science"
-    },
-
-    {
-        name: "Bill Bryson",
-        img: "Tolkien_IMG",
-        cat: "science"
-    }
 
 ];
 
