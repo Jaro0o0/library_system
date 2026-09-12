@@ -14,17 +14,17 @@ function CategoryPage() {
                 <CategoryPageHero header={ name }/>
                 {/* Grid */}
                 
-                    <h2>Explore {name}</h2>
+              
                         <Container>
                             <CategoryPageSwiper/>
                         </Container>
                 
                 {/* Second_Grid */}
-                <Section>
+             
                     <Container>
                         <CategoryPageSwiper/>
                     </Container>
-                </Section>
+                
             <Footer/>
         </>
      );

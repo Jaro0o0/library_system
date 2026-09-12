@@ -17,7 +17,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import HistoryPage from "./pages/HistoryPage";
 import ProductPage from "./pages/ProductPage";
 import CommingSoonPage from "./pages/CommingSoonPage";
-
+import ScrolltoTop from "./components/common/ScrollToTop";
 
 
 import { PersistGate } from "redux-persist/integration/react";
@@ -31,28 +31,29 @@ function App() {
       <PersistGate persistor={persistor}>
         <Toaster/>
         <BrowserRouter>
+          <ScrolltoTop/>
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="faq" element={<Search/>}/>
-            <Route path="login" element={<LoginPage/>}/>
-            <Route path="recomend" element={<Recomend/>}/>
-            {/* <Route path="user" element={<UserPage/>}/> */}
-            <Route path="categories" element={<Categories/>}/>
-            <Route path="register" element={<Register/>}/>
+              <Route path="/" element={<Home/>}/>
+              <Route path="faq" element={<Search/>}/>
+              <Route path="login" element={<LoginPage/>}/>
+              <Route path="recomend" element={<Recomend/>}/>
+              {/* <Route path="user" element={<UserPage/>}/> */}
+              <Route path="categories" element={<Categories/>}/>
+              <Route path="register" element={<Register/>}/>
 
-            <Route path="/users/:name" element={<ProtectedRoute><UserPage/></ProtectedRoute>}/>
-            
-            <Route path="/users/:name"  element={<UserPage/>}/>
-            <Route path="/categories/:name"  element={<CategoryPage/>}/>
-            <Route path="checkout" element={<CheckOut/>} />
-            <Route path="/checkout/thanks" element={<ThanksPage/>}/>
-            {/* History */}
-            <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
-            {/* ProductPaage */}
-            <Route path="/products/:productName" element={<ProductPage/>}/>
+              <Route path="/users/:name" element={<ProtectedRoute><UserPage/></ProtectedRoute>}/>
+              
+              <Route path="/users/:name"  element={<UserPage/>}/>
+              <Route path="/categories/:name"  element={<CategoryPage/>}/>
+              <Route path="checkout" element={<CheckOut/>} />
+              <Route path="/checkout/thanks" element={<ThanksPage/>}/>
+              {/* History */}
+              <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
+              {/* ProductPaage */}
+              <Route path="/products/:productName" element={<ProductPage/>}/>
 
-            {/* CommingSoon */}
-            <Route path="comming-soon" element={<CommingSoonPage/>}/>
+              {/* CommingSoon */}
+              <Route path="comming-soon" element={<CommingSoonPage/>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

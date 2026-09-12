@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../store/ShoppingCardSlice/ShoppingCardSlice';
@@ -13,7 +13,6 @@ import CommonHeading from '../common/CommonHeading';
 
 import toast from 'react-hot-toast';
 
-const genre = 'fantasy';
 const amount = 10;
 
 interface VolumeInfo {
@@ -31,6 +30,8 @@ interface MergedBook {
 }
 
 function CategoryPageSwiper() {
+    const { name } = useParams();
+    const genre = name ?? 'fantasy';
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState<MergedBook[]>([]);
@@ -39,7 +40,7 @@ function CategoryPageSwiper() {
         (async () => {
             setLoading(true);
             try {
-                const res = await fetch('http://localhost:5110/search/Books/category/fantasy');
+                const res = await fetch(`http://localhost:5110/search/Books/category/${encodeURIComponent(genre)}`);
                 if (!res.ok) {
                     console.error('Nie udało się pobrać danych:', res.status, await res.text());
                  
@@ -52,7 +53,8 @@ function CategoryPageSwiper() {
 
                 
 
-                const merged: MergedBook[] = localBooks.slice(0, amount).map((book, index) => {
+                const booksForView = name ? localBooks : localBooks.slice(0, amount);
+                const merged: MergedBook[] = booksForView.map((book, index) => {
                     const title = book.tytul as string | undefined;
 
                     return {
@@ -76,7 +78,7 @@ function CategoryPageSwiper() {
                 setLoading(false);
             }
         })();
-    }, []);
+    }, [genre, name]);
 
 
     const handleAddItem = (book: MergedBook) => {
@@ -110,7 +112,7 @@ function CategoryPageSwiper() {
                     </h2>
                 </div>
                 <Link
-                    to="#"
+                    to={`/categories/${encodeURIComponent(genre)}`}
                     className="hidden md:inline-flex items-center gap-2 text-green-500 hover:text-green-600 font-semibold transition-colors"
                 >
                     Zobacz wszystkie
