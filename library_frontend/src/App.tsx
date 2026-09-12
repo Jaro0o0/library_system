@@ -15,6 +15,7 @@ import CategoryPage from "./components/Categories/CategoryPage";
 import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import HistoryPage from "./pages/HistoryPage";
+import ProductPage from "./pages/ProductPage";
 
 
 
@@ -46,6 +47,8 @@ function App() {
             <Route path="/checkout/thanks" element={<ThanksPage/>}/>
             {/* History */}
             <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
+            {/* ProductPaage */}
+            <Route path="/products/:productName" element={<ProductPage/>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

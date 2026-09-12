@@ -17,6 +17,8 @@ public class Book
 
     public DateTime  EndDate {get; set;}
 
+    public int? ImageId { get; set; }
+
     public ICollection<RentalHistory> RentalHistories { get; set; }
         = new List<RentalHistory>();
 }
@@ -40,6 +42,15 @@ public class RentalHistory
 
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
+}
+
+
+// Images
+public class Image
+{
+    public int Id { get; set; }
+    public byte[] ImageData { get; set; }
+    public string ContentType { get; set; }
 }
 
 
@@ -85,6 +96,9 @@ public class AppDbContext : DbContext
         .IsUnique();
 
 
+
+
+
     // Categories
     modelBuilder.Entity<Category>().HasData(
         new Category { Id = 1, Name = "fantasy" },
@@ -106,6 +120,11 @@ public class AppDbContext : DbContext
         .WithMany()
         .HasForeignKey(rent => rent.UserId);
 
+
+    modelBuilder.Entity<Book>()
+        .HasOne<Image>()
+        .WithOne()
+        .HasForeignKey<Book>(b => b.ImageId);
 
     // Books
     modelBuilder.Entity<Book>().HasData(

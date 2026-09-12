@@ -11,19 +11,33 @@ using Microsoft.EntityFrameworkCore;
 public class AccountController  : ControllerBase
 {
     private readonly AppDbContext _dbContext;
-    private readonly IRegisterService _registerService;
-
     private readonly PasswordService _passwordService;
     private readonly JwtService _jwtService;
 
 
-    public AccountController(AppDbContext dbContext, IRegisterService registerService, PasswordService passwordService,JwtService jwtService)
+    public AccountController(AppDbContext dbContext, PasswordService passwordService,JwtService jwtService)
     {
         _dbContext = dbContext;
-        _registerService = registerService;
          _passwordService = passwordService;
         _jwtService = jwtService;
     }
+
+
+    [HttpPost("login")]
+    public async Task<ActionResult<LoginRequestModel>> Login(LoginCredentialsModel request)
+    {
+        if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
+            return BadRequest("User name and password are required.");
+
+        var user = await _dbContext.Users.SingleOrDefaultAsync(user => user.UserName == request.UserName.Trim());
+        if (user is null || !_passwordService.Verify(request.Password, user.PasswordHash))
+            return Unauthorized("Invalid user name or password.");
+
+        return Ok(_jwtService.GenerateToken(user));
+    }
+
+
+
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequestModel request)
@@ -88,11 +102,7 @@ public class AccountController  : ControllerBase
         return Created(string.Empty, user.FavoriteAuthors);
     }
 
-    // public async Task<IActionResult> Logout()
-    // {
-    //     var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-    // }
+ 
 
 
 }

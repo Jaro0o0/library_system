@@ -8,6 +8,8 @@ import { Button } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
+
+
 //icons
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
@@ -20,6 +22,11 @@ import ShoppingCard from './ShoppingCard';
 import useGetUser from "../../hooks/useGetUser";
 import usegetUserStatus from '../../hooks/useGetUserStatus';
 
+type RecommendedBook = {
+    id: number;
+    tytul: string;
+    autor: string;
+};
 
 
 
@@ -124,32 +131,61 @@ function Header() {
         setSearchBooks(data)
 
     }
-// 'bg-black/50 backdrop-blur-sm'
-// 'bg-transparent'
+
+
+    //Recomendation
+   
+    const [reccomedationList, setReccomedationList] = useState<RecommendedBook[]>([]);
+
+
+    useEffect(  () => {
+        const getReccomendation =   async  () => {
+                if (!userName) return;
+
+                const res = await fetch(`http://localhost:5110/search/Books/recomended?userName=${ userName }`,{
+                method: 'GET',
+                });
+
+                if (!res.ok) return;
+                const data = await res.json();
+
+                console.log(data);
+                setReccomedationList(data);
+
+        }
+
+        getReccomendation();
+    },
+    
+    
+    [userName])
+
+
+
+
+
+
     return (
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium  `}
             ref={heightRef}
         >
             <div>
-                <h1 className={`text-xl   text-black font-bold`} >
+                <h1 className={`text-xl   font-bold`} >
                     <Link to="/"> Book <span className="text-green-400">Tracker</span></Link>
                 </h1>
             </div>
             <div className='flex gap-6 items-center mr-6'>
                 <ul className="flex gap-4">
-                    <li className="  text-black  hover:text-green-500 transition-colors">
+                    <li className="    hover:text-green-500 transition-colors">
                         <Link to="/">Home</Link>
                     </li>
-                    <li className=" text-black  hover:text-green-500 transition-colors">
+                    <li className="   hover:text-green-500 transition-colors">
                         <Link to="/categories">Categories</Link>
                     </li>
-                    {/* <li className="text-lg font-bold text-white hover:text-green-500 transition-colors">
-                        <Link to="/search">Search</Link>
-                    </li> */}
-                    <li className=" text-black  hover:text-green-500 transition-colors">
+                    <li className="   hover:text-green-500 transition-colors">
                         <Link to="/faq">Faq</Link>
                     </li>
                 </ul>
@@ -158,30 +194,37 @@ function Header() {
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
                     {isUserLogin ?  <button  onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
+                     // User is not logged in 
                     <div>
-                        {/* User is not logged in */}
                         <div className="flex gap-4">
                             <button className=" text-white ">
-                                <Link to="/login" className='text-lg  text-black hover:text-green-500 transition-colors'>Login</Link>
+                                <Link to="/login" className='text-lg   hover:text-green-500 transition-colors'>Login</Link>
                             </button>
                             <button className="bg-green-500 text-white px-4 py-2 rounded-md">
                                 <Link to="/register">Register</Link>
                             </button>
                         </div>
                     </div> )}
+                
+
+
+                    {/* Search_Button */}
+                    <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold  hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
+
+
+                    {/* Shopping_Card_Button */}
+                    <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold hover:text-green-500 transition-colors'>
+                        <ShoppingBagIcon  className="hover:!text-green-500"/>
+                    </button>
+
                 </div>
 
 
-                {/* Search_Button */}
-                <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold text-black hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
-                {/* mobile menu button */}
-                <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button>
 
-                {/* Shopping_Card_Button */}
-                <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold text-black hover:text-green-500 transition-colors'>
-                    <ShoppingBagIcon  className="hover:!text-green-500"/>
-                </button>
+
+                  {/* mobile menu button */}
+                {/* <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button> */}
             </div>
             
           
@@ -193,23 +236,47 @@ function Header() {
        
             <div
                 style={{ top: headerHeight }}
-                className={`fixed left-0 w-full bg-white z-[99] p-6 transition-transform duration-500 ${searchOpen ? "translate-y-0" : "-translate-y-[500px]"}`}
+                className={`fixed left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-[99] py-8 shadow-xl transition-transform duration-500 font-[400] ${searchOpen ? "translate-y-0" : "-translate-y-[500px]"}`}
             >
                 <Container>
-                    <h2>Search</h2>
-                    <TextField id="filled-basic" label="Filled" variant="filled"  fullWidth onChange={( e ) =>  searchBooksHandler ( e ) } />
+                    <div className="max-w-3xl mx-auto">
+                    <h2 className="text-2xl font-semibold text-slate-800 mb-4">Find your next book</h2>
+                    <TextField id="filled-basic" label="Search by title" variant="filled" fullWidth onChange={( e ) =>  searchBooksHandler ( e ) }  
+                                                
+ sx={{
+    '& .MuiFilledInput-root:after': {
+      borderBottomColor: '#4ade80', // green-400
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: '#4ade80', // label na zielono, gdy pole jest focusowane
+    },
+    
+     }}
+                    />
 
-                    <h3 className='mt-8 mb-2'>Recomended Authors for you </h3>
-                    {/* Grid */}
+                    <h3 className='mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500'>Recommended for you</h3>
+                               <Container className="!px-0">
+                                    {reccomedationList.length === 0 ? (
+                                        <p className="text-slate-500">You don't have recommendations yet</p>
+                                    ) : (
+                                        reccomedationList.map((book) => (
+                                            <div key={book.id} className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 mb-2">
+                                                <h3 className="font-semibold text-slate-800">{book.tytul}</h3>
+                                                <p className="text-sm text-slate-500">{book.autor}</p>
+                                            </div>
+                                        ))
+                                    )}
+                                </Container> 
                 
                      {/* Display search results */}
                      {searchBooks.length > 0 && (
-                        <div className='mt-6'>
-                            <h3 className='mb-2'>Search results ({searchBooks.length})</h3>
+                        <div className='mt-7'>
+                            <h3 className='mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500'>Search results ({searchBooks.length})</h3>
                             <div className='flex flex-col max-h-64 overflow-y-auto gap-2'>
                                 {searchBooks.map((book) => (
-                                    <div key={book.id} className='p-3 border-1 border-slate-200 rounded-md bg-slate-50'>
-                                        <h1 className='text-red-800'>{book.tytul}</h1>
+                                    //Item
+                                    <div key={book.id} className='p-4 border border-slate-200 rounded-xl bg-slate-50 hover:border-green-300 hover:bg-green-50 transition-colors'>
+                                        <Link className='font-semibold text-green-600 hover:text-green-700' to={`/products/${encodeURIComponent(book.tytul)}`} onClick={() => setSearchOpen(false)}>{book.tytul}</Link>
                                         <p className='text-sm text-gray-600'>{book.autor} · {book.gatunek}</p>
                                     </div>
                                 ))}
@@ -217,16 +284,17 @@ function Header() {
                         </div>
                     )}
                     {searchBooks.length === 0 && (
-                        <p className='mt-6 text-gray-500'>No books found</p>
+                        <p className='mt-6 text-slate-500'>No books found</p>
                     )}
                     
-                    <Button variant='contained'>See all books</Button>
+                    <Button variant='contained' className="!mt-6 !bg-green-500 !rounded-xl !px-5">See all books</Button>
+                    </div>
                 </Container>
             </div>
         
 
         {/* Profile_Menu */}
-        <ProfileMenu open={profileOpen}/>
+        <ProfileMenu open={profileOpen} positionProperty={headerHeight }/>
 
         {/* Shopping_Card */}
         <ShoppingCard open={shoppingCardOpen} onClose={() => setShoppingCardOpen(false)}/>

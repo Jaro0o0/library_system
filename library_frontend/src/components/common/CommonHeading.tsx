@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 function CommonHeading({ children }: { children: ReactNode }) {
     return (  
-        <span className=" inline-block py-1.5 px-4 rounded-full bg-lime-500/10 text-lime-400 border border-lime-500/20 uppercase font-semibold mb-6 tracking-wider ">
+        <span className="inline-block text-sm font-semibold uppercase tracking-wider text-green-400 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-1.5 mb-6">
                 {children}
         </span>
     );

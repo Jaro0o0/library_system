@@ -1,5 +1,6 @@
 import Container from "../common/Container";
 import { Button } from "@mui/material";
+import CommonHeading from "../common/CommonHeading";
 
 const premiumData = [
     {
@@ -18,7 +19,9 @@ function Premium() {
     return ( 
         <>
         <Container>
+            {/* TEXT_BOX */}
             <div className="text-center mb-12 py-8">
+                <CommonHeading>Plans</CommonHeading>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Explore more possibilities</h2>
                 <p className="text-slate-500 mt-3 max-w-xl mx-auto">Unlock unlimited reading, audiobooks and offline access with a Premium plan.</p>
             </div>

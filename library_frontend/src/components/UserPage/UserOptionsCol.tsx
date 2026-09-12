@@ -6,15 +6,24 @@ import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {Link} from 'react-router';
 import useGetUser from "../../hooks/useGetUser";
+import HomeIcon from '@mui/icons-material/Home';
+
+
 
 const iconsData = [
 
     {
-        name:'Notifications',
-        icon: <NotificationsActiveIcon/>,
+        name:'Dashboard',
+        icon: <HomeIcon/>,
 
 
     },
+    // {
+    //     name:'Notifications',
+    //     icon: <NotificationsActiveIcon/>,
+
+
+    // },
     {
         name:'Shopping card',
         icon: <ShoppingCartIcon/>,

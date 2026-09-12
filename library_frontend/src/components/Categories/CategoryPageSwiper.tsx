@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../store/ShoppingCardSlice/ShoppingCardSlice';
+import CommonHeading from '../common/CommonHeading';
 
 import toast from 'react-hot-toast';
 
@@ -49,39 +50,26 @@ function CategoryPageSwiper() {
                 const localBooks: Record<string, unknown>[] = Array.isArray(data) ? data : [];
                 console.log(localBooks);
 
-                const merged: MergedBook[] = [];
-                for (const book of localBooks.slice(0, amount)) {
-                    const googleBook: { volumeInfo: Partial<VolumeInfo> } = { volumeInfo: {} };
-                    const tytul = book.tytul as string | undefined;
+                
 
-                    if (tytul) {
-                        try {
-                            const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(tytul)}&maxResults=1&key=${import.meta.env.VITE_Google_BOOKS_API_KEY}`;
-                            const gRes = await fetch(url);
-                            if (gRes.ok) {
-                                const gData = await gRes.json();
-                                if (gData.items?.length) {
-                                    Object.assign(googleBook.volumeInfo, gData.items[0].volumeInfo);
-                                }
-                            }
-                        } catch (e) {
-                            console.warn('Google Books fetch failed for:', tytul, e);
-                        }
-                    }
+                const merged: MergedBook[] = localBooks.slice(0, amount).map((book, index) => {
+                    const title = book.tytul as string | undefined;
 
-                    merged.push({
-                        id: (book.id as string | number) ?? tytul ?? Math.random().toString(),
+                    return {
+                        id: (book.id as string | number) ?? title ?? index,
                         isRented: book.isRented === true,
                         local: book,
                         volumeInfo: {
-                            title: googleBook.volumeInfo.title ?? tytul ?? 'Brak tytułu',
-                            authors: googleBook.volumeInfo.authors ?? (book.autor ? [book.autor as string] : []),
-                            description: googleBook.volumeInfo.description ?? (book.opis as string) ?? '',
-                            imageLinks: googleBook.volumeInfo.imageLinks ?? null,
+                            title: title ?? 'Brak tytułu',
+                            authors: book.autor ? [book.autor as string] : [],
+                            description: (book.opis as string) ?? '',
                         },
-                    });
-                }
+                    };
+                });
                 setBooks(merged);
+
+
+
             } catch (err) {
                 console.error('Nie udało się pobrać danych:', err);
             } finally {
@@ -114,9 +102,9 @@ function CategoryPageSwiper() {
         <>
             <div className="flex items-center justify-between mb-2">
                 <div>
-                    <span className="inline-block py-1.5 px-4 rounded-full bg-lime-500/10 text-lime-400 border border-lime-500/20 text-sm font-semibold uppercase tracking-wider mb-3">
-                        Kategoria
-                    </span>
+                    <CommonHeading>
+                        category
+                    </CommonHeading>
                     <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
                         Explore <span className="text-green-500">{genre}</span>
                     </h2>
@@ -155,7 +143,7 @@ function CategoryPageSwiper() {
                 >
                     {books.map((book) => {
                         const volume = book.volumeInfo;
-                        const cover = volume.imageLinks?.thumbnail;
+                        const cover = `http://localhost:5110/images/Images?title=${encodeURIComponent(volume.title)}`;
                         return (
                             <SwiperSlide key={book.id} className="!h-[420px]">
                                 <div className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100 hover:border-green-400 hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
@@ -184,13 +172,20 @@ function CategoryPageSwiper() {
                                             {(volume.description?.length ?? 0) > 150 ? '...' : ''}
                                         </p>
                                     </div>
-                                    <Button
-                                        onClick={() => handleAddItem(book)}
-                                        variant="contained"
-                                        className="!bg-green-400"
-                                    >
-                                        Add to card
-                                    </Button>
+                                    {/* Buttons */}
+                                    <div className='flex gap-4'>
+                                        <Button
+                                            onClick={() => handleAddItem(book)}
+                                            variant="contained"
+                                            className="!bg-green-400"
+                                        >
+                                            Add to card
+                                        </Button>
+                                        <Button   variant="contained"   className="!bg-green-400" component={Link} to={`/products/${encodeURIComponent(book.local.tytul as string)}`}>
+                                            See Product
+                                        </Button>
+                                    </div>
+                                 
                                    {book.isRented && <p>This book is rented</p>}
                                 </div>
                             </SwiperSlide>

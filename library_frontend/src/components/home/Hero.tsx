@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import heroVideo from '../../assets/videos/hero-video.mp4'
+import CommonHeading from '../common/CommonHeading'
 
 
 
@@ -24,9 +25,10 @@ function Hero() {
 
                 <div className="max-w-2xl">
                     {/* HEADING */}
-                    <span className="inline-block text-sm font-semibold uppercase tracking-wider text-green-400 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-1.5 mb-6">
+                    <CommonHeading>
                         Twoja osobista biblioteka
-                    </span>
+                    </CommonHeading>
+                    
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
                         Śledź czytanie z{' '}

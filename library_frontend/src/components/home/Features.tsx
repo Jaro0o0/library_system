@@ -1,4 +1,5 @@
 import { Container } from "@mui/material"
+import CommonHeading from "../common/CommonHeading"
 
 const features = [
     {
@@ -32,9 +33,9 @@ function Features() {
         <section id="features" className="w-full px-4 py-20 bg-slate-50">
             <Container>
                 <div className="text-center mb-14">
-                    <span className="text-sm font-semibold uppercase tracking-wider text-green-600">
-                        Dlaczego Book Tracker
-                    </span>
+                   <CommonHeading>
+                         Why book tracker
+                   </CommonHeading>
                     <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
                         Wszystko, czego potrzebujesz do czytania z planem
                     </h2>

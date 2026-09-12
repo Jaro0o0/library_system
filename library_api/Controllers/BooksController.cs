@@ -78,8 +78,8 @@ public class BooksController : ControllerBase
 
 
     //Rent endpoint
-    [HttpPut("rent")]
     [Authorize]
+    [HttpPut("rent")]
     public async Task<IActionResult> RentBook( [FromBody] List<string> booksIds )
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -101,35 +101,35 @@ public class BooksController : ControllerBase
         }
     }
 
-    [HttpGet("rent")]
-    [Authorize]
-    public async Task<IActionResult> GetRentalHistory()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!int.TryParse(userId, out var parsedUserId))
-            return Unauthorized();
+    // [Authorize]
+    // [HttpGet("rent")]
+    // public async Task<IActionResult> GetRentalHistory()
+    // {
+    //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    //     if (!int.TryParse(userId, out var parsedUserId))
+    //         return Unauthorized();
 
-        var history = await _context.RentalHistories
-            .AsNoTracking()
-            .Where(rental => rental.UserId == parsedUserId)
-            .OrderByDescending(rental => rental.StartDate)
-            .Select(rental => new
-            {
-                rental.Id,
-                rental.StartDate,
-                rental.EndDate,
-                book = new
-                {
-                    rental.Book.id,
-                    rental.Book.tytul,
-                    rental.Book.autor,
-                    rental.Book.gatunek
-                }
-            })
-            .ToListAsync();
+    //     var history = await _context.RentalHistories
+    //         .AsNoTracking()
+    //         .Where(rental => rental.UserId == parsedUserId)
+    //         .OrderByDescending(rental => rental.StartDate)
+    //         .Select(rental => new
+    //         {
+    //             rental.Id,
+    //             rental.StartDate,
+    //             rental.EndDate,
+    //             book = new
+    //             {
+    //                 rental.Book.id,
+    //                 rental.Book.tytul,
+    //                 rental.Book.autor,
+    //                 rental.Book.gatunek
+    //             }
+    //         })
+    //         .ToListAsync();
 
-        return Ok(history);
-    }
+    //     return Ok(history);
+    // }
 
 
 }

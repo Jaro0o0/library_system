@@ -23,10 +23,6 @@ builder.Services.AddCors(options =>
 });
 
 
-//Custom SERVICES
- builder.Services.AddScoped<IRegisterService, UserService>();
-
-
 //DATABASE
 // Build connection string from environment variables if present, otherwise fall back to configuration
 var envHost = Environment.GetEnvironmentVariable("DB_HOST");
@@ -105,6 +101,8 @@ builder.Services.AddScoped<RentBookService>();
 
 var app = builder.Build();
 
+await DatabaseSeeder.SeedImagesAsync(app.Services);
+
 app.Use(async (context, next) =>
 {
     try
@@ -129,4 +127,3 @@ app.MapControllers();
 app.MapGet("/", () => "Library system");
 
 app.Run();
-

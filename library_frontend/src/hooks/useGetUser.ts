@@ -1,17 +1,29 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store";
-import { fetchUser } from "../store/UserSlice/userSlice";
+import { useEffect, useState } from "react";
+
+
 
 function useGetUser() {
-    const dispatch = useDispatch<AppDispatch>();
-    const { userName, isLoading, error } = useSelector((state: RootState) => state.user);
+    const [userName, setUserName] = useState("");
+
+  
 
     useEffect(() => {
-        dispatch(fetchUser());
-    }, [dispatch]);
 
-    return { userName, isLoading, error };
+        const fetchUser = async () => {
+        const res = await fetch("http://localhost:5110/search/User");
+        if (!res.ok) return;
+
+        const data = await res.json();
+        setUserName(data.userName);
+        
+    }
+
+        fetchUser()
+
+
+    }, []);
+
+    return { userName };
 }
 
 export default useGetUser;
