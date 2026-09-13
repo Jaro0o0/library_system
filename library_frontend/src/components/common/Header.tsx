@@ -193,7 +193,7 @@ function Header() {
 
                 {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ?  <button  onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
+                    {isUserLogin ?  <button   onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
                      // User is not logged in 
                     <div>
                         <div className="flex gap-4">
