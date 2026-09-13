@@ -71,39 +71,34 @@ public class AccountController  : ControllerBase
 
     }
 
-    [HttpPost("recomend")]
-    public async Task<IActionResult> GetPreferences(UserPreferencesModel request)
+
+    [HttpPost("set-recomend")]
+    public async Task<IActionResult> SetPreferences( string userName, [FromBody] List<string> authorsList)
     {
-        var authorName = request.AuthorType.Trim();
-
-        if (string.IsNullOrWhiteSpace(authorName))
-            return BadRequest("Podaj nazwę autora.");
-
         var user = await _dbContext.Users
-            .Include(user => user.FavoriteAuthors)
-            .FirstOrDefaultAsync(user => user.Id == request.UserId);
+            .FirstOrDefaultAsync(u => u.UserName == userName);
 
-        if (user == null)
-            return NotFound("Nie znaleziono użytkownika.");
-
-        var author = await _dbContext.Authors
-            .FirstOrDefaultAsync(author => author.Name == authorName);
-
-        if (author == null)
+        if (user is null)
         {
-            author = new Author { Name = authorName };
-            _dbContext.Authors.Add(author);
+           return BadRequest("User not found");
         }
 
-        if (!user.FavoriteAuthors.Any(author => author.Name == authorName))
-        {
-            user.FavoriteAuthors.Add(author);
-            await _dbContext.SaveChangesAsync();
-        }
 
-        return Created(string.Empty, user.FavoriteAuthors);
+        var authors = await _dbContext.Authors
+            .Where(a => authorsList.Contains(a.Name))
+            .ToListAsync();
+
+
+        user.FavoriteAuthors = authors;
+
+
+
+
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(user.FavoriteAuthors);
+
     }
-
  
 
 

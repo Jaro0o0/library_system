@@ -102,6 +102,12 @@ builder.Services.AddScoped<RentBookService>();
 var app = builder.Build();
 
 await DatabaseSeeder.SeedImagesAsync(app.Services);
+using (var seedScope = app.Services.CreateScope())
+{
+    var seedContext = seedScope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await DatabaseSeeder.SeedAuthors(seedContext);
+    await DatabaseSeeder.SeedBooks(seedContext);
+}
 
 app.Use(async (context, next) =>
 {

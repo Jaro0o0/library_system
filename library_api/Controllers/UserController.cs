@@ -16,7 +16,7 @@ public class UserController : ControllerBase
         _context = context;
     }
 
-    [Authorize]
+   
     [HttpGet]
     public async Task<IActionResult>  GetUserName()
     {
