@@ -1,7 +1,7 @@
-import Container from "../components/common/Container";
+import Container from "../common/Container";
 import { useState, useEffect } from "react";
-import History_IMG from '../assets/images/temporaryImages/pragmatic-programmer-img.jpg'
-import UserOptionsCol from "../components/UserPage/UserOptionsCol";
+// import History_IMG from '../assets/images/temporaryImages/pragmatic-programmer-img.jpg'
+
 
 type RentalHistory = {
     id: number;
@@ -15,7 +15,7 @@ type RentalHistory = {
     };
 };
 
-function HistoryPage() {
+function UserPageDashboardHistory() {
 
     const [data, setData] = useState<RentalHistory[]>([]);
 
@@ -35,17 +35,16 @@ function HistoryPage() {
 
 
     return ( 
-        <div className="w-full h-screen">
-
-           {/* Grid  */}
-            <div className="grid  h-full grid-cols-[1fr_3fr]">
-                    {/* Optioons */}
+        
+        <>
+           
+            <div className="flex flex-col gap-10 justify-start p-10 overflow-y-auto bg-slate-50/50">
                     
-                        <UserOptionsCol/>
+                
                     
                     {/* Dashboard */}
                     <Container>
-                        <div className="p-8 overflow-y-auto">
+                        <div className="overflow-y-auto">
                             <h1 className="text-3xl mb-4 font-semibold text-slate-800">History of rents</h1>
                     
                                 {data.length === 0 ? (
@@ -55,7 +54,7 @@ function HistoryPage() {
                                         // History_Item
                                         <div key={rental.id} className="p-4 shadow-md flex justify-between items-center">
                                             <div>
-                                                <img src={History_IMG} className="rounded-2xl object-cover w-[150px] h-[150px]" alt="product-img"/>
+                                                <img  className="rounded-2xl object-cover w-[150px] h-[150px]" alt="product-img"/>
                                             </div>
                                             <div>
                                                 <p>{rental.book.tytul} — {rental.book.autor}</p>
@@ -69,8 +68,8 @@ function HistoryPage() {
                     </Container>
 
                 </div>
-        </div>
+        </>
      );
 }
 
-export default HistoryPage;
+export default UserPageDashboardHistory;

@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
-
 
 public class RecommendService
 {
@@ -10,7 +9,6 @@ public class RecommendService
     public RecommendService(AppDbContext context)
     {
         _context = context;
-
     }
 
     public async Task<List<Book>> GetRecommendedUsers(string userName)
@@ -21,35 +19,34 @@ public class RecommendService
 
         if (user is null)
         {
+            Console.WriteLine("USER NOT FOUND");
             return [];
+        }
+
+        Console.WriteLine($"USER: {user.UserName}");
+        Console.WriteLine($"FAVORITE AUTHORS COUNT: {user.FavoriteAuthors.Count}");
+
+        foreach (var author in user.FavoriteAuthors)
+        {
+            Console.WriteLine($"FAVORITE AUTHOR: [{author.Name}]");
         }
 
         var books = await _context.books.ToListAsync();
 
-        var recomendations = books.Select(book =>
+        foreach (var book in books)
         {
-            int score = 0;
+            Console.WriteLine($"BOOK: {book.tytul} | AUTHOR: {book.autor}");
+        }
 
-            if (user.FavoriteAuthors
-                .Any(a => a.Name == book.autor))
-            {
-                score += 5;
-            }
+        var recommendations = books
+            .Where(book =>
+                user.FavoriteAuthors.Any(author =>
+                    author.Name == book.autor))
+            .ToList();
 
-            return new
-            {
-                Book = book,
-                Score = score
-            };
-        })
-        .Where(x => x.Score > 0)
-        .OrderByDescending(x => x.Score)
-        .Select(x => x.Book)
-        .ToList();
+        Console.WriteLine($"RECOMMENDATIONS: {recommendations.Count}");
 
-        return recomendations;
+        return recommendations;
     }
-   
-
-
 }
+

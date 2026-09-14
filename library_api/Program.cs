@@ -82,7 +82,6 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JtwConfig:Issuer"],
         ValidAudience = builder.Configuration["JtwConfig:Audience"],
@@ -92,7 +91,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization();
+
 
 //Custom Setvies
 builder.Services.AddScoped<RecommendService>();

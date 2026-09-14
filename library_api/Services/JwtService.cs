@@ -18,8 +18,6 @@ namespace Library_Api.Services
 
         public LoginRequestModel GenerateToken(LibraryUser user)
         {
-            var validityMinutes = _configuration.GetValue<int>("JtwConfig:TokenValidityMins");
-            var expiresAt = DateTime.UtcNow.AddMinutes(validityMinutes);
             var key = _configuration["JtwConfig:Key"]
                 ?? throw new InvalidOperationException("JWT signing key is missing.");
 
@@ -31,7 +29,7 @@ namespace Library_Api.Services
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.UserName)
                 ],
-                expires: expiresAt,
+               
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                     SecurityAlgorithms.HmacSha256));
@@ -40,7 +38,7 @@ namespace Library_Api.Services
             {
                 UserName = user.UserName,
                 AccesToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresIn = validityMinutes * 60
+                
             };
         }
     }

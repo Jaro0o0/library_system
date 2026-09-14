@@ -16,7 +16,7 @@ public class UserController : ControllerBase
         _context = context;
     }
 
-   
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult>  GetUserName()
     {
@@ -28,7 +28,7 @@ public class UserController : ControllerBase
         var user = await _context.Users.FindAsync(parsedUserId);
 
         if (user is null)
-            return NotFound();
+            return Unauthorized();
 
         return Ok(new { userName = user.UserName });
     }

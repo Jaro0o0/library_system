@@ -1,4 +1,5 @@
-import Dashboard from "../components/UserPage/Dashboard";
+
+import MainDashboard from "../components/UserPage/MainDashboard";
 
 
 
@@ -9,7 +10,7 @@ import Dashboard from "../components/UserPage/Dashboard";
 function UserPage() {
     return (  
         
-             <Dashboard/>
+            <MainDashboard/>
     
       
     );

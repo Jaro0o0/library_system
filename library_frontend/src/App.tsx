@@ -14,15 +14,19 @@ import Register from "./pages/Register";
 import CategoryPage from "./components/Categories/CategoryPage";
 import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-import HistoryPage from "./pages/HistoryPage";
+
 import ProductPage from "./pages/ProductPage";
 import CommingSoonPage from "./pages/CommingSoonPage";
 import ScrolltoTop from "./components/common/ScrollToTop"
 
 
+import UserPageDashboardCol from "./components/UserPage/UserPageDashboardCol";
+import UserPageDashboardHistory from "./components/UserPage/UserPageDahboardHistory";
+import UserPageDashboardFavaourites from "./components/UserPage/UserPageDashboardFavaourites";
+
 
 import { PersistGate } from "redux-persist/integration/react";
-import FavouritesPage from "./pages/FavouritesPage";
+
 
 function App() {
  
@@ -43,20 +47,40 @@ function App() {
               <Route path="categories" element={<Categories/>}/>
               <Route path="register" element={<Register/>}/>
 
-              <Route path="/users/:name" element={<ProtectedRoute><UserPage/></ProtectedRoute>}/>
+              <Route
+                  path="/users/:name"
+                  element={
+                    <ProtectedRoute>
+                      <UserPage />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<UserPageDashboardCol />} />
+
+                  <Route
+                    path="history"
+                    element={<UserPageDashboardHistory />}
+                  />
+
+                  <Route
+                    path="favaourites"
+                    element={<UserPageDashboardFavaourites />}
+                  />
+                  </Route>
+                  
               
-              <Route path="/users/:name"  element={<UserPage/>}/>
+             
               <Route path="/categories/:name"  element={<CategoryPage/>}/>
               <Route path="checkout" element={<CheckOut/>} />
               <Route path="/checkout/thanks" element={<ThanksPage/>}/>
               {/* History */}
-              <Route path="/users/:name/history" element={<ProtectedRoute><HistoryPage/></ProtectedRoute>}/>
+    
               {/* ProductPaage */}
               <Route path="/products/:productName" element={<ProductPage/>}/>
 
               {/* CommingSoon */}
               <Route path="comming-soon" element={<CommingSoonPage/>}/>
-              <Route path="/users/:name/favaourites" element={<ProtectedRoute><FavouritesPage/></ProtectedRoute>}/>
+       
 
 
           </Routes>
