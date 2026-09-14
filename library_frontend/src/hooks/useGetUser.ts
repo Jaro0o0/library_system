@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-
-
 function useGetUser() {
     const [userName, setUserName] = useState("");
 
@@ -13,25 +11,28 @@ function useGetUser() {
             return;
         }
 
-        const getUserName = async () => {
+        try {
+            const payload = token.split(".")[1];
 
-            const res = await fetch('http://localhost:5110/search/User', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-            });
+            if (!payload) {
+                setUserName("");
+                return;
+            }
 
-            if (!res.ok) return;
+            const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
+            const decoded = JSON.parse(atob(normalized));
+            const nameFromToken =
+                decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
+                decoded.unique_name ||
+                decoded.name ||
+                decoded.userName ||
+                "";
 
-            const data = await res.json();
-            setUserName(data.userName);
-
-        };
-
-        getUserName();
+            setUserName(nameFromToken);
+        } catch {
+            setUserName("");
+        }
     }, []);
-
-
 
     return { userName };
 }

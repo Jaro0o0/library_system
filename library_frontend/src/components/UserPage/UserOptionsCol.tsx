@@ -50,6 +50,7 @@ const iconsData = [
 function UserOptionsCol() {
 
     const {userName} = useGetUser();
+    const safeUserName = userName || "User";
 
     const navigate = useNavigate();
 
@@ -69,7 +70,7 @@ function UserOptionsCol() {
                                    
                                     {/* Text_BOX */}
                                     <div className="flex flex-col">
-                                        <span className="font-semibold text-slate-800">{userName}</span>
+                                        <span className="font-semibold text-slate-800">{safeUserName}</span>
                                         <span className="text-sm text-slate-400">Member</span>
                                     </div>
                                 </div>
@@ -90,7 +91,7 @@ function UserOptionsCol() {
                                     <IconBox>
                                         <HomeIcon/> 
                                     </IconBox>
-                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={`/users/${userName}`}>Dashboard</Link>
+                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={userName ? `/users/${encodeURIComponent(userName)}` : "/login"}>Dashboard</Link>
                                 </div>
                                 {/* Shopping_Icon_BOx */}
                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
@@ -105,7 +106,7 @@ function UserOptionsCol() {
                                             <IconBox>
                                                 {item.icon}
                                             </IconBox>
-                                            <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={`/users/${userName}/${item.name}`}>{item.name}</Link>
+                                            <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={userName ? `/users/${encodeURIComponent(userName)}/${item.name}` : "/login"}>{item.name}</Link>
                                         
                                             
                                         </div>
