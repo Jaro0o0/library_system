@@ -61,7 +61,7 @@ function UserOptionsCol() {
 
     const logoutHandler = () => {
         localStorage.removeItem("accessToken");
-        navigate('login');
+        navigate('/login');
 
 
     }

@@ -6,11 +6,15 @@ import fantasyAuthors from '../lib/Authors/fantasyAuthors';
 import sciFiAuthors from '../lib/Authors/sciFiAuthors';
 import scienceAuthors from '../lib/Authors/scienceAuthors';
 
+
+import useGetUser from "../hooks/useGetUser";
+
 import { useNavigate } from "react-router";
 
 function Recomend() {
     const [pageType,setPageType] = useState("fantasy");
     const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
+    const {userName} = useGetUser();
 
     const navigate = useNavigate();
 
@@ -24,11 +28,16 @@ function Recomend() {
         }
 
         try {
-            const response = await fetch("http://localhost:5110/search/Books/recomended", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ authors: allAuthors }),
-            });
+          const response = await fetch(
+                    `http://localhost:5110/auth/Account/set-recomend?userName=${userName}`,
+                    {
+                        method: "POST",
+                        headers: {
+                        "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(allAuthors),
+                    }
+                    );
 
             if (!response.ok) {
                 throw new Error(await response.text());

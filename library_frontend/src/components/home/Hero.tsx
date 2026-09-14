@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import heroVideo from '../../assets/videos/hero-video.mp4'
 import CommonHeading from '../common/CommonHeading'
+import { headerAnimations }from '../../animations/recomendedListAnimation'
 
 
 
@@ -21,7 +22,12 @@ function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 pointer-events-none" />
 
             {/* INNER */}
-            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-28 pb-16">
+            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-28 pb-16"
+                variants={fadeInUp}
+                initial="hidden"
+                animate="visible"
+            
+            >
 
                 <div className="max-w-2xl">
                     {/* HEADING */}
