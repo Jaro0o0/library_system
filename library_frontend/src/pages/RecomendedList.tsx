@@ -1,7 +1,7 @@
 import Container from '../components/common/Container';
 import { useState } from 'react';
 import { motion } from "framer-motion";
-import recomendedListAnimation from '../animations/recomendedListAnimation';
+import { fadeInUp, viewportConfig } from '../animations/commonAnimations';
 import toast from "react-hot-toast";
 import { Button } from '@mui/material';
 import Section from '../components/common/Section';
@@ -54,19 +54,19 @@ function RecomendedList({ title, authors, onSubmit }: RecomendedListProps) {
                         
                                 {/* Grid */}
                                 <motion.div className="grid grid-cols-3 gap-2 md:gap-6"
-                                    variants={recomendedListAnimation.container}
+                                    variants={fadeInUp}
                                     initial="hidden"
-                                    whileInView="show"
-                                    
-                                    viewport={{ once: true, amount: 0.15 }}>
+                                    whileInView="visible"
+                                    viewport={viewportConfig}
+                                    >
                                     {authors.map((author, index) => {
                                         return(
                                             <motion.div
                                                 key={index}
                                                 
                                                 className={`p-2 md:p-4 ${choose.includes(author.name) ? "bg-green-300/50" : "bg-white" } flex flex-col items-center rounded-xl shadow-xl cursor-pointer`}
-                                                variants={recomendedListAnimation.item}
-                                                whileHover={recomendedListAnimation.hover}
+                                                variants={fadeInUp}
+                                                whileHover={{ scale: 1.05, y: -5 }}
                                                 onClick={() => toggleAuthor(author.name)}
                                             
                                             >

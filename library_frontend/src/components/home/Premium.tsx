@@ -1,6 +1,9 @@
 import Container from "../common/Container";
 import { Button } from "@mui/material";
 import CommonHeading from "../common/CommonHeading";
+import { fadeInUp, viewportConfig,gridAnimate,gridItemsAnimate } from '../../animations/commonAnimations';
+import { motion } from "framer-motion";
+
 
 const premiumData = [
     {
@@ -20,15 +23,40 @@ function Premium() {
         <>
         <Container>
             {/* TEXT_BOX */}
-            <div className="text-center mb-12 py-8">
+            <motion.div className="text-center mb-12 py-8"
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                >
                 <CommonHeading>Plans</CommonHeading>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Explore more possibilities</h2>
                 <p className="text-slate-500 mt-3 max-w-xl mx-auto">Unlock unlimited reading, audiobooks and offline access with a Premium plan.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            </motion.div>
+            {/* Grid */}
+            <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+                variants={gridAnimate}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.1 }}
+
+
+            >
                 {premiumData.map((item, index) => {
                     return(
-                        <div key={index} className="shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100 rounded-2xl p-8 relative flex flex-col justify-between min-h-[560px] h-full bg-white hover:border-green-400 hover:-translate-y-1 transition-all duration-300">
+                        <motion.div key={index} className="shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100 rounded-2xl p-8 relative flex flex-col justify-between min-h-[560px] h-full bg-white"
+                                variants={gridItemsAnimate}
+                                
+                                whileHover={{
+                                    scale: 1.05,
+                                    transition: {
+                                    duration: 0.2,
+                                    ease: "easeInOut",
+                                    },
+                                }}
+
+                                           
+                        >
                             {/* for_month */}
                             <div className="px-4 py-1.5 max-w-[160px] w-full bg-gradient-to-r from-green-400 to-green-500 text-white text-sm font-semibold rounded-lg absolute -top-0 left-0 shadow-md ">
                                 <span>0 PLN for month</span>
@@ -59,13 +87,13 @@ function Premium() {
                             <Button className="!bg-green-400 !rounded-lg !font-semibold w-full" variant="contained">try now</Button>
                             <p className="mt-6 text-xs text-slate-400 leading-relaxed">0 PLN for 3 months, then 26.99 PLN per month. Offer available only to users who have not yet used Premium. </p>
 
-                        </div>
+                        </motion.div>
 
                     )
                 }) }
                 
 
-            </div>
+            </motion.div>
         </Container>
         </>
      );

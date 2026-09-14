@@ -169,7 +169,7 @@ function Header() {
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium  `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium shadow-md  `}
             ref={heightRef}
         >
             <div>
@@ -197,8 +197,8 @@ function Header() {
                      // User is not logged in 
                     <div>
                         <div className="flex gap-4">
-                            <button className=" text-white ">
-                                <Link to="/login" className='text-lg   hover:text-green-500 transition-colors'>Login</Link>
+                           <button className="bg-green-500 text-white px-4 py-2 rounded-md">
+                                <Link to="/login">Login</Link>
                             </button>
                             <button className="bg-green-500 text-white px-4 py-2 rounded-md">
                                 <Link to="/register">Register</Link>
