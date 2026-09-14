@@ -59,7 +59,7 @@ public class BooksController : ControllerBase
 
 
     [HttpGet("recomended")]
-    public async Task<IActionResult> GetRecomendedBooks(string userName )
+    public async Task<IActionResult> GetRecomendedBooks([FromQuery] string userName)
     {
         var books = await _recomended.GetRecommendedUsers(userName);
         return Ok(books);
@@ -103,35 +103,35 @@ public class BooksController : ControllerBase
 
     
 
-    // [Authorize]
-    // [HttpGet("rent")]
-    // public async Task<IActionResult> GetRentalHistory()
-    // {
-    //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-    //     if (!int.TryParse(userId, out var parsedUserId))
-    //         return Unauthorized();
+    [Authorize]
+    [HttpGet("rent-history")]
+    public async Task<IActionResult> GetRentalHistory()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(userId, out var parsedUserId))
+            return Unauthorized();
 
-    //     var history = await _context.RentalHistories
-    //         .AsNoTracking()
-    //         .Where(rental => rental.UserId == parsedUserId)
-    //         .OrderByDescending(rental => rental.StartDate)
-    //         .Select(rental => new
-    //         {
-    //             rental.Id,
-    //             rental.StartDate,
-    //             rental.EndDate,
-    //             book = new
-    //             {
-    //                 rental.Book.id,
-    //                 rental.Book.tytul,
-    //                 rental.Book.autor,
-    //                 rental.Book.gatunek
-    //             }
-    //         })
-    //         .ToListAsync();
+        var history = await _context.RentalHistories
+            .AsNoTracking()
+            .Where(rental => rental.UserId == parsedUserId)
+            .OrderByDescending(rental => rental.StartDate)
+            .Select(rental => new
+            {
+                rental.Id,
+                rental.StartDate,
+                rental.EndDate,
+                book = new
+                {
+                    rental.Book.id,
+                    rental.Book.tytul,
+                    rental.Book.autor,
+                    rental.Book.gatunek
+                }
+            })
+            .ToListAsync();
 
-    //     return Ok(history);
-    // }
+        return Ok(history);
+    }
 
 
 }

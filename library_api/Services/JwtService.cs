@@ -21,6 +21,8 @@ namespace Library_Api.Services
             var key = _configuration["JtwConfig:Key"]
                 ?? throw new InvalidOperationException("JWT signing key is missing.");
 
+            var expiresAt = DateTime.UtcNow.AddHours(2);
+
             var token = new JwtSecurityToken(
                 issuer: _configuration["JtwConfig:Issuer"],
                 audience: _configuration["JtwConfig:Audience"],
@@ -29,7 +31,7 @@ namespace Library_Api.Services
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.UserName)
                 ],
-               
+                expires: expiresAt,
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                     SecurityAlgorithms.HmacSha256));
@@ -38,7 +40,7 @@ namespace Library_Api.Services
             {
                 UserName = user.UserName,
                 AccesToken = new JwtSecurityTokenHandler().WriteToken(token),
-                
+                ExpiresIn = (int)TimeSpan.FromHours(2).TotalSeconds
             };
         }
     }

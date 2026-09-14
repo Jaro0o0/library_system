@@ -13,40 +13,43 @@ public class RecommendService
 
     public async Task<List<Book>> GetRecommendedUsers(string userName)
     {
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            return new List<Book>();
+        }
+
         var user = await _context.Users
-            .Include(u => u.FavoriteAuthors)
+            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.UserName == userName);
 
-        if (user is null)
+        if (user == null)
         {
-            Console.WriteLine("USER NOT FOUND");
-            return [];
+            return new List<Book>();
         }
 
-        Console.WriteLine($"USER: {user.UserName}");
-        Console.WriteLine($"FAVORITE AUTHORS COUNT: {user.FavoriteAuthors.Count}");
+        var recentAuthors = await _context.RentalHistories
+            .AsNoTracking()
+            .Where(rental => rental.UserId == user.Id)
+            .OrderByDescending(rental => rental.StartDate)
+            .Select(rental => rental.Book.autor)
+            .Distinct()
+            .Take(5)
+            .ToListAsync();
 
-        foreach (var author in user.FavoriteAuthors)
+        if (!recentAuthors.Any())
         {
-            Console.WriteLine($"FAVORITE AUTHOR: [{author.Name}]");
+            return new List<Book>();
         }
 
-        var books = await _context.books.ToListAsync();
+        var recommendedBooks = await _context.books
+            .AsNoTracking()
+            .Where(book => recentAuthors.Contains(book.autor))
+            .Where(book => !_context.RentalHistories.Any(rental =>
+                rental.UserId == user.Id && rental.BookId == book.id))
+            .Take(10)
+            .ToListAsync();
 
-        foreach (var book in books)
-        {
-            Console.WriteLine($"BOOK: {book.tytul} | AUTHOR: {book.autor}");
-        }
-
-        var recommendations = books
-            .Where(book =>
-                user.FavoriteAuthors.Any(author =>
-                    author.Name == book.autor))
-            .ToList();
-
-        Console.WriteLine($"RECOMMENDATIONS: {recommendations.Count}");
-
-        return recommendations;
+        return recommendedBooks;
     }
 }
 

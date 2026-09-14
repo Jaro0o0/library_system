@@ -38,22 +38,30 @@ function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
 
     //handleRentBook
     const handleRentBook = async () => {
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+            console.error("No access token found");
+            return;
+        }
+
         const booksIds = cardItems.map((item: { title: string }) => item.title);
 
         const res = await fetch('http://localhost:5110/search/Books/rent', {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(booksIds),
         });
 
-        if(res.ok){
-            
-
-            navigate('thanks')
+        if (res.ok) {
+            onClose();
+            navigate('/checkout/thanks');
+            return;
         }
+
         const data = await res.text();
         console.log(data);
     }

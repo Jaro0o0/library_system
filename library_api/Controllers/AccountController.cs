@@ -72,33 +72,33 @@ public class AccountController  : ControllerBase
     }
 
 
-    [HttpPost("set-recomend")]
-    public async Task<IActionResult> SetPreferences( string userName, [FromBody] List<string> authorsList)
-    {
-        var user = await _dbContext.Users
-            .FirstOrDefaultAsync(u => u.UserName == userName);
+    // [HttpPost("set-recomend")]
+    // public async Task<IActionResult> SetPreferences( string userName, [FromBody] List<string> authorsList)
+    // {
+    //     var user = await _dbContext.Users
+    //         .FirstOrDefaultAsync(u => u.UserName == userName);
 
-        if (user is null)
-        {
-           return BadRequest("User not found");
-        }
-
-
-        var authors = await _dbContext.Authors
-            .Where(a => authorsList.Contains(a.Name))
-            .ToListAsync();
+    //     if (user is null)
+    //     {
+    //        return BadRequest("User not found");
+    //     }
 
 
-        user.FavoriteAuthors = authors;
+    //     var authors = await _dbContext.Authors
+    //         .Where(a => authorsList.Contains(a.Name))
+    //         .ToListAsync();
+
+
+    //     user.FavoriteAuthors = authors;
 
 
 
 
-        await _dbContext.SaveChangesAsync();
+    //     await _dbContext.SaveChangesAsync();
 
-        return Ok(user.FavoriteAuthors);
+    //     return Ok(user.FavoriteAuthors);
 
-    }
+    // }
  
 
 

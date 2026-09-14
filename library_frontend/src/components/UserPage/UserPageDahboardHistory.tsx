@@ -21,7 +21,7 @@ function UserPageDashboardHistory() {
 
     useEffect(() => {
         const getHistory = async () => {
-            const res = await fetch('http://localhost:5110/search/Books/rent', {
+            const res = await fetch('http://localhost:5110/search/Books/rent-history', {
                 headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
             });
 
