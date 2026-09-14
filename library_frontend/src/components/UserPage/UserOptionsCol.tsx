@@ -13,24 +13,18 @@ import { useNavigate } from "react-router";
 
 const iconsData = [
 
-    {
-        name:'Dashboard',
-        icon: <HomeIcon/>,
-
-
-    },
     // {
     //     name:'Notifications',
     //     icon: <NotificationsActiveIcon/>,
 
 
     // },
-    {
-        name:'Shopping card',
-        icon: <ShoppingCartIcon/>,
+    // {
+    //     name:'Shopping card',
+    //     icon: <ShoppingCartIcon/>,
 
 
-    },
+    // },
     {
         name:'History',
         icon: <HistoryToggleOffIcon/>
@@ -38,7 +32,7 @@ const iconsData = [
 
     },
     {
-        name:'favourites',
+        name:'favaourites',
         icon: <FavoriteIcon/>
 
 
@@ -79,8 +73,32 @@ function UserOptionsCol() {
                                         <span className="text-sm text-slate-400">Member</span>
                                     </div>
                                 </div>
-                                {/* Icons_BOX */}
-                                <div className="flex flex-col gap-1">
+
+                            
+
+                            {/* Icons_BOX */}
+                            <div className="flex flex-col gap-1">
+                                {/* Home_Icon_BOx */}
+                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
+                                    <IconBox>
+                                        <HomeIcon/> 
+                                    </IconBox>
+                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to="/">Home</Link>
+                                </div>
+                                {/* Dashboard_Icon_BOx */}
+                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
+                                    <IconBox>
+                                        <HomeIcon/> 
+                                    </IconBox>
+                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={`/users/${userName}`}>Dashboard</Link>
+                                </div>
+                                {/* Shopping_Icon_BOx */}
+                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
+                                    <IconBox>
+                                         <ShoppingCartIcon/> 
+                                    </IconBox>
+                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to="/checkout">Card</Link>
+                                </div>
                                 { iconsData.map((item) => {
                                     return(
                                         <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group" key={item.name} >
@@ -95,7 +113,7 @@ function UserOptionsCol() {
                                     
                                 } )}
 
-                                </div>
+                            </div>
                             </div>
                         <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined" onClick={logoutHandler}>Logout</Button>
                     </div>
