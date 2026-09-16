@@ -13,17 +13,17 @@ function ProfileMenu({ open, positionProperty }) {
     const iconsData = [
         {
             name:'Shopping card',
-            icon: <ShoppingCartIcon/>,
+            icon: <ShoppingCartIcon className='!text-white'/>,
             link: '/checkout',
         },
         {
             name:'History',
-            icon: <HistoryToggleOffIcon/>,
+            icon: <HistoryToggleOffIcon className='!text-white'/>,
             link: userName ? `/users/${encodeURIComponent(userName)}/history` : '/login',
         },
         {
             name:'Settings',
-            icon: <SettingsIcon/>,
+            icon: <SettingsIcon className='!text-white'/>,
             link: 'comming-soon',
         },
     ]

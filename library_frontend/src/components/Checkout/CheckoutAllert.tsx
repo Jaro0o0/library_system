@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-
+import { useState } from 'react';
 
 import { useSelector,  } from 'react-redux';
 import type { RootState } from '../../store';
@@ -8,30 +8,15 @@ import { useNavigate } from 'react-router';
 
 
 
-type CheckoutAllertProps = {
-    open: boolean;
-    onClose: () => void;
-};
 
-function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
+
+function CheckoutAllert({ open , onClose} ) {
 
     const navigate = useNavigate();
+    const [error, setError] = useState('');
     
 
       
-
-
-    //Handlers
-    // const handlSubmit = async () => {
-
-    //     const res = await fetch(`http://localhost:5110/search/Books/rent?title=${cardItems}`,{
-    //         method: "PUT",
-    //         headers: { "Content-Type": "application/json" },
-    //     })
-
-    //     const data = await res.json();
-    //     console.log(data);
-    // }
 
 
      const cardItems = useSelector((state: RootState) => state.shoppingCard.card);
@@ -40,13 +25,11 @@ function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
     const handleRentBook = async () => {
         const token = localStorage.getItem("accessToken");
 
-        if (!token) {
-            console.error("No access token found");
-            return;
-        }
+       
 
         const booksIds = cardItems.map((item: { title: string }) => item.title);
 
+    try{
         const res = await fetch('http://localhost:5110/search/Books/rent', {
             method: "PUT",
             headers: {
@@ -56,14 +39,27 @@ function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
             body: JSON.stringify(booksIds),
         });
 
-        if (res.ok) {
+        if(!res.ok){
+            const message = await res.text();
+            throw new Error(message);
+
+        }
+        else{
+            
             onClose();
             navigate('/checkout/thanks');
             return;
         }
-
-        const data = await res.text();
-        console.log(data);
+    }
+    catch(error){
+           if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError("An unexpected error occurred.");
+            }
+    }
+        
+       
     }
 
   
@@ -76,8 +72,8 @@ function CheckoutAllert({ open , onClose}: CheckoutAllertProps ) {
                     <h2 className="text-lg font-bold mb-4">Checkout Alert</h2>
                     <p className="mb-4">Please review your order before proceeding to checkout.</p>
                     <div className='flex gap-4'>
-                        <Button variant='contained' className="bg-green-400 text-white px-4 py-2 rounded " onClick={onClose}>Close</Button>
-                        <Button  variant='contained' className="bg-green-400 text-white px-4 py-2 rounded " onClick={handleRentBook} >Rent</Button>
+                        <Button variant='contained' className="!bg-green-400 !text-white !px-4 !py-2 " onClick={onClose}>Close</Button>
+                        <Button  variant='contained' className="!bg-green-400 !text-white !px-4 !py-2  " onClick={handleRentBook} >Rent</Button>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router';
 import useGetUser from "../../hooks/useGetUser";
 import HomeIcon from '@mui/icons-material/Home';
@@ -15,22 +16,17 @@ const iconsData = [
 
     {
         name:'History',
-        icon: <HistoryToggleOffIcon/>
+        icon: <HistoryToggleOffIcon className="!text-white"/>
 
 
     },
     {
         name:'Recommended',
-        icon: <FavoriteIcon/>
+        icon: <FavoriteIcon className="!text-white"/>
 
 
     },
-    {
-        name:'Settings',
-        icon: <SettingsIcon/>
-
-
-    },
+  
 
 ]
 
@@ -70,28 +66,28 @@ function UserOptionsCol() {
                                 {/* Home_Icon_BOx */}
                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
                                     <IconBox>
-                                        <HomeIcon/> 
+                                        <HomeIcon className="!text-white"/> 
                                     </IconBox>
                                     <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to="/">Home</Link>
                                 </div>
                                 {/* Dashboard_Icon_BOx */}
                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
                                     <IconBox>
-                                        <HomeIcon/> 
+                                        <DashboardIcon className="!text-white"/> 
                                     </IconBox>
                                     <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={userName ? `/users/${encodeURIComponent(userName)}` : "/login"}>Dashboard</Link>
                                 </div>
                                 {/* Shopping_Icon_BOx */}
                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
                                     <IconBox>
-                                         <ShoppingCartIcon/> 
+                                         <ShoppingCartIcon className="!text-white"/> 
                                     </IconBox>
                                     <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to="/checkout">Card</Link>
                                 </div>
                                 { iconsData.map((item) => {
                                     return(
                                         <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group" key={item.name} >
-                                            <IconBox>
+                                            <IconBox >
                                                 {item.icon}
                                             </IconBox>
                                             <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to={userName ? `/users/${encodeURIComponent(userName)}/${item.name}` : "/login"}>{item.name}</Link>
@@ -101,6 +97,13 @@ function UserOptionsCol() {
                                     )
                                     
                                 } )}
+                                  {/* Settings_Icon_BOx */}
+                                <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
+                                    <IconBox>
+                                        <SettingsIcon className="!text-white"/>
+                                    </IconBox>
+                                    <Link  className="text-slate-600 group-hover:text-green-600 transition-colors" to="/comming-soon">Settings</Link>
+                                </div>
 
                             </div>
                             </div>

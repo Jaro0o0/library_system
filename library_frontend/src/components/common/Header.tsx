@@ -169,7 +169,7 @@ function Header() {
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium   `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-[#F8FAFC]  text-gray-900 font-medium   `}
             ref={heightRef}
         >
             <div>
@@ -248,10 +248,10 @@ function Header() {
                                                 
  sx={{
     '& .MuiFilledInput-root:after': {
-      borderBottomColor: '#4ade80', // green-400
+      borderBottomColor: '#4ade80', 
     },
     '& .MuiInputLabel-root.Mui-focused': {
-      color: '#4ade80', // label na zielono, gdy pole jest focusowane
+      color: '#4ade80', 
     },
     
      }}
@@ -290,7 +290,7 @@ function Header() {
                         <p className='mt-6 text-slate-500'>No books found</p>
                     )}
                     
-                    <Button variant='contained' className="!mt-6 !bg-green-500 !rounded-xl !px-5">See all books</Button>
+                    <Button variant='contained' className="!mt-6 !bg-green-400  !px-5">See all books</Button>
                     </div>
                 </Container>
             </div>

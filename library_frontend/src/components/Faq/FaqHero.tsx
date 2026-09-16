@@ -109,7 +109,7 @@ function FaqHero() {
     <div className="w-full h-screen">
       <div className="grid grid-cols-[1fr_2fr] h-full">
         {/* Nav */}
-        <div className="p-8 border-r border-gray-200 overflow-y-auto h-full">
+        <div className="p-8  overflow-y-auto h-full">
           <h1 className="font-semibold text-2xl mt-8 mb-6 text-gray-800">On this site</h1>
           <ul className="flex flex-col gap-3">
             {accordionLinks.map((item, index) => (

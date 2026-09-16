@@ -100,8 +100,8 @@ function CheckOut() {
                                 
                                 {/* Buttons */}
                                 <div className="flex gap-3 mt-5">
-                                    <Button variant="contained" className="!bg-green-400 !rounded-xl !text-white !font-semibold !px-5" onClick={() => setOpenAllert(prev => !prev)}>Rent</Button>
-                                    <Button variant="outlined" className="!border-green-400 !text-green-400 !rounded-xl !font-semibold" component={Link} to='/'>Home</Button>
+                                    <Button variant="contained" className="!bg-green-400  !text-white !font-semibold !px-5" onClick={() => setOpenAllert(prev => !prev)}>Rent</Button>
+                                    <Button variant="outlined" className="!border-green-400 !text-green-400  !font-semibold" component={Link} to='/'>Home</Button>
                                 </div>
                             
                             </div>
