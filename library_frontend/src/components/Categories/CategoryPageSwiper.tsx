@@ -147,35 +147,35 @@ function CategoryPageSwiper() {
                         const volume = book.volumeInfo;
                         const cover = `http://localhost:5110/images/Images?title=${encodeURIComponent(volume.title)}`;
                         return (
-                            <SwiperSlide key={book.id} className="!h-[420px]">
+                            <SwiperSlide key={book.id} className="!h-[620px] ">
                                 <div className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-100 hover:border-green-400 hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
-                                    <div className="relative overflow-hidden">
+                                    
+                                    {/* Card_IMG*/}
+                                    <div className="relative w-full h-[400px] overflow-hidden bg-slate-100">
                                         {cover ? (
                                             <img
                                                 src={cover}
                                                 alt={volume.title}
-                                                className="w-full h-[700px] object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                                             />
                                         ) : (
-                                            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 font-medium">
+                                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 font-medium">
                                                 Brak okładki
                                             </div>
                                         )}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>
-
-                                    <div className="flex flex-col flex-1 p-5">
+                                    {/* CARD_TEXT_BOX */}
+                                    <div className="flex flex-col flex-1 p-5 ">
                                         <h3 className="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-green-600 transition-colors duration-300">
                                             {volume.title}
                                         </h3>
                                         <p className="text-sm text-slate-500 mt-1">{volume.authors?.join(', ')}</p>
-                                        <p className="text-sm text-slate-500 leading-relaxed mt-2 overflow-hidden line-clamp-3 flex-1">
-                                            {volume.description?.slice(0, 150)}
-                                            {(volume.description?.length ?? 0) > 150 ? '...' : ''}
-                                        </p>
+                                         {book.isRented ? <p className='text-red-600 mt-2'>This book is rented</p> : <p className='text-green-600 mt-2'>This book is available</p>  }
+                                     
                                     </div>
                                     {/* Buttons */}
-                                    <div className='flex gap-4'>
+                                    <div className='flex justify-between p-5'>
                                         <Button
                                             onClick={() => handleAddItem(book)}
                                             variant="contained"
@@ -188,7 +188,7 @@ function CategoryPageSwiper() {
                                         </Button>
                                     </div>
                                  
-                                   {book.isRented && <p>This book is rented</p>}
+                                  
                                 </div>
                             </SwiperSlide>
                         );

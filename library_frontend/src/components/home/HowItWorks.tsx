@@ -1,5 +1,4 @@
 import { Container, Button } from '@mui/material';
-import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
 import CommonHeading from '../common/CommonHeading';
 import { fadeInUp, viewportConfig, gridAnimate, gridItemsAnimate } from '../../animations/commonAnimations';
 import { motion } from "framer-motion";
@@ -32,7 +31,7 @@ function HowItWorks() {
             </motion.div>
             {/* Grid */}
             <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-8"
-                variants={gridItemsAnimate}
+                variants={ gridAnimate}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.1 }}

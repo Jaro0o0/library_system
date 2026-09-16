@@ -52,9 +52,9 @@ function UserPageDashboardHistory() {
                                 ) : (
                                     data.map((rental) => (
                                         // History_Item
-                                        <div key={rental.id} className="p-4 shadow-md flex justify-between items-center">
+                                        <div key={rental.id} className="p-4  flex justify-between items-center">
                                             <div>
-                                                <img  className="rounded-2xl object-cover w-[150px] h-[150px]" alt="product-img"/>
+                                                <img  src={`http://localhost:5110/images/Images?title=${encodeURIComponent(rental.book.tytul)  }`}  className="rounded-2xl object-cover w-[150px] h-[150px]" alt="product-img"/>
                                             </div>
                                             <div>
                                                 <p>{rental.book.tytul} — {rental.book.autor}</p>

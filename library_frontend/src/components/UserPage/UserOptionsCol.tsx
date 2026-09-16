@@ -13,18 +13,6 @@ import { useNavigate } from "react-router";
 
 const iconsData = [
 
-    // {
-    //     name:'Notifications',
-    //     icon: <NotificationsActiveIcon/>,
-
-
-    // },
-    // {
-    //     name:'Shopping card',
-    //     icon: <ShoppingCartIcon/>,
-
-
-    // },
     {
         name:'History',
         icon: <HistoryToggleOffIcon/>
@@ -32,7 +20,7 @@ const iconsData = [
 
     },
     {
-        name:'favaourites',
+        name:'Recommended',
         icon: <FavoriteIcon/>
 
 

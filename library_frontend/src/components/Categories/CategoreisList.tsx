@@ -1,8 +1,9 @@
-import Tolkien_Img from '../../assets/images/recommendList/tolkien.jpg'
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Container from '../common/Container';
 import { Link } from 'react-router';
+import { gridAnimate, gridItemsAnimate} from '../../animations/commonAnimations';
+import { motion } from 'framer-motion';
 
 
 import Fantasy_IMG from '../../assets/images/categoriesImages/fantasy-img.jpg'
@@ -49,10 +50,26 @@ function CategoriesList() {
     return ( 
         <Container>
             {/* Gird */}
-            <div className='grid grid-cols-3 gap-6'>
+            <motion.div className='grid grid-cols-3 gap-6'
+                variants={gridAnimate}
+                initial='hidden'
+                whileInView="show"
+                viewport={{ once: true, amount: 0.1 }}
+
+            
+            >
                 {categoriesList.map((item,index)=> {
                     return (
-                        <div key={index} className='p-4 shadow-md'>
+                        <motion.div key={index} className='p-4 shadow-md'
+                            variants={gridItemsAnimate}
+                               whileHover={{
+                                    scale: 1.05,
+                                    transition: {
+                                    duration: 0.2,
+                                    ease: "easeInOut",
+                                    },
+                                }}
+                        >
                             <div className='relative'>
                                 {/* Overlay */}
                                 <div className='absolute inset-0  bg-green-300/10  pointer-events-none'></div>
@@ -63,10 +80,10 @@ function CategoriesList() {
                             <Button variant="contained" endIcon={<SendIcon />}  component={Link}  to={`/categories/${item.name}`} className='!bg-green-400'> Send </Button>
                                                                             
                                                                             
-                        </div>
+                        </motion.div>
                     )
                 })}
-            </div>
+            </motion.div>
         </Container>
      );
 }

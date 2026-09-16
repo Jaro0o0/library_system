@@ -3,6 +3,10 @@ import { addItem, removeItem } from '../../store/ShoppingCardSlice/ShoppingCardS
 import { Button } from '@mui/material';
 import { Link } from 'react-router';
 import { useEffect } from 'react';
+//Icons
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 
 function ShoppingCard({ open, onClose }) {
 
@@ -46,12 +50,17 @@ function ShoppingCard({ open, onClose }) {
                     {cardItems.map((item,index) => {
                         return (
                             // Item
-                            <div key={index} className='flex p-4 shadow-md'>
+                            <div key={index} className='flex gap-2 p-4 shadow-md'>
                                 <div>
                                     <h3>{item.title}</h3>
                                     <p>{item.authors?.join(', ')}</p>
+                                    <button onClick={() => dispatch(removeItem())} className="text-red-400 hover:text-red-600 transition-colors duration-200 self-start mt-2 cursor-pointer"><DeleteIcon fontSize="small"/></button>
+                                </div>
+                                <div>
+                                    <img src={`http://localhost:5110/images/Images?title=${encodeURIComponent(item.title)  }`} alt="book-img" className="rounded-2xl object-cover w-[100px] h-[100px]" />
                                 </div>
                             </div>
+                            
                         )
                     } )}
                 </div>

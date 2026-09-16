@@ -1,50 +1,65 @@
-import { useEffect,useState } from "react";
 import { Button } from "@mui/material";
-import {Link} from "react-router";
-import { useDispatch,useSelector } from "react-redux";
+import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
 import { clearTable } from "../../store/ShoppingCardSlice/ShoppingCardSlice";
+import { loginContainer } from "../../animations/loginAnimations";
 
-function ThanksPage () {
+function ThanksPage() {
+  const dispatch = useDispatch();
+  const cardItems = useSelector((state: any) => state?.shoppingCard?.card ?? []);
 
-    const dispatch = useDispatch();
-    const cardItems = useSelector((state) => state.shoppingCard.card)
-    const [clearCard, setClearCard] = useState('');
+  const clearHandler = () => {
+    dispatch(clearTable());
+  };
 
-
-    const clearHandler = () => {
-
-        dispatch(clearTable());
-    }
-
-
-    return ( 
-        <div className="w-full h-screen flex flex-col justify-center items-center">
-            {/* Card */}
-            <div className="shadow-md w-full  max-w-md h-full max-h-[500px] p-8 ">
-                {/* TEXT_BOX */}
-                <div className="mb-4">
-                    <h1 className="text-3xl">Thans for Rent!</h1>
-                </div>
-                {/* YOUR_PSUHAREd */}
-                 {/* Itmems */}
-                <div className="mb-4">
-                    {cardItems.map((item,index) => {
-                        return (
-                            // Item
-                            <div key={index} className='flex p-4 shadow-md'>
-                                <div>
-                                    <h3>{item.title}</h3>
-                                    <p>{item.authors?.join(', ')}</p>
-                                </div>
-                            </div>
-                        )
-                    } )}
-                </div>
-                <Button    onClick={clearHandler} variant="contained" className="!bg-green-400" component={Link} to='/'>Back to Home</Button>
-            
-            </div>
+  return (
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <motion.div
+        className="shadow-md w-full max-w-lg h-full max-h-[600px] p-8 overflow-y-auto flex flex-col justify-between"
+        variants={loginContainer}
+        initial="initial"
+        animate="animate"
+      >
+        <div className="mb-4">
+          <h1 className="text-3xl font-medium text-gray-900">Thanks for Rent!</h1>
         </div>
-     );
+
+        <div className="mb-4 space-y-4">
+          {cardItems.length === 0 ? (
+            <p className="text-gray-500">Your rental list is empty.</p>
+          ) : (
+            cardItems.map((item: any, index: number) => (
+              <div key={`${item.title ?? "book"}-${index}`} className="flex p-4 shadow-md gap-6">
+                <div>
+                  <img
+                    src={`http://localhost:5110/images/Images?title=${encodeURIComponent(item.title ?? "")}`}
+                    alt="book-img"
+                    className="h-[150px] w-[150px] object-cover rounded-2xl"
+                  />
+                </div>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.authors?.join(", ") ?? "Unknown author"}</p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        <Button
+          onClick={clearHandler}
+          variant="contained"
+          className="!bg-green-400"
+          component={Link}
+          to="/"
+        >
+          Back to Home
+        </Button>
+      </motion.div>
+    </div>
+  );
 }
 
-export default ThanksPage  ;
+export default ThanksPage;

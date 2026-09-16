@@ -4,6 +4,67 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 
+import { Link } from "react-router";
+
+
+const companyData = [
+    {
+        name: 'about',
+        link: '/about'
+    },
+    {
+        name: 'careers',
+        link: '/comming-soon'
+    }
+]
+
+
+const navData = [
+    {
+        name: 'home',
+        link: '/'
+    },
+    {
+        name: 'categories',
+        link: '/categories'
+    },
+    {
+        name :'faq',
+        link: '/faq'
+    }
+]
+
+const plansData = [
+    {
+        name: 'individual',
+        link: '/plans'
+    },
+    {
+        name: 'student',
+        link: '/plans'
+    },
+    {
+        name: 'duo',
+        link: '/plans'
+    },
+]
+
+const socialData = [
+    {
+        name:'facebook',
+        icon: <FacebookIcon/>
+    },
+    {
+        name: 'instagram',
+        icon: <InstagramIcon/>
+    },
+    {
+        name: 'x',
+        icon: <XIcon/>
+    }
+]
+
+
 
 function Footer() {
     return ( 
@@ -17,7 +78,7 @@ function Footer() {
                             <span className="text-green-400">Books</span>
                         </h2>
                         <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-                            Twoja biblioteka online — odkrywaj, wypożyczaj i czytaj tysiące książek w jednym miejscu.
+                           Your online library — discover, borrow, and read thousands of books in one place
                         </p>
                      </div>
                      {/* Lists */}
@@ -26,40 +87,51 @@ function Footer() {
                         <div className="space-y-3">
                             <span className="text-sm font-semibold uppercase tracking-wider text-green-400">Company</span>
                             <ul className="space-y-2 text-sm text-slate-400">
-                                <li className="hover:text-white cursor-pointer transition-colors">O nas</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Kariera</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Kontakt</li>
+                               { companyData.map((item,index)=> {
+                                return (
+                                    <li className=" mt-2 hover:text-white cursor-pointer transition-colors" key={index}><Link to={item.link}>{item.name}</Link></li>
+                                )
+                               })}
                             </ul>
                         </div>
                         {/* Plans_LIst */}
                         <div className="space-y-3">
                             <span className="text-sm font-semibold uppercase tracking-wider text-green-400">Plans</span>
                             <ul className="space-y-2 text-sm text-slate-400">
-                                <li className="hover:text-white cursor-pointer transition-colors">Standard</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Premium</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Premium+</li>
+                            
+                                { plansData.map((item,index)=> {
+                                return (
+                                    <li className=" mt-2 hover:text-white cursor-pointer transition-colors" key={index}><Link to={item.link}>{item.name}</Link></li>
+                                )
+                               })}
+                               
                             </ul>
                         </div>
                         {/* Nav_LIst */}
                         <div className="space-y-3">
                             <span className="text-sm font-semibold uppercase tracking-wider text-green-400">Nav</span>
-                            <ul className="space-y-2 text-sm text-slate-400">
-                                <li className="hover:text-white cursor-pointer transition-colors">Home</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Kategorie</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">Wyszukiwarka</li>
+                            <ul className="space-y-2 text-sm text-slate-400 ">
+                                   {navData.map((item,index) => {
+                                    return (
+                                        <li className=" mt-2 hover:text-white cursor-pointer transition-colors" key={index}><Link to={item.link}>{item.name}</Link></li>
+                                    )
+                                })}
                             </ul>
                         </div>
 
                      </div>
-                     {/* Socials */}
-                     <div className="flex flex-col gap-4 justify-items-center md:justify-items-end">
-                        <span className="text-sm font-semibold uppercase tracking-wider text-green-400 text-center md:text-right">Śledź nas</span>
-                        <div className="grid grid-cols-3 gap-4 justify-items-center md:justify-items-end">
-                            <IconBox><FacebookIcon/></IconBox>
-                            <IconBox><InstagramIcon /></IconBox>
-                            <IconBox><XIcon/></IconBox>
-                        </div>
-                     </div>
+                            {/* Socials */}
+                            <div className="flex flex-col gap-4 items-center">
+                                <div className="flex items-center gap-6 ">
+                                    {socialData.map((item,index) => {
+                                          return(
+                                            <div key={index} className="  hover:text-green-400 transition-colors md:mx-6" >
+                                                {item.icon}
+                                            </div>
+                                          )
+                                    })}
+                                </div>
+                            </div>
                 </div>
                 <div className="border-t border-slate-800 py-6 text-center text-sm text-slate-500">
                     © {new Date().getFullYear()} Books Library. Wszelkie prawa zastrzeżone.

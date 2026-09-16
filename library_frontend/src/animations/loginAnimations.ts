@@ -15,10 +15,6 @@ export const loginContainer = {
     },
   },
 
-  exit: {
-    opacity: 0,
-    y: 40,
-  },
 };
 
 

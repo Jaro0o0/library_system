@@ -1,4 +1,4 @@
-import { Container } from "@mui/material"
+import  {Container } from "@mui/material"
 import CommonHeading from "../common/CommonHeading"
 import { fadeInUp, viewportConfig } from '../../animations/commonAnimations';
 import { motion } from "framer-motion";

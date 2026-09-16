@@ -169,7 +169,7 @@ function Header() {
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium shadow-md  `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-white  text-gray-900 font-medium   `}
             ref={heightRef}
         >
             <div>
@@ -184,6 +184,9 @@ function Header() {
                     </li>
                     <li className="   hover:text-green-500 transition-colors">
                         <Link to="/categories">Categories</Link>
+                    </li>
+                      <li className="   hover:text-green-500 transition-colors">
+                        <Link to="/plans">Plans</Link>
                     </li>
                     <li className="   hover:text-green-500 transition-colors">
                         <Link to="/faq">Faq</Link>

@@ -1,35 +1,26 @@
+
+
+
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
-
-import Container from '../common/Container';
-
-function AccordionComponent({ accordionTitle, accordionQuestion }) {
-    return ( 
-            <div className='p-8 mb-8'>
-                  {/* TEXT_BOX */}
-                        <div className='mb-4'>
-                            <h1 className='text-3xl'>{accordionQuestion}</h1>
-                        </div>
 
 
-
-                        <Accordion>
-                            <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}  
-                            >
-                            <Typography component="span">{accordionQuestion}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            {accordionTitle}
-                            </AccordionDetails>
-                        </Accordion>
-                </div>
-     );
+function AccordionComponent({ id, accordionTitle, accordionQuestion, scrollRef }) {
+  return (
+    <>
+        
+        <Accordion id={id} className="mb-3 bg-gray-100! rounded-2xl!" elevation={0}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 3 }}>
+            <Typography component="span">{accordionTitle}</Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{ p: 5 }}>{accordionQuestion}</AccordionDetails>
+        </Accordion>
+    </>
+    
+  );
 }
 
 export default AccordionComponent;

@@ -10,7 +10,7 @@ import  { removeItem} from '../store/ShoppingCardSlice/ShoppingCardSlice'
 //Icons
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import Book_Img from'../assets/images/temporaryImages/pragmatic-programmer-img.jpg'
+
 
 
 import CheckoutAllert from "../components/Checkout/CheckoutAllert";
@@ -50,8 +50,8 @@ function CheckOut() {
                                         return (
                                             
                                             <div key={index} className="flex gap-4 shadow-md rounded-2xl overflow-hidden bg-white">
-                                                    <div className="flex-shrink-0">
-                                                        <img src={Book_Img} alt="book-img" className="h-[150px] object-cover rounded-l-2xl"/>
+                                                    <div className="p-4">
+                                                        <img src={`http://localhost:5110/images/Images?title=${encodeURIComponent(item.title)  }`} alt="book-img" className="h-[150px] w-[150px] object-cover rounded-2xl"/>
                                                     </div>
                                                     {/* Text_BOX */}
                                                     <div className="flex flex-col justify-between py-3 pr-4 flex-1 min-w-0">

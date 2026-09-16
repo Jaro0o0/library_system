@@ -16,13 +16,17 @@ import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
 import ProductPage from "./pages/ProductPage";
+import PlansPage from "./pages/PlansPage";
 import CommingSoonPage from "./pages/CommingSoonPage";
 import ScrolltoTop from "./components/common/ScrollToTop"
 
 
+
 import UserPageDashboardCol from "./components/UserPage/UserPageDashboardCol";
 import UserPageDashboardHistory from "./components/UserPage/UserPageDahboardHistory";
-import UserPageDashboardFavaourites from "./components/UserPage/UserPageDashboardFavaourites";
+import UserPageDashboardRecommended from "./components/UserPage/UserPageDashboardRecommended";
+import AboutPage from "./pages/AboutPage";
+
 
 
 import { PersistGate } from "redux-persist/integration/react";
@@ -63,8 +67,8 @@ function App() {
                   />
 
                   <Route
-                    path="favaourites"
-                    element={<UserPageDashboardFavaourites />}
+                    path="recommended"
+                    element={<UserPageDashboardRecommended />}
                   />
                   </Route>
                   
@@ -73,13 +77,18 @@ function App() {
               <Route path="/categories/:name"  element={<CategoryPage/>}/>
               <Route path="checkout" element={<CheckOut/>} />
               <Route path="/checkout/thanks" element={<ThanksPage/>}/>
-              {/* History */}
+      
+              <Route path="plans" element={<PlansPage/>}/>
     
               {/* ProductPaage */}
               <Route path="/products/:productName" element={<ProductPage/>}/>
 
               {/* CommingSoon */}
               <Route path="comming-soon" element={<CommingSoonPage/>}/>
+
+               <Route path="about" element={<AboutPage/>}/>
+
+              
        
 
 
