@@ -101,7 +101,7 @@ function FaqHero() {
     const scrollItem = scrollRef.current[itemTitle];
 
     if (scrollItem) {
-      scrollItem.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollItem.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
