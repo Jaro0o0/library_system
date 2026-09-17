@@ -169,12 +169,12 @@ function Header() {
     <>
         <header
             // ${scrolled ? 'bg-white shadow-md ' : 'bg-transparent'}
-            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-[#F8FAFC]  text-gray-900 font-medium   `}
+            className={`fixed  top-0 left-0 right-0 z-[100] flex justify-between items-center py-2 px-6  bg-[#F8FAFC]  text-gray-900    `}
             ref={heightRef}
         >
             <div>
                 <h1 className={`text-xl   font-bold`} >
-                    <Link to="/"> Book <span className="text-green-400">Tracker</span></Link>
+                    <Link to="/"> 📗 Book <span className="text-green-400">Tracker</span></Link>
                 </h1>
             </div>
             <div className='flex gap-6 items-center mr-6'>
@@ -194,20 +194,23 @@ function Header() {
                 </ul>
 
 
-                {/* Buttons */}
+             
+
+
+
+
+
+                  {/* mobile menu button */}
+                {/* <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button> */}
+            </div>
+
+
+               {/* Buttons */}
                 <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
                     {isUserLogin ?  <button   onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
                      // User is not logged in 
-                    <div>
-                        <div className="flex gap-4">
-                           <button className="bg-green-500 text-white px-4 py-2 rounded-md">
-                                <Link to="/login">Login</Link>
-                            </button>
-                            <button className="bg-green-500 text-white px-4 py-2 rounded-md">
-                                <Link to="/register">Register</Link>
-                            </button>
-                        </div>
-                    </div> )}
+                        <button  className='hover:text-green-500 transition-colors'><Link to='/login'><AccountCircleIcon/></Link></button>
+                    )}
                 
 
 
@@ -221,14 +224,6 @@ function Header() {
                     </button>
 
                 </div>
-
-
-
-
-
-                  {/* mobile menu button */}
-                {/* <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button> */}
-            </div>
             
           
         </header>

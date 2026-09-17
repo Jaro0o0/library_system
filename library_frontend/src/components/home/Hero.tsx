@@ -3,12 +3,18 @@ import { motion } from 'framer-motion'
 import heroVideo from '../../assets/videos/hero-video.mp4'
 import CommonHeading from '../common/CommonHeading'
 import { fadeInUp} from '../../animations/commonAnimations'
+import usegetUserStatus from '../../hooks/useGetUserStatus'
+import { Button } from '@mui/material'
 
 
 
 
 
 function Hero() {
+
+    const isUserLogin = usegetUserStatus();
+
+
     return (
         <>
         <div className="w-full min-h-screen relative flex items-center">
@@ -48,33 +54,38 @@ function Hero() {
                        wszystko w jednym intuicyjnym miejscu
                     </p>
 
+                    {/* If User is not login  */}
                     <div className="flex flex-wrap gap-4 mt-8">
-                        <Link
-                            to="/register"
-                            className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-                        >
-                            Załóż konto za darmo
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="border border-white/40 hover:border-white hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-                        >
-                            Zaloguj się
-                        </Link>
+                    {isUserLogin ? (
+                        <>
+                            <Button component={Link}  to="/register"  className="primary-button">
+                               Create free account
+                            </Button>
+                            <Button component={Link} to="/login"  className="primary-button">
+                                Log in
+                            </Button>
+                         
+                        </>
+                        )
+                        : (
+                            <Button className="!bg-green-400  !text-white !font-semibold  !rounded-lg">Start Browsing</Button>
+                        )
+                    }
                     </div>
 
-                    <ul className="flex flex-wrap gap-6 mt-10 text-sm text-slate-400">
+                      <ul className="flex flex-wrap gap-6 mt-10 text-sm text-slate-400">
                         <li className="flex items-center gap-2">
                             <span className="text-green-400" aria-hidden="true">✓</span>
-                            Darmowe konto
+                            Free account
                         </li>
                         <li className="flex items-center gap-2">
                             <span className="text-green-400" aria-hidden="true">✓</span>
-                            Biblioteka i cele
+                            personalized recommendations
                         </li>
                         <li className="flex items-center gap-2">
                             <span className="text-green-400" aria-hidden="true">✓</span>
-                            Tysiace opinii
+                            rental history
+                            
                         </li>
                     </ul>
                 </div>

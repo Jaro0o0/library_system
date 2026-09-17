@@ -84,7 +84,7 @@ function Premium() {
                                 </ul>
                             </div>
                             
-                            <Button className="!bg-green-400 !rounded-lg !font-semibold w-full" variant="contained">try now</Button>
+                            <Button className="primary-button " variant="contained">try now</Button>
                             <p className="mt-6 text-xs text-slate-400 leading-relaxed">0 PLN for 3 months, then 26.99 PLN per month. Offer available only to users who have not yet used Premium. </p>
 
                         </motion.div>

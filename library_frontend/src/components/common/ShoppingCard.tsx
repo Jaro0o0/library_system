@@ -66,7 +66,7 @@ function ShoppingCard({ open, onClose }) {
                 </div>
                 {/* Buttons */}
                 <div className='mb-12'>
-                    <Button variant='contained' component={Link} to='/checkout' className="!bg-green-400 !text-white !px-4 !py-2  ">Checkout</Button>
+                    <Button variant='contained' component={Link} to='/checkout' className="primary-button">Checkout</Button>
                 </div>
             </div>
         </>

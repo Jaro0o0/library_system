@@ -1,36 +1,49 @@
-import  {Container } from "@mui/material"
+import  {Container,Button } from "@mui/material"
 import CommonHeading from "../common/CommonHeading"
 import { fadeInUp, viewportConfig } from '../../animations/commonAnimations';
+import useGetUser from "../../hooks/useGetUser";
 import { motion } from "framer-motion";
+import {Link} from "react-router";
+
 
 const features = [
+  {
+        title: 'Borrow books in seconds',
+        description:
+        'Browse the catalog and borrow available books with just a few clicks.',
+        icon: '📚',
+    },
+    {
+        title: 'Easy returns, always on time',
+        description:
+        'Return your books quickly and keep track of due dates without hassle.',
+        icon: '⏳',
+    },
     {
         title: 'Your reading history, all in one place',
         description:
-            'Keep a clear record of the books you’ve borrowed and returned, so you always know what you’ve read and can easily revisit your reading history.',
+        'Keep a clear record of the books you’ve borrowed and returned.',
         icon: '📖',
     },
     {
         title: 'Recommendations made for you',
         description:
-            'Get book recommendations based on your reading history, favorite authors, and the books you enjoy most.',
+        'Get book recommendations based on your reading history.',
         icon: '🔍',
-    },
-    {
-        title: 'Discover your next favorite author',
-        description:
-            'Find new authors and titles that match your reading preferences, without spending hours searching for what to read next.',
-        icon: '🎯',
-    },
-    {
-        title: 'One place for your entire reading journey',
-        description:
-            'From books you’ve borrowed to the ones waiting on your reading list, keep everything organized and easy to find.',
-        icon: '📚',
     },
 ]
 
 function Features() {
+
+    const { userName } = useGetUser();
+
+
+
+    
+
+
+
+
     return (
         <section id="features" className="w-full px-4 py-20 bg-slate-50">
             <Container>
@@ -53,12 +66,14 @@ function Features() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {features.map((feature) => (
-                        <article
-                            key={feature.title}
-                            className="group bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:border-green-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 "
+                        <div
+                             key={feature.title}
+                            className=" bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col items-center  "
                         >
+                           
+                        
                             <span
-                                className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-50 text-2xl group-hover:bg-green-100 transition-colors"
+                                className=" mb-4 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-50 text-2xl  "
                                 role="img"
                                 aria-hidden="true"
                             >
@@ -70,9 +85,14 @@ function Features() {
                             <p className="text-slate-600 mt-2 leading-relaxed">
                                 {feature.description}
                             </p>
-                        </article>
+                        </div>
                     ))}
                 </div>
+                <div className="flex justify-center mt-14">
+                    <Button component={Link} to={`/users/${userName}`} className="primary-button w-fit"  variant='contained'>Get Started</Button>
+                </div>
+                
+               
             </Container>
         </section>
     )

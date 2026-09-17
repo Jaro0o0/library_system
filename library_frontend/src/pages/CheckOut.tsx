@@ -39,7 +39,7 @@ function CheckOut() {
             <div className="w-full h-screen relative">
                 <CheckoutAllert open={openAllert} onClose={() => setOpenAllert(false)}/>
 
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[900px] px-4">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] px-4">
                
                     {/* Grid */}
                     <div className="grid grid-cols-[2fr_1fr] gap-8 items-start">
@@ -70,7 +70,7 @@ function CheckOut() {
                                 
                             </div>
                             {/* Data_COL */}
-                            <div className="shadow-xl rounded-2xl h-[300px]  p-8 bg-white w-full max-w-md border border-slate-100 flex flex-col justify-between">
+                            <div className="shadow-xl rounded-2xl h-[300px]  p-8 bg-white w-full  border border-slate-100 flex flex-col justify-between">
                                 
                                 
                                 {/* data_box */}
@@ -99,8 +99,8 @@ function CheckOut() {
                                
                                 
                                 {/* Buttons */}
-                                <div className="flex gap-3 mt-5">
-                                    <Button variant="contained" className="!bg-green-400  !text-white !font-semibold !px-5" onClick={() => setOpenAllert(prev => !prev)}>Rent</Button>
+                                <div className="flex justify-between mt-5">
+                                    <Button variant="contained" className="primary-button" onClick={() => setOpenAllert(prev => !prev)} disabled={cardItems.length === 0 }>Rent</Button>
                                     <Button variant="outlined" className="!border-green-400 !text-green-400  !font-semibold" component={Link} to='/'>Home</Button>
                                 </div>
                             

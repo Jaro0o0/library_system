@@ -2,9 +2,10 @@ import { Button } from "@mui/material";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { fadeInUp } from "../../animations/commonAnimations";
 
 import { clearTable } from "../../store/ShoppingCardSlice/ShoppingCardSlice";
-import { loginContainer } from "../../animations/loginAnimations";
+
 
 function ThanksPage() {
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ function ThanksPage() {
     <div className="w-full h-screen flex flex-col justify-center items-center">
       <motion.div
         className="shadow-md w-full max-w-lg h-full max-h-[600px] p-8 overflow-y-auto flex flex-col justify-between"
-        variants={loginContainer}
-        initial="initial"
-        animate="animate"
+        variants={fadeInUp }
+        initial="hidden"
+        animate="visible"
       >
         <div className="mb-4">
           <h1 className="text-3xl font-medium text-gray-900">Thanks for Rent!</h1>
@@ -51,7 +52,7 @@ function ThanksPage() {
         <Button
           onClick={clearHandler}
           variant="contained"
-          className="!bg-green-400"
+          className="primary-button"
           component={Link}
           to="/"
         >
