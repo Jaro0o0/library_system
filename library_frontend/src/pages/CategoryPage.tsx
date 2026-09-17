@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import { Button } from "@mui/material";
-import Container from '../../components/common/Container'
-import Section from "../common/Section";
-import CategoryPageSwiper from "./CategoryPageSwiper";
-import CategoryPageHero from "./CategoryPageHero";
-import Footer from "../common/Footer";
+import Container from '../components/common/Container'
+import Section from "../components/common/Section";
+import CategoryPageSwiper from "../components/Categories/CategoryPageSwiper";
+import CategoryPageHero from "../components/Categories/CategoryPageHero";
+import Footer from "../components/common/Footer";
 
 function CategoryPage() {
     const { name } = useParams();

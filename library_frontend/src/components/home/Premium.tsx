@@ -3,22 +3,37 @@ import { Button } from "@mui/material";
 import CommonHeading from "../common/CommonHeading";
 import { fadeInUp, viewportConfig,gridAnimate,gridItemsAnimate } from '../../animations/commonAnimations';
 import { motion } from "framer-motion";
+import { Link }from "react-router";
+import useGetUser from "../../hooks/useGetUser";
+
 
 
 const premiumData = [
     {
-        name: 'Individual'
+        name: 'Individual',
+        price: '30',
+        account: '1'
+
     },
     {
-        name: 'Student'
+        name: 'Student',
+        price:'40',
+        account: '2'
     },
     {
-        name: 'Duo'
+        name: 'Duo',
+        price:'50',
+        account: '3'
     },
 ]
 
 
 function Premium() {
+
+
+    const { userNamne } = useGetUser();
+
+
     return ( 
         <>
         <Container>
@@ -59,23 +74,23 @@ function Premium() {
                         >
                             {/* for_month */}
                             <div className="px-4 py-1.5 max-w-[160px] w-full bg-gradient-to-r from-green-400 to-green-500 text-white text-sm font-semibold rounded-lg absolute -top-0 left-0 shadow-md ">
-                                <span>0 PLN for month</span>
+                                <span>0 PLN for 3 months</span>
                             </div>
                             {/* Title_BOx */}
                             <div className="mt-10">
-                                <h3 className="text-2xl font-bold text-slate-900 mt-3">{item.name}</h3>
-                                <span className="text-slate-500 text-sm">after this 30 PLN for month</span>
+                                  <h3 className="text-2xl font-bold text-slate-900 mt-3">{item.name}</h3>
+                                  <span className="text-slate-500 text-sm">{`then ${item.price} PLN per month`}</span>
                             </div>
                             <div className="p-4 border-b border-slate-100 bg-slate-50 rounded-xl">
                                  <span className="text-3xl font-bold text-slate-900">0 PLN</span>
-                                 <span className="text-slate-500 block text-sm mt-1">after this 30 PLN for month</span>
+                                   <span className="text-slate-500 block text-sm mt-1">{`then ${item.price} PLN per month`}</span>
                             </div>
                             {/* List */}
                             <div className="mt-6 mb-10" >
                                 <ul className="space-y-3">
                                     <li className="flex items-center gap-3 text-slate-700">
                                         <svg className="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg>
-                                        <span>1 Premium account</span>
+                                        <span>{`${item.account} Premium accoun`}t</span>
                                     </li>
                                     <li className="flex items-center gap-3 text-slate-700">
                                         <svg className="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg>
@@ -84,8 +99,8 @@ function Premium() {
                                 </ul>
                             </div>
                             
-                            <Button className="primary-button " variant="contained">try now</Button>
-                            <p className="mt-6 text-xs text-slate-400 leading-relaxed">0 PLN for 3 months, then 26.99 PLN per month. Offer available only to users who have not yet used Premium. </p>
+                            <Button component={Link} to={ userNamne ? `/users/${userNamne}` : '/login'} className="primary-button " variant="contained">try now</Button>
+                            <p className="mt-6 text-xs text-slate-400 leading-relaxed">{`0 PLN for 3 months, then ${item.price} PLN per month. Offer available only to users who have not yet used Premium.` }</p>
 
                         </motion.div>
 

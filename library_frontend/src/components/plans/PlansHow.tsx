@@ -2,13 +2,22 @@ import Img from '../../assets/images/plansImages/plans-img.jpg'
 import Container from '../common/Container';
 import CommonHeading from '../common/CommonHeading';
 import { Button } from '@mui/material';
-import {delay, motion} from 'framer-motion';
+import { motion} from 'framer-motion';
+import { useNavigate } from 'react-router';
+import useGetUser from '../../hooks/useGetUser';
+import { handleGetStartedButton } from '../../utils/handleGetStartedButton';
+
 import { fadeInUp,viewportConfig  } from '../../animations/commonAnimations';
 
 
 
 
 function PlansHow() {
+
+    const userName = useGetUser();
+    const navigate = useNavigate();
+
+
     return ( 
         <Container>
             <motion.div className=" grid grid-cols-1 md:grid-cols-2 gap-8"
@@ -36,7 +45,7 @@ function PlansHow() {
                     <CommonHeading>Try free</CommonHeading>
                     <h2 className='text-4xl font-bold text-gray-900 mb-3'>Try it now for free</h2>
                     <p className="text-gray-500 leading-relaxed mb-6">Join thousands of readers already growing their library with our platform. Get unlimited access to your favorite titles, personalized recommendations, and exclusive member perks. Cancel anytime, no strings attached.</p>
-                    <Button className='!bg-green-400 !text-white !text-lg !px-4 font-medium'>Try now</Button>
+                     <Button onClick={ () => handleGetStartedButton(navigate, userName) } className="primary-button w-fit"  variant='contained'>Get Started</Button>
                 </div>
 
             </motion.div>

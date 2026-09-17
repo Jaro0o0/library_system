@@ -1,9 +1,10 @@
 import PlansHero from "../components/plans/PlansHero";
 import Section from "../components/common/Section";
 import Header from "../components/common/Header";
-import PlansCards from "../components/plans/PlansCards";
 import PlansHow from "../components/plans/PlansHow";
+import Premium from "../components/home/Premium";
 import Footer from "../components/common/Footer";
+
 
 
 function Plans() {
@@ -15,7 +16,7 @@ function Plans() {
                      <PlansHow/> 
                </Section>
                <Section>
-                  <PlansCards />
+                  <Premium/>
                </Section>
                <Footer/>
             </>

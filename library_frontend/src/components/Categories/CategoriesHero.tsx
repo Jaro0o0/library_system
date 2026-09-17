@@ -7,20 +7,24 @@ import { Button } from '@mui/material';
 import CommonHeading from '../common/CommonHeading';
 import { motion} from 'framer-motion';
 import { fadeInUp } from '../../animations/commonAnimations';
-
+import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
+import useGetUser from '../../hooks/useGetUser';
+import { handleGetStartedButton } from '../../utils/handleGetStartedButton';
 
 function CategoriesHero() {
 
  
-
+    const {userName} = useGetUser();
+    const navigate = useNavigate();
 
 
 
     return ( 
       <>
         <Header/>
-        <div className="h-[60vh] relative flex items-center">
-              <img src={Hero_Img } className='absolute inset-0 w-full h-full object-cover'/>
+        <div className="h-[70vh] relative flex items-center">
+              <img src={Hero_Img } className='absolute inset-0 w-full h-full object-cover object-center'/>
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 pointer-events-none" />
               {/* TEXT_BOX */}
@@ -36,9 +40,9 @@ function CategoriesHero() {
                       Discover everything you need in one place.
                   </h1>
                   <p className="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl">
-                      Find the products that are right for you - all in one intuitive place.
+                      Find the products that are right for you - all ain one intuitive place.
                   </p>
-                  <Button className='!bg-green-500 hover:!bg-green-400' variant='contained' size='large'>Try now</Button>
+                  <Button component={Link} to={userName ? `users/${userName}` : '/login'}  className="primary-button w-fit"  variant='contained'>Get Started</Button>
               </motion.div>
         </div>
        </>

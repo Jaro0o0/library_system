@@ -1,13 +1,22 @@
-import Img from '../../assets/images/plansImages/plans-img.jpg'
+import Img from '../../assets/images/aboutImages/about-us-img.jpg'
 import Container from '../common/Container';
 import CommonHeading from '../common/CommonHeading';
 import { Button } from '@mui/material';
 import {motion} from 'framer-motion'
 import { fadeInUp,viewportConfig } from '../../animations/commonAnimations';
+import { useNavigate } from 'react-router';
+import useGetUser from '../../hooks/useGetUser';
+
+import { handleGetStartedButton } from '../../utils/handleGetStartedButton';
 
 
 
 function AboutSection() {
+
+    const navigate = useNavigate();
+    const { userName } = useGetUser();
+
+
     return (
 
          <Container>
@@ -28,10 +37,10 @@ function AboutSection() {
                     <img src={Img } alt='coffe' className='w-full h-full object-cover rounded-2xl'/>
                 </div>
                 <div className='p-8'>
-                    <CommonHeading>Try free</CommonHeading>
-                    <h2 className='text-4xl font-bold text-gray-900 mb-3'>Try it now for free</h2>
-                    <p className="text-gray-500 leading-relaxed mb-6">Join thousands of readers already growing their library with our platform. Get unlimited access to your favorite titles, personalized recommendations, and exclusive member perks. Cancel anytime, no strings attached.</p>
-                    <Button className='!bg-green-400 !text-white !text-lg !px-4 font-medium'>Try now</Button>
+                    <CommonHeading>About us</CommonHeading>
+                    <h2 className='text-4xl font-bold text-gray-900 mb-3'>Book Tracker</h2>
+                    <p className="text-gray-500 leading-relaxed mb-6">Book Tracker helps you take control of your reading life. Browse our catalog and borrow your next favorite book in just a few clicks, keep a clear record of everything you've borrowed and returned, and discover new titles through recommendations tailored to your reading history.</p>
+                    <Button variant='contained' onClick={() =>  handleGetStartedButton(navigate, userName)} className='primary-button'>Try now</Button>
                 </div>
 
             </motion.div>

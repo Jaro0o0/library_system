@@ -11,7 +11,7 @@ import store, { persistor } from './store'
 import UserPage from "./pages/UserPage";
 import Categories from "./pages/Categories";
 import Register from "./pages/Register";
-import CategoryPage from "./components/Categories/CategoryPage";
+import CategoryPage from "./pages/CategoryPage";
 import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 

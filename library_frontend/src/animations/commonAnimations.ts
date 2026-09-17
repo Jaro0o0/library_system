@@ -1,4 +1,5 @@
-import type { hover } from "framer-motion";
+
+
 
 export const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -15,7 +16,7 @@ export const viewportConfig = {
 };
 
 
-export const gridAnimate = {
+export const  gridAnimate = {
     hidden : {
       opacity : 0,
     },
@@ -40,7 +41,7 @@ export const gridItemsAnimate = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };

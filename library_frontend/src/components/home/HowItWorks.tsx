@@ -1,4 +1,5 @@
-import { Container, Button } from '@mui/material';
+import Container from '../common/Container';
+import { Button } from '@mui/material';
 import CommonHeading from '../common/CommonHeading';
 import {Link }from 'react-router';
 import { fadeInUp, viewportConfig, gridAnimate, gridItemsAnimate } from '../../animations/commonAnimations';

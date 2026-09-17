@@ -16,8 +16,7 @@ function CategoryPageHero({ header }) {
                 <Container>
                     <div className="py-16 md:py-24">
                         <div className="max-w-2xl">
-                            <h1 className="text-5xl md:text-6xl uppercase font-bold leading-tight text-green-300 mb-6">{header}</h1>
-                            <p className="text-lg text-slate-500 mb-8">desc desc desc</p>
+                            <h1 className="text-5xl md:text-6xl uppercase font-bold leading-tight text-green-300 mb-14">{header}</h1>
                             <Button component={Link} to={`users/${userName}`} className="primary-button" variant='contained'> Try Premium</Button>
                         </div>
                     </div>

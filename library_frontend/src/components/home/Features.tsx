@@ -1,4 +1,6 @@
-import  {Container,Button } from "@mui/material"
+
+import Container from "../common/Container";
+import  {Button } from "@mui/material"
 import CommonHeading from "../common/CommonHeading"
 import { fadeInUp, viewportConfig } from '../../animations/commonAnimations';
 import useGetUser from "../../hooks/useGetUser";
@@ -14,7 +16,7 @@ const features = [
         icon: '📚',
     },
     {
-        title: 'Easy returns, always on time',
+        title: 'Easy returns',
         description:
         'Return your books quickly and keep track of due dates without hassle.',
         icon: '⏳',
@@ -89,7 +91,7 @@ function Features() {
                     ))}
                 </div>
                 <div className="flex justify-center mt-14">
-                    <Button component={Link} to={`/users/${userName}`} className="primary-button w-fit"  variant='contained'>Get Started</Button>
+                    <Button component={Link} to='/plans' className="primary-button"  variant='contained'>See plans</Button>
                 </div>
                 
                
