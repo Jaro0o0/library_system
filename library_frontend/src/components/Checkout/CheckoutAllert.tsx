@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router';
 
 
 
-function CheckoutAllert({ open , onClose} ) {
+function CheckoutAllert({ open , onClose}: {open: boolean, onClose: () => void;} ) {
 
     const navigate = useNavigate();
-    const [error, setError] = useState('');
+  
     
 
       
@@ -53,10 +53,8 @@ function CheckoutAllert({ open , onClose} ) {
     }
     catch(error){
            if (error instanceof Error) {
-                setError(error.message);
-            } else {
-                setError("An unexpected error occurred.");
-            }
+                error.message;
+            } 
     }
         
        

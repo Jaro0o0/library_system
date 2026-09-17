@@ -1,12 +1,11 @@
-import { Link, useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import { TextField, Button } from "@mui/material";
-import { useState, type FormEvent } from "react";
+import { useState,  } from "react";
 
 
 
 
 function Register( {  }) {
-    const [disabled, setDisabled] = useState(false);
     const [email , setEmail] = useState('');
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +15,7 @@ function Register( {  }) {
 
 
     //handdlers
-    const rewhisterHandler =  async (event: FormEvent<HTMLFormElement>) => {
+    const rewhisterHandler =  async (event: any) => {
         event.preventDefault();
         setError("");
         setIsLoading(true);

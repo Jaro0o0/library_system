@@ -4,7 +4,7 @@ import Header from "../common/Header";
 import{ Link }from "react-router";
 import useGetUser from "../../hooks/useGetUser";
 
-function CategoryPageHero({ header }) {
+function CategoryPageHero({ header }: { header: string | undefined}) {
 
     const {userName} = useGetUser();
 

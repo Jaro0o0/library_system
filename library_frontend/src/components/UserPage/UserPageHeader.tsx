@@ -1,39 +1,9 @@
 import { Link } from "react-router";
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import SearchIcon from '@mui/icons-material/Search';
-import IconBox from "../common/IconBox";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
+import {categoriesList } from '../../lib/UserPage/userPageHeader';
 
 
-const categoriesList = [
-    {
-        name: 'fantasy',
-        
-    },
-    {
-        name: 'science fiction',
-       
-    },
-    {
-        name: 'horror',
-      
-    },
-    {
-        name: 'romance',
-      
-    },
-    {
-        name: 'adventure',
-       
-    },
-    {
-        name: 'biography',
-       
-    },
-  
-    
-]
+
 
 
 

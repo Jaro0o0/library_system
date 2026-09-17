@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useGetUser() {
+function useGetUser(): { userName: string | null  } {
     const [userName, setUserName] = useState("");
 
     useEffect(() => {

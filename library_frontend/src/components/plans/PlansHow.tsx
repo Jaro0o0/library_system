@@ -5,7 +5,6 @@ import { Button } from '@mui/material';
 import { motion} from 'framer-motion';
 import { useNavigate } from 'react-router';
 import useGetUser from '../../hooks/useGetUser';
-import { handleGetStartedButton } from '../../utils/handleGetStartedButton';
 
 import { fadeInUp,viewportConfig  } from '../../animations/commonAnimations';
 
@@ -14,7 +13,7 @@ import { fadeInUp,viewportConfig  } from '../../animations/commonAnimations';
 
 function PlansHow() {
 
-    const userName = useGetUser();
+    const { userName } = useGetUser();
     const navigate = useNavigate();
 
 
@@ -45,7 +44,7 @@ function PlansHow() {
                     <CommonHeading>Try free</CommonHeading>
                     <h2 className='text-4xl font-bold text-gray-900 mb-3'>Try it now for free</h2>
                     <p className="text-gray-500 leading-relaxed mb-6">Join thousands of readers already growing their library with our platform. Get unlimited access to your favorite titles, personalized recommendations, and exclusive member perks. Cancel anytime, no strings attached.</p>
-                     <Button onClick={ () => handleGetStartedButton(navigate, userName) } className="primary-button w-fit"  variant='contained'>Get Started</Button>
+                     <Button onClick={() => userName ? navigate(`/users/${userName}`) : navigate('/login')} className="primary-button w-fit"  variant='contained'>Get Started</Button>
                 </div>
 
             </motion.div>

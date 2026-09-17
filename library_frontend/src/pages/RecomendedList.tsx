@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { fadeInUp, viewportConfig } from '../animations/commonAnimations';
 import toast from "react-hot-toast";
 import { Button } from '@mui/material';
-import Section from '../components/common/Section';
+
 
 type Author = {
     name: string;

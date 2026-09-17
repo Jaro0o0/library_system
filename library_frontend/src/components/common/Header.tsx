@@ -1,7 +1,7 @@
-import { useState, useEffect,useRef } from 'react'
+import { useState, useEffect,useRef, type ChangeEvent } from 'react'
 import { Link } from 'react-router'
 import SearchIcon from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
 import { Button } from '@mui/material';
@@ -34,12 +34,11 @@ type RecommendedBook = {
 function Header() {
 
 
-    const [scrolled, setScrolled] = useState(false)
-    const [recomendedAuthorsData ,setrecomendedAuthorsData] = useState([]);
+  
     const [searchBooks,setSearchBooks] = useState<any[]>([]);
 
     const [searchOpen, setSearchOpen] = useState(false);
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
     const [shoppingCardOpen, setShoppingCardOpen] = useState(false);
 
@@ -63,13 +62,7 @@ function Header() {
         }
     }
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 0)
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+
 
     //Height
     useEffect(() => {
@@ -78,19 +71,7 @@ function Header() {
         }
     }, []);
 
-    //Handlers
-    const recomendedBooksHandler = async () => {
 
-        const data = await fetch(`http://localhost:5110/search/Books/recomended?userId=${user.id}&count=10`,{
-
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-           
-
-
-        });
-    
-    }
 
     useEffect(()=>{
         
@@ -115,22 +96,30 @@ function Header() {
     },[])
     
     //Search Books
-    const searchBooksHandler = async ( e ) => {
+    const searchBooksHandler = async (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const input = e.target.value;
 
-        const input = e.target.value
         if (!input.trim()) {
-            setSearchBooks([])
-            return
+            setSearchBooks([]);
+            return;
         }
-        const res =  await fetch(`http://localhost:5110/search/Books/search-books?title=${encodeURIComponent(input)}`,{
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        }  );
-        if (!res.ok) return;
-        const data = await res.json();
-        setSearchBooks(data)
 
-    }
+        const res = await fetch(
+            `http://localhost:5110/search/Books/search-books?title=${encodeURIComponent(input)}`,
+            {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        setSearchBooks(data);
+    };
+
 
 
     //Recomendation

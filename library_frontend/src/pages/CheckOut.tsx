@@ -1,11 +1,11 @@
 import { useDispatch,useSelector } from "react-redux";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import Container from "../components/common/Container";
 import { Button } from "@mui/material";
 import { Link } from "react-router";
 import { useState } from "react";
 
+import type { RootState } from "../store";
 import  { removeItem} from '../store/ShoppingCardSlice/ShoppingCardSlice'
 //Icons
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,7 +18,7 @@ import CheckoutAllert from "../components/Checkout/CheckoutAllert";
 function CheckOut() {
 
     const dispatch = useDispatch();
-    const cardItems = useSelector((state) => state.shoppingCard.card);
+    const cardItems = useSelector((state: RootState ) => state.shoppingCard.card);
 
     const [openAllert,setOpenAllert] = useState(false);
 
@@ -46,7 +46,7 @@ function CheckOut() {
                             {/* ShoppingCardCOL */}
                             <div className="p-4 overflow-y-auto flex flex-col gap-4 max-h-[500px]">
                                 {cardItems.length === 0 ? <h2 className="text-slate-500 text-lg font-medium">Empty card</h2> : 
-                                    cardItems.map((item,index) => {
+                                    cardItems.map((item: any,index: number) => {
                                         return (
                                             
                                             <div key={index} className="flex gap-4 shadow-md rounded-2xl overflow-hidden bg-white">
@@ -59,7 +59,7 @@ function CheckOut() {
                                                             <p className="text-slate-800 font-semibold text-base leading-snug">{item.title}</p>
                                                             <p className="text-slate-500 text-sm mt-1">{item.authors?.join(', ')}</p>
                                                         </div>
-                                                        <button onClick={() => dispatch(removeItem())} className="text-red-400 hover:text-red-600 transition-colors duration-200 self-start mt-2 cursor-pointer"><DeleteIcon fontSize="small"/></button>
+                                                        <button onClick={() => dispatch(removeItem(index))} className="text-red-400 hover:text-red-600 transition-colors duration-200 self-start mt-2 cursor-pointer"><DeleteIcon fontSize="small"/></button>
                                                        
                                                     </div>
                                                 

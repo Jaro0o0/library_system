@@ -31,7 +31,7 @@ const premiumData = [
 function Premium() {
 
 
-    const { userNamne } = useGetUser();
+    const { userName  } = useGetUser();
 
 
     return ( 
@@ -99,7 +99,7 @@ function Premium() {
                                 </ul>
                             </div>
                             
-                            <Button component={Link} to={ userNamne ? `/users/${userNamne}` : '/login'} className="primary-button " variant="contained">try now</Button>
+                            <Button component={Link} to={ userName  ? `/users/${userName }` : '/login'} className="primary-button " variant="contained">try now</Button>
                             <p className="mt-6 text-xs text-slate-400 leading-relaxed">{`0 PLN for 3 months, then ${item.price} PLN per month. Offer available only to users who have not yet used Premium.` }</p>
 
                         </motion.div>

@@ -1,22 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../../store/ShoppingCardSlice/ShoppingCardSlice';
+import { removeItem } from '../../store/ShoppingCardSlice/ShoppingCardSlice';
 import { Button } from '@mui/material';
 import { Link } from 'react-router';
-import { useEffect } from 'react';
+import  { useEffect } from 'react';
+import type { RootState } from '../../store';
+
+import type  { ShoppingCardProps } from '../../types';
+
 //Icons
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
-function ShoppingCard({ open, onClose }) {
+function ShoppingCard({ open, onClose }: ShoppingCardProps ) {
 
-    const cardItems = useSelector((state) => state.shoppingCard.card);
+    const cardItems = useSelector((state: RootState) => state.shoppingCard.card);
     const dispatch = useDispatch();
 
 
-    const handleRemoveItem = (name) => {
-        dispatch(removeItem(name));
-    }
+   
 
 
     // Scroll block
@@ -47,14 +49,14 @@ function ShoppingCard({ open, onClose }) {
                 </div>
                 {/* Itmems */}
                 <div>
-                    {cardItems.map((item,index) => {
+                    {cardItems.map((item: any, index: number) => {
                         return (
                             // Item
                             <div key={index} className='flex gap-2 p-4 shadow-md'>
                                 <div>
                                     <h3>{item.title}</h3>
                                     <p>{item.authors?.join(', ')}</p>
-                                    <button onClick={() => dispatch(removeItem())} className="text-red-400 hover:text-red-600 transition-colors duration-200 self-start mt-2 cursor-pointer"><DeleteIcon fontSize="small"/></button>
+                                    <button onClick={() => dispatch(removeItem(index))} className="text-red-400 hover:text-red-600 transition-colors duration-200 self-start mt-2 cursor-pointer"><DeleteIcon fontSize="small"/></button>
                                 </div>
                                 <div>
                                     <img src={`http://localhost:5110/images/Images?title=${encodeURIComponent(item.title)  }`} alt="book-img" className="rounded-2xl object-cover w-[100px] h-[100px]" />

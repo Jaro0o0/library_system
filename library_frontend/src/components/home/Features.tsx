@@ -3,7 +3,7 @@ import Container from "../common/Container";
 import  {Button } from "@mui/material"
 import CommonHeading from "../common/CommonHeading"
 import { fadeInUp, viewportConfig } from '../../animations/commonAnimations';
-import useGetUser from "../../hooks/useGetUser";
+
 import { motion } from "framer-motion";
 import {Link} from "react-router";
 
@@ -37,7 +37,7 @@ const features = [
 
 function Features() {
 
-    const { userName } = useGetUser();
+   
 
 
 

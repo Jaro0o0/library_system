@@ -3,12 +3,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import IconBox from './IconBox';
 import { Button } from '@mui/material';
 import { Link } from 'react-router';
+import type { ProfileMenuProps } from '../../types';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 
 
-function ProfileMenu({ open, positionProperty }) {
+function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
     const { userName } = useGetUser();
     const iconsData = [
         {

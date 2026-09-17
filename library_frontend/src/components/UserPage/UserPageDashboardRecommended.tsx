@@ -5,14 +5,20 @@ import useGetUser from "../../hooks/useGetUser";
 import { Button } from "@mui/material";
 import { Link } from "react-router"
 
+import type { RecomendedBok } from "../../types";
+
 
 function UserPageDashboardFavaourites() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<RecomendedBok[]>([]);
 
     const { userName } = useGetUser();
 
     useEffect(() => {
         const getData = async () => {
+            if(!userName){
+                return;
+            }
+
             try {
                 const res = await fetch(
                     `http://localhost:5110/search/Books/recomended?userName=${encodeURIComponent(userName)}`,

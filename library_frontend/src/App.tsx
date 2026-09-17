@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Search from "./pages/Faq";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
-import Recomend from "./pages/Recomend";
 import ThanksPage from "./components/Checkout/ThanksPage";
 
 import { Provider } from 'react-redux'
@@ -46,7 +45,6 @@ function App() {
               <Route path="/" element={<Home/>}/>
               <Route path="faq" element={<Search/>}/>
               <Route path="login" element={<LoginPage/>}/>
-              <Route path="recomend" element={<Recomend/>}/>
               {/* <Route path="user" element={<UserPage/>}/> */}
               <Route path="categories" element={<Categories/>}/>
               <Route path="register" element={<Register/>}/>

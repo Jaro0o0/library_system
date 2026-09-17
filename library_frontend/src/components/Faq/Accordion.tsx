@@ -6,9 +6,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import type  { AccordionFaqProps } from '../../types';
 
 
-function AccordionComponent({ id, accordionTitle, accordionQuestion, scrollRef }) {
+function AccordionComponent({ id, accordionTitle, accordionQuestion,} : AccordionFaqProps )  {
   return (
     <>
         

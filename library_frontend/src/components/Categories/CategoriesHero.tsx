@@ -8,15 +8,13 @@ import CommonHeading from '../common/CommonHeading';
 import { motion} from 'framer-motion';
 import { fadeInUp } from '../../animations/commonAnimations';
 import { Link } from 'react-router';
-import { useNavigate } from 'react-router';
 import useGetUser from '../../hooks/useGetUser';
-import { handleGetStartedButton } from '../../utils/handleGetStartedButton';
 
 function CategoriesHero() {
 
  
     const {userName} = useGetUser();
-    const navigate = useNavigate();
+   
 
 
 

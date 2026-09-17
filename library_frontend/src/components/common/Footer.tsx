@@ -1,5 +1,4 @@
 import Container from "./Container";
-import IconBox from "./IconBox";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
