@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Library_Api.Services;
-using MyProject.Data;
+using Backend.Data;
+using Backend.Models;
 
 [ApiController]
 [Route("images/[controller]")]

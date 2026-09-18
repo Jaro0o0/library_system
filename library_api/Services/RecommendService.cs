@@ -1,6 +1,6 @@
-
 using Microsoft.EntityFrameworkCore;
-using MyProject.Data;
+using Backend.Data;
+using Backend.Models;
 
 public class RecommendService
 {

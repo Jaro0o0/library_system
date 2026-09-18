@@ -15,7 +15,7 @@ function Register( {  }) {
 
 
     //handdlers
-    const rewhisterHandler =  async (event: any) => {
+    const registerHandler =  async (event: any) => {
         event.preventDefault();
         setError("");
         setIsLoading(true);
@@ -57,7 +57,7 @@ function Register( {  }) {
         <>
            <div className="w-full h-screen">
                 {/* Login_BOX */}
-                <form onSubmit={rewhisterHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col  gap-6 rounded-2xl shadow-md">
+                <form onSubmit={registerHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col  gap-6 rounded-2xl shadow-md">
                     <h1 className="text-3xl">Register</h1>
                         <div className="flex flex-col gap-3">
                             <span>E-mail</span>
@@ -118,7 +118,7 @@ function Register( {  }) {
                                 />
                         </div>
                         {error && <p className="text-red-600">{error}</p>}
-                        <Button  className="!bg-green-400"  variant="contained" type="submit" disabled={disabledHandler() || isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
+                        <Button  className="!bg-green-400"    variant="contained" type="submit" disabled={disabledHandler() || isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
                         {/* <Link to="/recomend">Recomend</Link>
                      */}
                 </form>

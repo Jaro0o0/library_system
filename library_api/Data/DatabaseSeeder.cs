@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-
-
-namespace MyProject.Data;
+using Backend.Data;
+using Backend.Models;
 
 public static class DatabaseSeeder
 {
@@ -32,6 +31,10 @@ public static class DatabaseSeeder
         };
 
     public static async Task SeedImagesAsync(IServiceProvider services)
+    
+
+
+
     {
         using var scope = services.CreateScope();
         var environment = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();

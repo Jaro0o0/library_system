@@ -1,4 +1,4 @@
-using MyProject.Data;
+using Backend.Models;
 
 public class Author
 {

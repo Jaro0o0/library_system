@@ -7,13 +7,7 @@ namespace Library.Api.Models
 
 
 
-    // public class RentBookDto
-    // {
-    //     public string AuthorName;
-        
-
-    // }
-
+    
 }
 
 

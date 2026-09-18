@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MyProject.Data;
+using Backend.Data;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -10,46 +10,37 @@ Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Configuration["AllowedHosts"] = 
+    Environment.GetEnvironmentVariable("ALLOWEDHOSTS");
+
+
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("Frontend", policy => policy
-        .WithOrigins("http://localhost:5173")
-        .AllowAnyHeader()
-        .AllowAnyMethod());
-});
+
+
+//Custom Setvies
+builder.Services.AddScoped<RecommendService>();
+builder.Services.AddScoped<SearchBookService>();
+builder.Services.AddScoped<RentBookService>();
+
 
 
 //DATABASE
-// Build connection string from environment variables if present, otherwise fall back to configuration
 var envHost = Environment.GetEnvironmentVariable("DB_HOST");
-string connectionString;
-if (!string.IsNullOrEmpty(envHost))
-{
-    connectionString =
+string connectionString =
         $"Host={envHost};" +
         $"Port={Environment.GetEnvironmentVariable("DB_PORT")};" +
         $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
         $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
         $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
-}
-else
-{
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
-}
+
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 
-//Auth
-builder.Services.AddScoped<JwtService>();
-builder.Services.AddSingleton<PasswordService>();
 
-builder.Services.AddAuthorization();
 
 //CORS
 builder.Services.AddCors(options =>
@@ -60,15 +51,18 @@ builder.Services.AddCors(options =>
             .WithOrigins("http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod();
+         
     });
 });
 
 
 
 //Auth
+builder.Services.AddScoped<JwtService>();
+builder.Services.AddSingleton<PasswordService>();
+
+
 builder.Services.AddAuthorization();
-
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -83,23 +77,23 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JtwConfig:Issuer"],
-        ValidAudience = builder.Configuration["JtwConfig:Audience"],
+        ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
+        ValidAudience = builder.Configuration["JwtConfig:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JtwConfig:Key"]!)),
+            Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWTKEY")
+                 ?? throw new InvalidOperationException("Environment variable 'JWTKEY' is not set.")
+                )),
         ClockSkew = TimeSpan.Zero
     };
 });
 
 
 
-//Custom Setvies
-builder.Services.AddScoped<RecommendService>();
-builder.Services.AddScoped<SearchBookService>();
-builder.Services.AddScoped<RentBookService>();
+
 
 var app = builder.Build();
 
+// Seeding
 await DatabaseSeeder.SeedImagesAsync(app.Services);
 using (var seedScope = app.Services.CreateScope())
 {
@@ -108,6 +102,11 @@ using (var seedScope = app.Services.CreateScope())
     await DatabaseSeeder.SeedBooks(seedContext);
 }
 
+
+
+
+
+//PipeLine
 app.Use(async (context, next) =>
 {
     try
@@ -121,14 +120,17 @@ app.Use(async (context, next) =>
     }
 });
 
-
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.UseCors("AllowReact");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapOpenApi();
+
 app.MapControllers();
-app.MapGet("/", () => "Library system");
+
 
 app.Run();

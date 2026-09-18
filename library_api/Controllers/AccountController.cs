@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using MyProject.Data;
-using Library_Api.Models;
+using Backend.Data;
+using Backend.Models;
 using Library_Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 
 
@@ -43,12 +44,36 @@ public class AccountController  : ControllerBase
     public async Task<IActionResult> Register( [FromBody] RegisterRequestModel request)
     {
         
+
+
+        //Validation
+        if (string.IsNullOrWhiteSpace(request.UserName))
+        {
+            return BadRequest("User name are required.");
+        }
+
+        if (string.IsNullOrWhiteSpace(request.Password))
+        {
+            return BadRequest("Password are required.");
+        }
+
+        if (string.IsNullOrWhiteSpace(request.Email ))
+        {
+            return BadRequest("Email are required.");
+        }
+
+        
+
+
+
         //Valdiaation same users
         var userName = request.UserName.Trim();
         if (await _dbContext.Users.AnyAsync(user => user.UserName == userName))
         {
             return Conflict("A user with this name already exists.");
         }
+
+
 
         var email = request.Email;
 
@@ -72,33 +97,7 @@ public class AccountController  : ControllerBase
     }
 
 
-    // [HttpPost("set-recomend")]
-    // public async Task<IActionResult> SetPreferences( string userName, [FromBody] List<string> authorsList)
-    // {
-    //     var user = await _dbContext.Users
-    //         .FirstOrDefaultAsync(u => u.UserName == userName);
-
-    //     if (user is null)
-    //     {
-    //        return BadRequest("User not found");
-    //     }
-
-
-    //     var authors = await _dbContext.Authors
-    //         .Where(a => authorsList.Contains(a.Name))
-    //         .ToListAsync();
-
-
-    //     user.FavoriteAuthors = authors;
-
-
-
-
-    //     await _dbContext.SaveChangesAsync();
-
-    //     return Ok(user.FavoriteAuthors);
-
-    // }
+   
  
 
 

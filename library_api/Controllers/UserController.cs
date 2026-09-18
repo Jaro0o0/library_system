@@ -1,7 +1,5 @@
-
 using Microsoft.AspNetCore.Mvc;
-using MyProject.Data;
-using Microsoft.EntityFrameworkCore;
+using Backend.Data;
 using Microsoft.AspNetCore.Authorization;
 
 [ApiController]

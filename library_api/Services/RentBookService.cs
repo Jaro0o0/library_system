@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using MyProject.Data;
-using Library_Api.Models;
+using Backend.Data;
+using Backend.Models;
 using System.Data;
 
 namespace Library_Api.Services {
