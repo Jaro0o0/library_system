@@ -1,4 +1,5 @@
 import useGetUser from '../../hooks/useGetUser';
+import { useEffect, useRef } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import IconBox from './IconBox';
 import { Button } from '@mui/material';
@@ -29,10 +30,22 @@ function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
         },
     ]
 
-    return ( 
+    const mountedRef = useRef(false);
+    useEffect(() => { mountedRef.current = true }, [])
+
+    const transformValue = open ? 'translateY(0)' : 'translateY(-500px)'
+    const transitionValue = mountedRef.current ? 'transform 500ms' : 'none'
+
+    return (
         <>
-       
-       <div className={`fixed top-[${positionProperty}] z-20 w-[320px] right-5 transition-transform duration-500 ${open ? "translate-y-0" : "-translate-y-[500px]"}`}>
+
+       <div      className={`
+        fixed top-[${positionProperty}]
+        z-20 w-[320px] right-5
+        ${open ? "translate-y-0" : "-translate-y-[500px]"}
+    `}
+        style={{ transform: transformValue, transition: transitionValue }}
+    >
 
             <div className='bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden'>
                     {/* TEXT_BOX */}
