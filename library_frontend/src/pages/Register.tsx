@@ -1,6 +1,7 @@
 import {  useNavigate } from "react-router";
 import { TextField, Button } from "@mui/material";
-import { useState,  } from "react";
+import { useState  } from "react";
+
 
 
 
@@ -12,6 +13,8 @@ function Register( {  }) {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+
 
 
     //handdlers
@@ -35,7 +38,7 @@ function Register( {  }) {
             if (res.ok) {
                 const data = await res.json();
                 localStorage.setItem("accessToken", data.accesToken);
-                navigate("/recomend"); // Navigate to the recomend page after successful registration
+                navigate(`/users/${userName}`); 
 
             }
         

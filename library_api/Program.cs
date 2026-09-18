@@ -106,7 +106,7 @@ using (var seedScope = app.Services.CreateScope())
 
 
 
-//PipeLine
+// PipeLine
 app.Use(async (context, next) =>
 {
     try

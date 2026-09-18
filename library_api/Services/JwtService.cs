@@ -18,14 +18,14 @@ namespace Library_Api.Services
 
         public LoginRequestModel GenerateToken(LibraryUser user)
         {
-            var key = _configuration["JtwConfig:Key"]
+            var key = Environment.GetEnvironmentVariable("JWTKEY")
                 ?? throw new InvalidOperationException("JWT signing key is missing.");
 
             var expiresAt = DateTime.UtcNow.AddHours(2);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["JtwConfig:Issuer"],
-                audience: _configuration["JtwConfig:Audience"],
+                issuer: _configuration["JwtConfig:Issuer"],
+                audience: _configuration["JwtConfig:Audience"],
                 claims:
                 [
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),

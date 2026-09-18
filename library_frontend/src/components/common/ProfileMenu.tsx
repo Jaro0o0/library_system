@@ -32,7 +32,7 @@ function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
     return ( 
         <>
        
-        <div className={`fixed top-[${positionProperty}] z-20 w-[320px] right-5 transition-transform duration-500 ${open ? "translate-y-0" : "-translate-y-[500px]"}`}>
+       <div className={`fixed top-[${positionProperty}] z-20 w-[320px] right-5 transition-transform duration-500 ${open ? "translate-y-0" : "-translate-y-[500px]"}`}>
 
             <div className='bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden'>
                     {/* TEXT_BOX */}
