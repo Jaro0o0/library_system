@@ -1,6 +1,9 @@
 import {  useNavigate } from "react-router";
 import { TextField, Button } from "@mui/material";
+import AccountHeader from "../components/common/AccountHeader";
 import { useState  } from "react";
+import {motion} from 'framer-motion';
+import { fadeInUp } from "../animations/commonAnimations";
 
 
 
@@ -58,74 +61,82 @@ function Register( {  }) {
 
     return (
         <>
-           <div className="w-full h-screen">
-                {/* Login_BOX */}
-                <form onSubmit={registerHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col  gap-6 rounded-2xl shadow-md">
-                    <h1 className="text-3xl">Register</h1>
-                        <div className="flex flex-col gap-3">
-                            <span>E-mail</span>
-                            <TextField id="userName" label="Email" variant="outlined" fullWidth value={email} onChange={(event) => setEmail(event.target.value)} 
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                
-                                        '&:hover fieldset': {
-                                            borderColor: '#4ade80', // hover
+        <AccountHeader />
+           
+                {/* Register_BOX */}
+            <motion.div 
+                variants={fadeInUp }
+                initial='hidden'
+                animate="visible"
+                className="w-full h-screen">
+                     
+                    <form onSubmit={registerHandler} className="absolute top-1/2 left-1/2 -translate-1/2  w-full max-w-md  p-12 flex flex-col  gap-6 rounded-2xl shadow-md">
+                        <h1 className="text-3xl">Register</h1>
+                            <div className="flex flex-col gap-3">
+                                <span>E-mail</span>
+                                <TextField id="userName" label="Email" variant="outlined" fullWidth value={email} onChange={(event) => setEmail(event.target.value)} 
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                    
+                                            '&:hover fieldset': {
+                                                borderColor: '#4ade80', // hover
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#4ade80', // focus
+                                            },
                                         },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#4ade80', // focus
+                                        '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#4ade80', // label color
                                         },
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                    color: '#4ade80', // label color
-                                    },
-                                }}
-                                />
-                        </div>
-                        <div className="flex flex-col gap-3">
-                            <span>Username</span>
-                            <TextField id="userName" label="Username" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} 
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                
-                                        '&:hover fieldset': {
-                                            borderColor: '#4ade80', // hover
+                                    }}
+                                    />
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <span>Username</span>
+                                <TextField id="userName" label="Username" variant="outlined" fullWidth value={userName} onChange={(event) => setUserName(event.target.value)} 
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                    
+                                            '&:hover fieldset': {
+                                                borderColor: '#4ade80', // hover
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#4ade80', // focus
+                                            },
                                         },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#4ade80', // focus
+                                        '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#4ade80', // label color
                                         },
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                    color: '#4ade80', // label color
-                                    },
-                                }}
-                                />
-                        </div>
-                        <div className="flex flex-col gap-3">
-                            <span>Password</span>
-                            <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} 
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                
-                                        '&:hover fieldset': {
-                                            borderColor: '#4ade80', // hover
+                                    }}
+                                    />
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <span>Password</span>
+                                <TextField id="password" label="Password" type="password" variant="outlined" fullWidth value={password} onChange={(event) => setPassword(event.target.value)} 
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                    
+                                            '&:hover fieldset': {
+                                                borderColor: '#4ade80', // hover
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#4ade80', // focus
+                                            },
                                         },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#4ade80', // focus
+                                        '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#4ade80', // label color
                                         },
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                    color: '#4ade80', // label color
-                                    },
-                                }}
-                                
-                                />
-                        </div>
-                        {error && <p className="text-red-600">{error}</p>}
-                        <Button  className="!bg-green-400"    variant="contained" type="submit" disabled={disabledHandler() || isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
-                        {/* <Link to="/recomend">Recomend</Link>
-                     */}
-                </form>
-            </div>
+                                    }}
+                                    
+                                    />
+                            </div>
+                            {error && <p className="text-red-600">{error}</p>}
+                            <Button  className="!bg-green-400"    variant="contained" type="submit" disabled={disabledHandler() || isLoading}>{isLoading ? "Logging in..." : "Login"}</Button>
+                            {/* <Link to="/recomend">Recomend</Link>
+                        */}
+                    </form>
+                </motion.div>
+       
         </>
       );
 }

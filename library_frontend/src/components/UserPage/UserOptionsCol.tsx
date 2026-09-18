@@ -47,10 +47,10 @@ function UserOptionsCol() {
 
   
     return ( 
-                    <div className="flex flex-col justify-between p-8 bg-white border-r border-slate-100 shadow-sm">
+                    <div className="flex flex-col justify-between  p-8 bg-white border-r border-slate-100 shadow-sm">
                         <div className="flex flex-col gap-5">
                                 {/* Photo */}
-                                <div className="flex items-center gap-4 pb-4 border-b border-slate-100">
+                                <div className="flex items-center md:gap-4 md:pb-4 border-b border-slate-100">
                                    
                                     {/* Text_BOX */}
                                     <div className="flex flex-col">
@@ -62,7 +62,7 @@ function UserOptionsCol() {
                             
 
                             {/* Icons_BOX */}
-                            <div className="flex flex-col gap-1">
+                            <div className=" flex flex-col gap-1">
                                 {/* Home_Icon_BOx */}
                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 cursor-pointer group">
                                     <IconBox>
@@ -107,7 +107,7 @@ function UserOptionsCol() {
 
                             </div>
                             </div>
-                        <Button className="!border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined" onClick={logoutHandler}>Logout</Button>
+                        <Button className="  !hidden !md:block !border-green-400 !text-green-400 !rounded-xl !py-2" variant="outlined" onClick={logoutHandler}>Logout</Button>
                     </div>
                         
      );

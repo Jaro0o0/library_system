@@ -22,7 +22,7 @@ const features = [
         icon: '⏳',
     },
     {
-        title: 'Your reading history, all in one place',
+        title: 'Your reading history',
         description:
         'Keep a clear record of the books you’ve borrowed and returned.',
         icon: '📖',
@@ -47,7 +47,7 @@ function Features() {
 
 
     return (
-        <section id="features" className="w-full px-4 py-20 bg-slate-50">
+        <section id="features" className="w-full py-20 bg-slate-50">
             <Container>
                 <motion.div className="text-center mb-14"
                 variants={fadeInUp}
@@ -62,7 +62,7 @@ function Features() {
                         A smarter way to manage your reading
                     </h2>
                     <p className="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">
-                        Keep track of the books you borrow, discover recommendations based on your reading history, and find more authors you’ll love — all in one place.
+                      Track what you read and discover what to read next.
                     </p>
                 </motion.div>
 

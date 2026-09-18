@@ -12,3 +12,8 @@ export type ShoppingCardProps = {
 }
 
 
+export type MobileMenuProps = {
+    open: boolean;
+    positionProperty: number;
+    
+}

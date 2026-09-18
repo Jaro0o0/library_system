@@ -1,7 +1,7 @@
 import { useState, useEffect,useRef, type ChangeEvent } from 'react'
 import { Link } from 'react-router'
 import SearchIcon from '@mui/icons-material/Search';
-// import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, TextField } from '@mui/material';
 import { Button } from '@mui/material';
@@ -17,6 +17,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 //Components
 import ProfileMenu from './ProfileMenu';
 import ShoppingCard from './ShoppingCard';
+import MobileMenu from './MobileMenu';
 
 //hooks
 import useGetUser from "../../hooks/useGetUser";
@@ -37,10 +38,14 @@ function Header() {
   
     const [searchBooks,setSearchBooks] = useState<any[]>([]);
 
+
+
     const [searchOpen, setSearchOpen] = useState(false);
-    // const [open, setOpen] = useState(false);
+   
+     
     const [profileOpen, setProfileOpen] = useState(false);
     const [shoppingCardOpen, setShoppingCardOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const heightRef = useRef<HTMLElement | null>(null);
     const [headerHeight, setHeaderHeight] = useState(0);
@@ -166,7 +171,8 @@ function Header() {
                     <Link to="/"> 📗 Book <span className="text-green-400">Tracker</span></Link>
                 </h1>
             </div>
-            <div className='flex gap-6 items-center mr-6'>
+            {/* Links */}
+            <div className=' hidden md:flex gap-6 items-center mr-6'>
                 <ul className="flex gap-4">
                     <li className="    hover:text-green-500 transition-colors">
                         <Link to="/">Home</Link>
@@ -189,14 +195,13 @@ function Header() {
 
 
 
-                  {/* mobile menu button */}
-                {/* <button onClick={() => setOpen(prev => !prev)} className='text-white block md:hidden'><MenuIcon/></button> */}
+                 
             </div>
 
 
                {/* Buttons */}
-                <div className="flex gap-4 border-r-1 border-l-1 border-white px-4">
-                    {isUserLogin ?  <button   onClick={() => setProfileOpen(prev => !prev)} className='hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
+                <div className=" hidden md:flex gap-4 border-r-1 border-l-1 border-white px-4">
+                    {isUserLogin ?  <button   onClick={() => setProfileOpen(prev => !prev)} className=' hover:text-green-500 transition-colors'><AccountCircleIcon/> </button>  : (
                      // User is not logged in 
                         <button  className='hover:text-green-500 transition-colors'><Link to='/login'><AccountCircleIcon/></Link></button>
                     )}
@@ -204,17 +209,20 @@ function Header() {
 
 
                     {/* Search_Button */}
-                    <button onClick={() => setSearchOpen(prev => !prev)} className='text-lg font-bold  hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
+                    <button onClick={() => setSearchOpen(prev => !prev)} className='  text-lg font-bold  hover:text-green-500 transition-colors'>{ searchOpen ? <CloseIcon/> : <SearchIcon/> }</button>     
 
 
                     {/* Shopping_Card_Button */}
-                    <button onClick={() => setShoppingCardOpen(prev => !prev) } className='text-lg font-bold hover:text-green-500 transition-colors'>
+                    <button onClick={() => setShoppingCardOpen(prev => !prev) } className='  text-lg font-bold hover:text-green-500 transition-colors'>
                         <ShoppingBagIcon  className="hover:!text-green-500"/>
                     </button>
+                    
+              
 
                 </div>
             
-          
+           {/* Mobile */}
+                   <button onClick={() => setMobileOpen(prev => !prev)} className='text-gray-900 block md:hidden'><MenuIcon/></button>
         </header>
 
 
@@ -286,6 +294,8 @@ function Header() {
         {/* Shopping_Card */}
         <ShoppingCard open={shoppingCardOpen} onClose={() => setShoppingCardOpen(false)}/>
 
+        {/* Mobile_Menu */}
+        <MobileMenu open={mobileOpen} positionProperty={headerHeight }/>
     
         
     </>

@@ -38,7 +38,7 @@ function UserPageDashboardHistory() {
         
         <>
            
-            <div className="flex flex-col gap-10 justify-start p-10 overflow-y-auto bg-slate-50/50">
+            <div className="flex flex-col gap-10 justify-start p-10 overflow-y-auto">
                     
                 
                     

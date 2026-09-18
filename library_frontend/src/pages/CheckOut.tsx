@@ -42,7 +42,7 @@ function CheckOut() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] px-4">
                
                     {/* Grid */}
-                    <div className="grid grid-cols-[2fr_1fr] gap-8 items-start">
+                    <div className="grid grid-cols-1  md:grid-cols-[2fr_1fr] gap-8 items-start">
                             {/* ShoppingCardCOL */}
                             <div className="p-4 overflow-y-auto flex flex-col gap-4 max-h-[500px]">
                                 {cardItems.length === 0 ? <h2 className="text-slate-500 text-lg font-medium">Empty card</h2> : 

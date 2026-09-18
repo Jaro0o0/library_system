@@ -2,6 +2,8 @@ import { Button, TextField } from "@mui/material";
 import { useState, type FormEvent } from "react";
 import { useNavigate, Link } from "react-router";
 import AccountHeader from "../components/common/AccountHeader";
+import {motion} from 'framer-motion';
+import { fadeInUp } from "../animations/commonAnimations";
 
 
 
@@ -59,7 +61,11 @@ function LoginPage() {
         <>
             <AccountHeader />
 
-            <div className="w-full h-screen">
+            <motion.div className="w-full h-screen"
+                variants={fadeInUp }
+                initial='hidden'
+                animate="visible"
+            >
                 <form
                     onSubmit={loginHandler}
                     className="absolute top-1/2 left-1/2 -translate-1/2 w-full max-w-md p-12 flex flex-col bg-white gap-6 rounded-2xl shadow-lg"
@@ -157,7 +163,7 @@ function LoginPage() {
                         Register
                     </Button>
                 </form>
-            </div>
+            </motion.div>
         </>
     );
 }

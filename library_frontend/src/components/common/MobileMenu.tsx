@@ -1,18 +1,21 @@
-import useGetUser from '../../hooks/useGetUser';
-import { useEffect, useRef } from 'react';
-import SettingsIcon from '@mui/icons-material/Settings';
-import IconBox from './IconBox';
-import { Button } from '@mui/material';
-import { Link } from 'react-router';
-import type { ProfileMenuProps } from '../../types';
+import type  { MobileMenuProps } from "../../types";
+import { useEffect,useRef } from "react";
+import { Button } from "@mui/material";
+import { Link } from "react-router";
+import useGetUser from "../../hooks/useGetUser";
 
+
+import IconBox from './IconBox';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 
 
-function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
+
+function MobileMenu({open, positionProperty}: MobileMenuProps) {
     const { userName } = useGetUser();
-    const iconsData = [
+
+
+        const iconsData = [
         {
             name:'Shopping card',
             icon: <ShoppingCartIcon className='!text-white'/>,
@@ -25,29 +28,32 @@ function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
         },
         {
             name:'Settings',
-            icon: <SettingsIcon className='!text-white'/>,
+             icon: <ShoppingCartIcon className='!text-white'/>,
             link: 'comming-soon',
         },
     ]
 
-    const mountedRef = useRef(false);
-    useEffect(() => { mountedRef.current = true }, [])
 
-    const transformValue = open ? 'translateY(0)' : 'translateY(-500px)'
-    const transitionValue = mountedRef.current ? 'transform 500ms' : 'none'
 
-    return (
-        <>
 
-       <div      className={`
+
+     const mountedRef = useRef(false);
+        useEffect(() => { mountedRef.current = true }, [])
+    
+        const transformValue = open ? 'translateY(0)' : 'translateY(-500px)'
+        const transitionValue = mountedRef.current ? 'transform 500ms' : 'none'
+
+
+    return ( 
+        <div      className={`
         fixed top-[${positionProperty}]
         z-20 w-[320px] right-5
         ${open ? "translate-y-0" : "-translate-y-[500px]"}
-    `}
+         `}
         style={{ transform: transformValue, transition: transitionValue }}
-    >
+          >
 
-        <div className='bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden'>
+               <div className='bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden'>
                 {/* TEXT_BOX */}
                 <div className='flex flex-col items-center gap-3 p-6 bg-slate-50 border-b border-slate-100'>
                     <span className='text-sm font-medium text-slate-500'>{userName}</span>
@@ -81,12 +87,8 @@ function ProfileMenu({ open, positionProperty } : ProfileMenuProps ) {
                 </div>
             </div>
 
-            
         </div>
-
-  
-        </>
      );
 }
 
-export default ProfileMenu;
+export default MobileMenu;
