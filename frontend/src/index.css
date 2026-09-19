@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+
+
+
+body{
+
+    background-color: #F8FAFC;
+    font-family: sans-serif;
+  
+}
+
+
+.primary-button {
+    @apply !font-semibold !bg-green-400  !text-white !font-semibold !rounded-lg !px-6 !py-3;
+}
+
+
+.primary-button.Mui-disabled {
+    @apply !bg-slate-300 !text-slate-600 !cursor-not-allowed !shadow-none;
+}
+

@@ -1,0 +1,46 @@
+services:
+
+  migrate:
+    build:
+      context: ./backend
+      target: build
+    working_dir: /src
+    entrypoint: ["dotnet", "ef", "database", "update"]
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - librarydatabase
+ 
+
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:8080"
+    env_file:
+     - ./backend/.env
+    depends_on:
+     - librarydatabase
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+  
+  librarydatabase:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: librarydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  
+
+volumes:
+  postgres_data:
