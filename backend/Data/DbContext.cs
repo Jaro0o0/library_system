@@ -16,12 +16,12 @@ namespace Backend.Data{
         }
 
         //context Tabli BOkks
-        public DbSet<Book> books { get; set; }
+        public virtual DbSet<Book> books { get; set; }
 
-        public DbSet<RentalHistory> RentalHistories { get; set; }
-        public DbSet<LibraryUser> Users { get; set; }
+        public virtual DbSet<RentalHistory> RentalHistories { get; set; }
+        public virtual DbSet<LibraryUser> Users { get; set; }
 
-        public DbSet<Author> Authors { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
 
         
 

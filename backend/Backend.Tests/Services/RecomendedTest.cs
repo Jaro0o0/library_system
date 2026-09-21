@@ -3,6 +3,7 @@ using Backend.Models;
 using Moq;
 using Moq.EntityFrameworkCore;
 using Library_Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Backend.Tests.Services
@@ -26,7 +27,7 @@ namespace Backend.Tests.Services
             {
                 id = 1,
                 autor = "Tolkien",
-                tytul = "Władca Pierścieni"
+                tytul = "Lords of the ring"
             };
 
             var book2 = new Book
@@ -44,7 +45,13 @@ namespace Backend.Tests.Services
                 StartDate = DateTime.UtcNow
             };
 
-            var contextMock = new Mock<AppDbContext>();
+
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .Options;
+
+            var contextMock = new Mock<AppDbContext>(options);
+
+            
 
             contextMock
                 .Setup(x => x.Users)
